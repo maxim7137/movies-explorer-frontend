@@ -1,0 +1,64 @@
+.about {
+}
+.about__container {
+  padding: 110px 70px;
+}
+.about__title {
+  font-weight: 400;
+  font-size: 22px;
+  border-bottom: 1px solid #dadada;
+}
+.section-title {
+}
+
+.about__discription-container {
+  display: flex;
+}
+.about__description {
+}
+.about__subtitle {
+}
+.about__text {
+}
+.about__chart {
+}
+.about__time {
+  display: flex;
+}
+
+.about__week,
+.about__caption {
+  text-align: center;
+  margin: 0;
+  font-size: 14px;
+}
+
+.about__week {
+  padding: 10px 0;
+  font-weight: 400;
+}
+
+.about__caption {
+  padding: 15px 0 0;
+  font-weight: 500;
+  color: #8b8b8b;
+}
+
+.about__week:first-child,
+.about__caption:first-child {
+  flex-grow: 1;
+}
+
+.about__week:last-child,
+.about__caption:last-child {
+  flex-grow: 4;
+}
+
+.about__week:first-child {
+  background-color: #3ddc84;
+  color: #000;
+}
+
+.about__week:last-child {
+  background-color: #303030;
+}

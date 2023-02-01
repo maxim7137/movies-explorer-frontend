@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../components/App/App.css" />
     <link rel="stylesheet" href="../components/Main/Main.css" />
     <link rel="stylesheet" href="../components/Main/Promo.css" />
     <link rel="stylesheet" href="../components/Main/NavTab.css" />
@@ -13,24 +14,7 @@
     <link rel="stylesheet" href="../components/Main/Portfolio.css" />
     <title>Main</title>
   </head>
-  <body
-    style="
-      padding: 0;
-      margin: 0;
-      background-color: #202020;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      color: #fff;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-      -moz-text-size-adjust: 100%;
-    "
-  >
+  <body class="body">
     <!-- Main -->
     <!-- Promo -->
     <section class="promo">
@@ -56,6 +40,40 @@
       </div>
     </section>
     <!-- Promo -->
+    <!-- AboutProject -->
+    <section class="about">
+      <div class="about__container">
+        <h2 class="about__title section-title">О проекте</h2>
+        <div class="about__discription-container">
+          <div class="about__description">
+            <p class="about__subtitle">Дипломный проект включал 5 этапов</p>
+            <p class="about__text">
+              Составление плана, работу над бэкендом, вёрстку, добавление
+              функциональности и финальные доработки.
+            </p>
+          </div>
+          <div class="about__description">
+            <p class="about__subtitle">На выполнение диплома ушло 5 недель</p>
+            <p class="about__text">
+              У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было
+              соблюдать, чтобы успешно защититься.
+            </p>
+          </div>
+        </div>
+
+        <div class="about__chart">
+          <div class="about__time">
+            <p class="about__week">1 неделя</p>
+            <p class="about__week">4 недели</p>
+          </div>
+          <div class="about__time">
+            <p class="about__caption">Back-end</p>
+            <p class="about__caption">Front-end</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- AboutProject -->
     <!-- Main -->
   </body>
 </html>
