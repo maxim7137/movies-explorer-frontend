@@ -3,7 +3,9 @@
 .about__container {
   padding: 110px 70px;
 }
-.about__title {
+.section-title {
+  margin: 0;
+  padding-bottom: 23px;
   font-weight: 400;
   font-size: 22px;
   border-bottom: 1px solid #dadada;
@@ -13,12 +15,18 @@
 
 .about__discription-container {
   display: flex;
+  margin: 70px 0 110px;
+  gap: calc((100vw - 768px) / (1280 - 768) * (100 - 30) + 30px);
 }
 .about__description {
 }
 .about__subtitle {
+  font-weight: 400;
+  font-size: 20px;
+  margin: 0 0 26px;
 }
 .about__text {
+  margin: 0;
 }
 .about__chart {
 }
