@@ -23,28 +23,6 @@ function Navigation({ loggedIn }) {
       {loggedIn ? (
         <>
           {/* Залогиненный пользователь -- */}
-          <nav className="navigation navigation_login">
-            <ul className="navigation__list navigation__list_login">
-              <li>
-                <a className="navigation__item" href="#">
-                  Фильмы
-                </a>
-              </li>
-              <li>
-                <a className="navigation__item" href="#">
-                  Сохраненные фильмы
-                </a>
-              </li>
-              <li>
-                <a
-                  className="navigation__item navigation__item_acount"
-                  href="#"
-                >
-                  Аккаунт
-                </a>
-              </li>
-            </ul>
-          </nav>
           {/* Кнопка -- */}
           <button
             className={burger ? 'burger burger_active' : 'burger'}
@@ -57,12 +35,11 @@ function Navigation({ loggedIn }) {
             ></span>
           </button>
           {/* -- Кнопка */}
-          {/* max-width: 768px -- */}
           <nav
             className={
               burger
-                ? 'navigation navigation_fixed navigation_active'
-                : 'navigation navigation_fixed'
+                ? 'navigation navigation_login navigation_active'
+                : 'navigation navigation_login'
             }
           >
             <ul
@@ -94,24 +71,33 @@ function Navigation({ loggedIn }) {
               </li>
             </ul>
           </nav>
-          {/* -- max-width: 768px */}
           {/* -- Залогиненный пользователь */}
         </>
       ) : (
-        <nav className="navigation">
-          <ul className="navigation__list">
-            <li>
-              <a className="navigation__item navigation__item_signup" href="#">
-                Регистрация
-              </a>
-            </li>
-            <li>
-              <a className="navigation__item navigation__item_signin" href="#">
-                Войти
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <>
+          {/* Неавторизованный пользователь -- */}
+          <nav className="navigation">
+            <ul className="navigation__list">
+              <li>
+                <a
+                  className="navigation__item navigation__item_signup"
+                  href="#"
+                >
+                  Регистрация
+                </a>
+              </li>
+              <li>
+                <a
+                  className="navigation__item navigation__item_signin"
+                  href="#"
+                >
+                  Войти
+                </a>
+              </li>
+            </ul>
+          </nav>
+          {/* --Неавторизованный пользователь */}
+        </>
       )}
     </>
   );

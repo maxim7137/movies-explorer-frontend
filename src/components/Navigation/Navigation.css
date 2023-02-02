@@ -5,10 +5,6 @@
   font-size: 12px;
 }
 
-.navigation_fixed {
-  display: none;
-}
-
 .navigation_login {
   margin-left: 44px;
   flex-basis: 100%;
@@ -26,6 +22,10 @@
 
 .navigation__list_login {
   gap: 16px;
+}
+
+.navigation__list_login li:first-child {
+  display: none;
 }
 
 .navigation__list li:last-child {
@@ -57,10 +57,6 @@
 
 @media (max-width: 768px) {
   .navigation_login {
-    display: none;
-  }
-
-  .navigation_fixed {
     display: flex;
     position: fixed;
     top: 0;
@@ -86,6 +82,10 @@
     flex-basis: 100%;
     height: calc(100% - 160px);
     margin-top: 160px;
+  }
+
+  .navigation__list_login li:first-child {
+    display: block;
   }
 
   .navigation__list_login li:last-child {
@@ -156,7 +156,7 @@
 }
 
 @media (max-width: 425px) {
-  .navigation_fixed {
+  .navigation_login {
     width: 100%;
   }
 }
