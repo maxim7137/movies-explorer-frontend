@@ -1,6 +1,6 @@
 import Navigation from '../Navigation/Navigation';
 
-function Header({ loggedIn }) {
+function Header({ loggedIn, logIn, logOut }) {
   return (
     <header className="header">
       <div className="logo">
@@ -8,7 +8,7 @@ function Header({ loggedIn }) {
           <div className="logo__arc"></div>
         </div>
       </div>
-      <Navigation loggedIn={loggedIn} />
+      <Navigation loggedIn={loggedIn} logIn={logIn} logOut={logOut} />
     </header>
   );
 }

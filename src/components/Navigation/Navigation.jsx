@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Navigation({ loggedIn }) {
+function Navigation({ loggedIn, logIn, logOut }) {
   const [burger, setBurger] = useState(false); // меню бургер да нет
   // переключение меню бургер
   function burgerClick() {
@@ -65,6 +65,7 @@ function Navigation({ loggedIn }) {
                 <a
                   className="navigation__item navigation__item_acount"
                   href="#"
+                  onClick={logOut}
                 >
                   Аккаунт
                 </a>
@@ -90,6 +91,7 @@ function Navigation({ loggedIn }) {
                 <a
                   className="navigation__item navigation__item_signin"
                   href="#"
+                  onClick={logIn}
                 >
                   Войти
                 </a>
