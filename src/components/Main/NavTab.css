@@ -32,6 +32,7 @@
 .navtab__link:hover {
   color: #000;
   font-weight: 500;
+  letter-spacing: -0.04em;
 }
 
 @media (max-width: 425px) {
