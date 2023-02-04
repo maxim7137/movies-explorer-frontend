@@ -1,0 +1,45 @@
+.portfolio {
+}
+.portfolio__container {
+  padding: 0 70px 125px;
+}
+.portfolio__title {
+  margin: 0 0 50px;
+  font-size: 18px;
+  color: #8b8b8b;
+}
+.portfolio__list {
+  margin: 0;
+  list-style: none;
+  padding-inline-start: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.portfolio__item {
+  padding-bottom: 19px;
+  border-bottom: 1px solid #424242;
+}
+
+.portfolio__item:last-child {
+  border: none;
+}
+
+.portfolio__link {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  color: #fff;
+  font-size: 30px;
+  transition: opacity 0.2s;
+}
+
+.portfolio__link:hover {
+  opacity: 0.6;
+}
+
+.portfolio__text {
+}
+.portfolio__arrow {
+}

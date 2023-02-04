@@ -26,13 +26,13 @@
         <nav class="promo__nav navtab">
           <ul class="navtab__list">
             <li class="navtab__item">
-              <a class="navtab__link" href="#">О проекте</a>
+              <a class="navtab__link" href="#about">О проекте</a>
             </li>
             <li class="navtab__item">
-              <a class="navtab__link" href="#">Технологии</a>
+              <a class="navtab__link" href="#techs">Технологии</a>
             </li>
             <li class="navtab__item">
-              <a class="navtab__link" href="#">Студент</a>
+              <a class="navtab__link" href="#me">Студент</a>
             </li>
           </ul>
         </nav>
@@ -41,7 +41,7 @@
     </section>
     <!-- /Promo -->
     <!-- AboutProject -->
-    <section class="about">
+    <section class="about" id="about">
       <div class="about__container">
         <h2 class="about__title section-title">О проекте</h2>
         <div class="about__discription-container">
@@ -74,7 +74,7 @@
     </section>
     <!-- /AboutProject -->
     <!-- Techs -->
-    <section class="techs">
+    <section class="techs" id="techs">
       <div class="techs__container">
         <h2 class="techs__title section-title">Технологии</h2>
         <div class="techs__description">
@@ -112,13 +112,51 @@
               обеспечения. Недавно начал кодить. В 2023 году закончил курс по
               веб-разработке в Яндекс.Практикуме.
             </p>
-            <a class="me__link" href="https://github.com/maxim7137" target="_blank">Github</a>
+            <a
+              class="me__link"
+              href="https://github.com/maxim7137"
+              target="_blank"
+              >Github</a
+            >
           </div>
-          <div class="me__avatar"><img class="me__image" src="../images/ava.jpg" alt="Фото студента"></div>
+          <div class="me__avatar">
+            <img
+              class="me__image"
+              src="../images/ava.jpg"
+              alt="Фото студента"
+            />
+          </div>
         </div>
       </div>
     </section>
     <!-- /AboutMe -->
+    <!-- Portfolio -->
+    <section class="portfolio">
+      <div class="portfolio__container">
+        <p class="portfolio__title">Портфолио</p>
+        <ul class="portfolio__list">
+          <li class="portfolio__item">
+            <a class="portfolio__link" href="https://maxim7137.github.io/how-to-learn" target="_blank" rel="noopener noreferrer">
+              <span class="portfolio__text">Статичный сайт</span>
+              <span class="portfolio__arrow"><img src="../images/arrow.svg" alt="стрелка"></span>
+            </a>
+          </li>
+          <li class="portfolio__item">
+            <a class="portfolio__link" href="https://maxim7137.github.io/russian-travel" target="_blank" rel="noopener noreferrer">
+              <span class="portfolio__text">Адаптивный сайт</span>
+              <span class="portfolio__arrow"><img src="../images/arrow.svg" alt="стрелка"></span>
+            </a>
+          </li>
+          <li class="portfolio__item">
+            <a class="portfolio__link" href="https://maxim.nomoredomains.club" target="_blank" rel="noopener noreferrer">
+              <span class="portfolio__text">Одностраничное приложение</span>
+              <span class="portfolio__arrow"><img src="../images/arrow.svg" alt="стрелка"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- /Portfolio -->
     <!-- /Main -->
   </body>
 </html>
