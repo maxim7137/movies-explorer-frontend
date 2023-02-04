@@ -1,0 +1,61 @@
+.me {
+}
+
+.me__container {
+  padding: 110px 70px 100px;
+}
+
+.me__title {
+  margin-bottom: 66px;
+}
+
+.me__discription-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.me__text {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 600px;
+}
+
+.me__name {
+  margin: 0;
+  font-size: 50px;
+}
+
+.bio {
+  margin: 18px 0 26px;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.me__about {
+  margin: 0;
+  line-height: 22px;
+}
+
+.me__link {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  color: #fff;
+  transition: color 0.2s;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.me__link:hover {
+  color: #8b8b8b;
+}
+
+.me__avatar {
+  flex-basis: 270px;
+}
+
+.me__image {
+  width: 100%;
+  max-width: 270px;
+  border-radius: 10px;
+}
