@@ -16,21 +16,23 @@
   <body class="body">
     <main class="movies">
       <section class="search">
-        <form class="search__container">
-          <input
-            class="search__text"
-            type="text"
-            placeholder="Фильм"
-            name="search"
-          />
-          <button class="search__find" type="submit"></button>
-          <div class="search__separator"></div>
-          <label class="search__switch">
-            <input class="search__input" type="checkbox" checked />
-            <span class="search__slider"></span>
-          </label>
-          <span class="search__short">Короткометражки</span>
-        </form>
+        <div class="search__border">
+          <form class="search__container">
+            <input
+              class="search__text"
+              type="text"
+              placeholder="Фильм"
+              name="search"
+            />
+            <button class="search__find" type="submit"></button>
+            <div class="search__separator"></div>
+            <label class="search__switch">
+              <input class="search__input" type="checkbox" checked />
+              <span class="search__slider"></span>
+            </label>
+            <span class="search__short">Короткометражки</span>
+          </form>
+        </div>
       </section>
       <section class="cards">
         <ul class="cards__list">
@@ -251,7 +253,9 @@
             </div>
           </li>
         </ul>
-        
+        <div class="more">
+          <button class="more__btn">Ещё</button>
+        </div>
       </section>
     </main>
   </body>

@@ -2,17 +2,20 @@
   display: flex;
   flex-direction: column;
 }
+
 .card__head {
   display: flex;
   background-color: #222222;
-  padding: 14px;
+  padding: 13px;
 }
+
 .card__text {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
+
 .card__name {
   margin: 0;
   max-width: 306px;
@@ -23,12 +26,14 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
 .card__duration {
   margin: 0;
   font-size: 11px;
   line-height: 13px;
   color: #8b8b8b;
 }
+
 .card__save {
   display: flex;
   justify-content: center;
@@ -47,7 +52,12 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: 10px 13px;
-  transition: background-color 0.2s background-image 0.2s;
+  transition: all 0.2s;
+}
+
+.card__btn:hover {
+  background-color: #424242;
+  background-image: url("../../images/save-hover.svg");
 }
 
 .card__btn_saved {
@@ -55,10 +65,24 @@
   background-image: url("../../images/saved.svg");
 }
 
-.card__body {
+.card__btn_inSaved {
+  background-image: url("../../images/insaved.svg");
 }
+
+.card__btn_inSaved:hover {
+  background-image: url("../../images/insaved-hover.svg");
+}
+
 .card__img {
   width: 100%;
   object-fit: contain;
   object-position: center;
+}
+
+/* 768 */
+@media (max-width: 768px) {
+}
+
+/* 320 */
+@media (max-width: 425px) {
 }
