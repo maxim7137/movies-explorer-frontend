@@ -2,7 +2,7 @@
 }
 
 .portfolio__container {
-  padding: 0 70px 125px;
+  padding: 0 70px 145px;
 }
 
 .portfolio__title {
@@ -52,7 +52,7 @@
 
 @media (max-width: 768px) {
   .portfolio__container {
-    padding: 0 50px 90px;
+    padding: 0 50px 110px;
   }
 
   .portfolio__link {
@@ -62,7 +62,7 @@
 
 @media (max-width: 425px) {
   .portfolio__container {
-    padding: 0 14px 70px;
+    padding: 0 14px 90px;
   }
 
   .portfolio__title {

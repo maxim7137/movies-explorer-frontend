@@ -156,7 +156,20 @@
 }
 
 @media (max-width: 425px) {
+  .navigation {
+    font-size: 10px;
+  }
+
   .navigation_login {
     width: 100%;
+  }
+
+  .navigation__item_signin {
+    padding: 7px 12px;
+  }
+
+  .navigation__list {
+    line-height: 1;
+    gap: 14px;
   }
 }

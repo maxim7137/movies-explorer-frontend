@@ -10,7 +10,7 @@
   min-width: 38px;
   height: 38px;
   background-color: #3ddc84;
-  border-radius: 15%;
+  border-radius: 8px;
 }
 
 .logo__circle {
@@ -36,5 +36,11 @@
 @media (max-width: 768px) {
   .header {
     padding: 18px 30px;
+  }
+}
+
+@media (max-width: 425px) {
+  .header {
+    padding: 18px 14px;
   }
 }

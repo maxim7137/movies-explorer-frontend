@@ -2,7 +2,7 @@
 }
 
 .me__container {
-  padding: 110px 70px 98px;
+  padding: 111px 70px 98px;
 }
 
 .me__title {
@@ -67,7 +67,7 @@
 
 @media (max-width: 768px) {
   .me__container {
-    padding: 90px 50px 85px;
+    padding: 91px 50px 85px;
   }
 
   .me__text {

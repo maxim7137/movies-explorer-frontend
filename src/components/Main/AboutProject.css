@@ -2,7 +2,7 @@
 }
 
 .about__container {
-  padding: 110px 70px;
+  padding: 112px 70px;
 }
 
 .section-title {
@@ -26,6 +26,7 @@
 .about__subtitle {
   font-weight: 400;
   font-size: 20px;
+  line-height: 24px;
   margin: 0 0 26px;
   letter-spacing: -0.04em;
 }
@@ -81,7 +82,7 @@
 
 @media (max-width: 768px) {
   .about__container {
-    padding: 90px 50px;
+    padding: 92px 50px;
   }
 
   .about__discription-container {
@@ -112,7 +113,7 @@
   }
 
   .about__discription-container {
-    margin: 61px 0;
+    margin: 61px 0 60px;
     flex-direction: column;
     gap: 57px;
   }
@@ -138,6 +139,6 @@
   }
 
   .about__caption {
-    padding: 8px 0 0;
+    padding: 9px 0 0;
   }
 }
