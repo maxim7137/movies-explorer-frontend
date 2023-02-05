@@ -1,0 +1,64 @@
+.card {
+  display: flex;
+  flex-direction: column;
+}
+.card__head {
+  display: flex;
+  background-color: #222222;
+  padding: 14px;
+}
+.card__text {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card__name {
+  margin: 0;
+  max-width: 306px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.card__duration {
+  margin: 0;
+  font-size: 11px;
+  line-height: 13px;
+  color: #8b8b8b;
+}
+.card__save {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card__btn {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: #313131;
+  background-image: url("../../images/save.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px 13px;
+  transition: background-color 0.2s background-image 0.2s;
+}
+
+.card__btn_saved {
+  background-color: #3ddc84;
+  background-image: url("../../images/saved.svg");
+}
+
+.card__body {
+}
+.card__img {
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+}
