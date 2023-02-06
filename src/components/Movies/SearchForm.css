@@ -13,9 +13,27 @@
   border-radius: 9px;
   align-items: center;
   padding: 16px 30px;
+  gap: 45px 30px;
+}
+
+.search__wrap {
+  display: flex;
+}
+
+.search__wrap_input {
+  flex: 1 1 auto;
+}
+
+.search__wrap_checkbox {
+  flex: 0 0 auto;
+}
+
+.search__container:focus-within {
+  outline: 2px solid #424242;
 }
 
 .search__text {
+  width: 100%;
   flex: 1 1 auto;
   background-color: #2f2f2f;
   background-image: url("../../images/search.svg");
@@ -29,31 +47,41 @@
   font-weight: 400;
 }
 
-.search__container:focus-within {
-  outline: 2px solid #424242;
-}
-
 .search__text:focus-visible {
   outline: 0;
 }
 
 .search__find {
+  flex: 0 0 auto;
   cursor: pointer;
   width: 34px;
   height: 34px;
   padding: 0;
+  margin: 0;
   border: none;
-  background: url("../../images/find.svg") no-repeat;
-  background-color: inherit;
+  border-radius: 50%;
+  background-color: #4285f4;
+  background-image: url("../../images/find.svg");
+  background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
+  background-size: 5px;
+  transition: background-color 0.3s, outline 0.1s;
+}
+
+.search__find:hover {
+  background-color: #3ddc84;
+}
+
+.search__find:active {
+  outline: 1px solid #fff;
+  outline-offset: -1px;
 }
 
 .search__separator {
   width: 1px;
   height: 40px;
   background-color: #424242;
-  margin: 0 30px;
+  margin: 0 0 0 30px;
 }
 
 .search__short {
@@ -64,19 +92,14 @@
 }
 
 /* 768 */
-@media (max-width: 768px) {
+@media (max-width: 1279px) {
   .search {
-    padding: 80px 30px 0;
-  }
-  .search__container {
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
+    padding: 30px;
   }
 }
 
 /* 320 */
-@media (max-width: 425px) {
+@media (max-width: 767px) {
   .search {
     padding: 80px 10px 0;
   }
@@ -86,7 +109,21 @@
   }
 
   .search__container {
+    flex-direction: column;
+    align-items: stretch;
+    background-color: inherit;
+    padding: 0;
+  }
+
+  .search__wrap_input {
     padding: 19px;
+    background-color: #2f2f2f;
+    border-radius: 9px;
+  }
+
+  .search__wrap_checkbox {
+    justify-content: center;
+    align-items: center;
   }
 
   .search__text {

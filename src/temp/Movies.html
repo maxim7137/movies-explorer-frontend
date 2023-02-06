@@ -18,19 +18,23 @@
       <section class="search">
         <div class="search__border">
           <form class="search__container">
-            <input
-              class="search__text"
-              type="text"
-              placeholder="Фильм"
-              name="search"
-            />
-            <button class="search__find" type="submit"></button>
-            <div class="search__separator"></div>
-            <label class="search__switch">
-              <input class="search__input" type="checkbox" checked />
-              <span class="search__slider"></span>
-            </label>
-            <span class="search__short">Короткометражки</span>
+            <div class="search__wrap search__wrap_input">
+              <input
+                class="search__text"
+                type="text"
+                placeholder="Фильм"
+                name="search"
+              />
+              <button class="search__find" type="submit"></button>
+              <div class="search__separator"></div>
+            </div>
+            <div class="search__wrap search__wrap_checkbox">
+              <label class="search__switch">
+                <input class="search__input" type="checkbox" checked />
+                <span class="search__slider"></span>
+              </label>
+              <span class="search__short">Короткометражки</span>
+            </div>
           </form>
         </div>
       </section>

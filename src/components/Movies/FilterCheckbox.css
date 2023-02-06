@@ -2,6 +2,7 @@
   display: block;
   width: 36px;
   height: 20px;
+  transition: opacity 0.2s;
 }
 
 .search__input {
@@ -16,7 +17,7 @@
   cursor: pointer;
   border-radius: 20px;
   background-color: #424242;
-  transition: 0.2s;
+  transition: background-color 0.3s;
 }
 
 .search__slider:before {
@@ -32,6 +33,14 @@
 
 .search__input:checked + .search__slider {
   background-color: #3ddc84;
+}
+
+.search__input:checked + .search__slider:hover {
+  background-color: #4285f4;
+}
+
+.search__input + .search__slider:hover {
+  background-color: #777;
 }
 
 .search__input:focus + .search__slider {
