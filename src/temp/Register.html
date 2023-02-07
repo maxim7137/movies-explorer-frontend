@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../vendor/fonts/fonts.css" />
+    <link rel="stylesheet" href="../components/App/App.css" />
+    <link rel="stylesheet" href="../components/Movies/Movies.css" />
+    <link rel="stylesheet" href="../components/Movies/SearchForm.css" />
+    <link rel="stylesheet" href="../components/Movies/FilterCheckbox.css" />
+    <link rel="stylesheet" href="../components/Movies/MoviesCardList.css" />
+    <link rel="stylesheet" href="../components/Movies/MoviesCard.css" />
+    <!--  -->
+    <link rel="stylesheet" href="../components/Header/Header.css" />
+    <link rel="stylesheet" href="../components/Header/Logo.css" />
+    <link rel="stylesheet" href="../components/Navigation/Navigation.css" />
+    <link rel="stylesheet" href="../components/Footer/Footer.css" />
+    <!--  -->
+    <link rel="stylesheet" href="../components/Profile/Profile.css" />
+    <!--  -->
+    <link rel="stylesheet" href="../components/Register/Register.css" />
+    <title>Profile</title>
+  </head>
+  <body class="body">
+    <!-- Register -->
+    <main class="register">
+      <div class="logo">
+        <div class="logo__circle">
+          <div class="logo__arc"></div>
+        </div>
+      </div>
+      <div class="register__main">
+        <h1 class="register__head">Добро пожаловать!</h1>
+        <form class="register__form">
+          <label class="register__row">
+            <span class="register__key">Имя</span>
+            <input
+              class="register__value"
+              type="text"
+              name="username"
+              id="username"
+            />
+            <span class="register__error">Что-то пошло не так ...</span>
+          </label>
+          <label class="register__row">
+            <span class="register__key">E-mail</span>
+            <input
+              class="register__value"
+              type="email"
+              name="useremail"
+              id="useremail"
+            />
+            <span class="register__error">Что-то пошло не так ...</span>
+          </label>
+          <label class="register__row">
+            <span class="register__key">Пароль</span>
+            <input
+              class="register__value"
+              type="password"
+              name="userpassword"
+              id="userpassword"
+            />
+            <span class="register__error">Что-то пошло не так ...</span>
+          </label>
+          <button class="register__button" type="submit">Зарегистрироваться</button>
+        </form>
+      </div>
+      <div class="register__footer">
+        <span class="register__question">Уже зарегистрированы?</span>
+        <a href="login" class="register__link">Войти</a>
+      </div>
+    </main>
+    <!-- Register -->
+  </body>
+</html>
