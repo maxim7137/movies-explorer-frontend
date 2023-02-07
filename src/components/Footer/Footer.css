@@ -35,13 +35,15 @@
   color: inherit;
 }
 
-@media (max-width: 768px) {
+/* 768 */
+@media (max-width: 1279px) {
   .footer {
     padding: 20px 30px;
   }
 }
 
-@media (max-width: 425px) {
+/* 320 */
+@media (max-width: 575px) {
   .footer {
     padding: 20px 10px;
     font-size: 12px;

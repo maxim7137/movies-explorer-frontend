@@ -33,13 +33,15 @@
   -webkit-clip-path: inset(50% 0 0 0);
 }
 
-@media (max-width: 768px) {
+/* 768 */
+@media (max-width: 1279px) {
   .header {
     padding: 18px 30px;
   }
 }
 
-@media (max-width: 425px) {
+/* 320 */
+@media (max-width: 575px) {
   .header {
     padding: 18px 14px;
   }

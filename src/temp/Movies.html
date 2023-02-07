@@ -11,9 +11,41 @@
     <link rel="stylesheet" href="../components/Movies/FilterCheckbox.css" />
     <link rel="stylesheet" href="../components/Movies/MoviesCardList.css" />
     <link rel="stylesheet" href="../components/Movies/MoviesCard.css" />
+    <!--  -->
+    <link rel="stylesheet" href="../components/Header/Header.css" />
+    <link rel="stylesheet" href="../components/Navigation/Navigation.css" />
+    <link rel="stylesheet" href="../components/Footer/Footer.css" />
+
+    <!--  -->
     <title>Movies</title>
   </head>
   <body class="body">
+    <header class="header">
+      <div class="logo">
+        <div class="logo__circle">
+          <div class="logo__arc"></div>
+        </div>
+      </div>
+      <nav class="navigation">
+        <ul class="navigation__list">
+          <li>
+            <a class="navigation__item navigation__item_signup" href="#">
+              Регистрация
+            </a>
+          </li>
+          <li>
+            <a
+              class="navigation__item navigation__item_signin"
+              href="#"
+              onClick="{logIn}"
+            >
+              Войти
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <!-- Movies -->
     <main class="movies">
       <section class="search">
         <div class="search__border">
@@ -262,5 +294,24 @@
         </div>
       </section>
     </main>
+    <!-- Movies -->
+    <footer class="footer">
+      <p class="footer__text">Учебный проект Яндекс.Практикум х BeatFilm.</p>
+      <div class="footer__copy">
+        <p class="footer__date">&copy; 2023</p>
+        <ul class="footer__list">
+          <li>
+            <a class="footer__link" href="https://practicum.yandex.ru">
+              Яндекс.Практикум
+            </a>
+          </li>
+          <li>
+            <a class="footer__link" href="https://github.com/maxim7137">
+              Github
+            </a>
+          </li>
+        </ul>
+      </div>
+    </footer>
   </body>
 </html>
