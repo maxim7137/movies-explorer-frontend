@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../vendor/fonts/fonts.css" />
+    <link rel="stylesheet" href="../components/App/App.css" />
+    <link rel="stylesheet" href="../components/Movies/Movies.css" />
+    <link rel="stylesheet" href="../components/Movies/SearchForm.css" />
+    <link rel="stylesheet" href="../components/Movies/FilterCheckbox.css" />
+    <link rel="stylesheet" href="../components/Movies/MoviesCardList.css" />
+    <link rel="stylesheet" href="../components/Movies/MoviesCard.css" />
+    <!--  -->
+    <link rel="stylesheet" href="../components/Header/Header.css" />
+    <link rel="stylesheet" href="../components/Navigation/Navigation.css" />
+    <link rel="stylesheet" href="../components/Footer/Footer.css" />
+    <!--  -->
+    <link rel="stylesheet" href="../components/Profile/Profile.css" />
+    <title>Profile</title>
+  </head>
+  <body class="body">
+    <header class="header">
+      <div class="logo">
+        <div class="logo__circle">
+          <div class="logo__arc"></div>
+        </div>
+      </div>
+      <nav class="navigation">
+        <ul class="navigation__list">
+          <li>
+            <a class="navigation__item navigation__item_signup" href="#">
+              Регистрация
+            </a>
+          </li>
+          <li>
+            <a
+              class="navigation__item navigation__item_signin"
+              href="#"
+              onClick="{logIn}"
+            >
+              Войти
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <!-- Profile -->
+    <main class="profile">
+      <h1 class="profile__header">Привет, Максим!</h1>
+      <form class="profile__form">
+        <label class="profile__row">
+          <span class="profile__key">Имя</span
+          ><input
+            class="profile__value"
+            type="text"
+            name="username"
+            id="username"
+            value="Максим"
+          />
+        </label>
+        <label class="profile__row">
+          <span class="profile__key">E-mail</span
+          ><input
+            class="profile__value"
+            type="email"
+            name="useremail"
+            id="useremail"
+            value="maxim@mail.ru"
+          />
+        </label>
+      </form>
+      <div class="profile__buttons">
+        <button class="profile__button profile__button_edit" type="submit">Редактировать</button>
+        <button class="profile__button profile__button_exit" type="submit">Выйти из аккаунта</button>
+      </div>
+    </main>
+    <!-- Profile -->
+  </body>
+</html>
