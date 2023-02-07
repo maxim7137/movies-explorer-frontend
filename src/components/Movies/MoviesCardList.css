@@ -57,11 +57,16 @@
 /* 320 */
 @media (max-width: 575px) {
   .cards {
-    padding: 40px 10px;
+    padding: 50px 10px 40px;
   }
 
   .cards__list {
     gap: 16px;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  .more__btn {
+    margin: 77px auto;
+    width: 240px;
   }
 }

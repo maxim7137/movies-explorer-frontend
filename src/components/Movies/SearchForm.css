@@ -136,10 +136,18 @@
     padding: 0;
   }
 
+  .search__container:focus-within {
+    outline: none;
+  }
+
   .search__wrap_input {
     padding: 19px;
     background-color: #2f2f2f;
     border-radius: 9px;
+  }
+
+  .search__wrap_input:focus-within {
+    outline: 2px solid #424242;
   }
 
   .search__wrap_checkbox {
@@ -155,5 +163,11 @@
 
   .search__separator {
     display: none;
+  }
+
+  .search__short {
+    font-size: 11px;
+    line-height: 18px;
+    padding-left: 13px;
   }
 }

@@ -40,7 +40,7 @@
 }
 
 .search__input + .search__slider:hover {
-  background-color: #777;
+  background-color: #8b8b8b;
 }
 
 .search__input:focus + .search__slider {

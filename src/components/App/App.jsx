@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
 import Footer from '../Footer/Footer';
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
     <>
       <Header loggedIn={loggedIn} logIn={logIn} logOut={logOut} />
       <Main />
+      <Movies />
+      <SavedMovies />
       <Footer />
     </>
   );
