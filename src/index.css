@@ -20,4 +20,7 @@
 @import url(./components/Movies/MoviesCardList.css);
 @import url(./components/Movies/MoviesCard.css);
 
+@import url(./components/Register/Register.css);
+@import url(./components/NotFound/NotFound.css);
+
 @import url(./components/Footer/Footer.css);

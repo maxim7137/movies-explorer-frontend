@@ -111,6 +111,7 @@ html,
   text-decoration: none;
   color: #4285f4;
   transition: color 0.2s;
+  padding-left: 6px;
 }
 
 .register__link:hover {
@@ -118,7 +119,19 @@ html,
 }
 
 /* 768 */
-@media (min-width: 575.01px) and (max-width: 768) {
+@media (min-width: 575.01px) and (max-width: 768px) {
+  .body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .register {
+    height: 557px;
+    width: 396px;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 /* 320 */
@@ -129,11 +142,11 @@ html,
     padding: 56px 0 30px;
   }
 
-  .logo{
+  .logo {
     align-self: center;
   }
 
   .register__head {
-text-align: center;
+    text-align: center;
   }
 }
