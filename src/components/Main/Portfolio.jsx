@@ -11,7 +11,7 @@ function Portfolio() {
               className="portfolio__link"
               href="https://maxim7137.github.io/how-to-learn"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noreferrer"
             >
               <span className="portfolio__text">Статичный сайт</span>
               <span className="portfolio__arrow">
@@ -28,7 +28,7 @@ function Portfolio() {
               className="portfolio__link"
               href="https://maxim7137.github.io/russian-travel"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noreferrer"
             >
               <span className="portfolio__text">Адаптивный сайт</span>
               <span className="portfolio__arrow">
@@ -45,7 +45,7 @@ function Portfolio() {
               className="portfolio__link"
               href="https://maxim.nomoredomains.club"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noreferrer"
             >
               <span className="portfolio__text">Одностраничное приложение</span>
               <span className="portfolio__arrow">

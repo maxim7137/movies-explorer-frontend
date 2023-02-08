@@ -68,6 +68,7 @@ function Login({ logIn }) {
                 autoComplete="off"
                 name="email"
                 id="email"
+                placeholder="E-mail"
               />
               <span
                 className={
@@ -101,6 +102,7 @@ function Login({ logIn }) {
                 autoComplete="off"
                 name="password"
                 id="password"
+                placeholder="Пароль"
               />
               <span
                 className={

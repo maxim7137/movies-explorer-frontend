@@ -30,6 +30,7 @@
   justify-content: space-between;
   padding: 16px 0;
   border-bottom: 1px solid #424242;
+  position: relative;
 }
 
 .profile__row:focus-within {
@@ -58,8 +59,29 @@
   border: none;
 }
 
+.profile__value_error {
+  color: #ee3465;
+}
+
 .profile__value:focus-visible {
   outline: 0;
+}
+
+.profile__error {
+  position: absolute;
+  top: 50px;
+  left: 3px;
+  display: block;
+  font-size: 10px;
+  line-height: 12px;
+  color: #3ddc84;
+  margin: 0 0 5px;
+  visibility: hidden;
+  transition: all 0.2s;
+}
+
+.profile__error_visible {
+  visibility: visible;
 }
 
 .profile__buttons {
@@ -129,5 +151,9 @@
     margin-bottom: 40px;
     flex: 1 1 auto;
     justify-content: flex-end;
+  }
+
+  .profile__error_name {
+    top: -30px;
   }
 }

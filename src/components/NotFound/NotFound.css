@@ -28,6 +28,10 @@
 }
 
 .notfound__back {
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  background-color: inherit;
   text-decoration: none;
   color: #4285f4;
   transition: color 0.2s;

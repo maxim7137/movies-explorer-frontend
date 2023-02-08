@@ -7,7 +7,6 @@ function SearchForm() {
 
   function handleChange(e) {
     setInputData(e.target.value);
-    console.log(inputData);
   }
 
   return (
