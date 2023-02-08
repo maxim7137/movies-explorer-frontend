@@ -19,6 +19,7 @@
 @import url(./components/Movies/FilterCheckbox.css);
 @import url(./components/Movies/MoviesCardList.css);
 @import url(./components/Movies/MoviesCard.css);
+@import url(./components/SavedMovies/SavedMovies.css);
 
 @import url(./components/Register/Register.css);
 @import url(./components/Profile/Profile.css);

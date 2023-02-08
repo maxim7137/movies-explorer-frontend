@@ -1,6 +1,15 @@
+import { useState } from 'react';
+
 import FilterCheckbox from './FilterCheckbox';
 
 function SearchForm() {
+  const [inputData, setInputData] = useState('');
+
+  function handleChange(e) {
+    setInputData(e.target.value);
+    console.log(inputData);
+  }
+
   return (
     <section className="search">
       <div className="search__border">
@@ -8,6 +17,8 @@ function SearchForm() {
           <div className="search__wrap search__wrap_input">
             <input
               className="search__text"
+              onChange={handleChange}
+              value={inputData || ''}
               type="text"
               placeholder="Фильм"
               name="search"

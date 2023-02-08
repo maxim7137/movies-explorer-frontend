@@ -32,6 +32,12 @@
 
 .register__row {
   display: block;
+  padding-top: 25px;
+  position: relative;
+}
+
+.register__row:first-child {
+  padding-top: 0;
 }
 
 .register__key {
@@ -62,7 +68,17 @@
   border-bottom-color: #4285f4;
 }
 
+.register__value_error {
+  color: #ee3465;
+  border-bottom-color: #ee3465;
+}
+
+.register__value_error:focus {
+  border-bottom-color: #ff0000;
+}
+
 .register__error {
+  position: absolute;
   display: block;
   font-size: 10px;
   line-height: 12px;

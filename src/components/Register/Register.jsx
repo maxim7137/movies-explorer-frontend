@@ -1,7 +1,57 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../Header/Logo';
 
 function Register() {
+  // <-- управление компонентами --
+  const [inputData, setInputData] = useState({
+    username: '',
+    password: '',
+    email: '',
+  });
+
+  // Стейты для валидации
+  const [isInputValid, setIsInputValid] = useState({
+    username: true,
+    password: true,
+    email: true,
+  });
+
+  const [errorMessage, setErrorMessage] = useState({
+    username: '',
+    password: '',
+    email: '',
+  });
+
+  // Обработчик изменения инпута для валидации
+  function handleInput(e) {
+    const { name, validity, validationMessage } = e.target;
+    setIsInputValid({
+      ...isInputValid,
+      [name]: validity.valid,
+    });
+    setErrorMessage({
+      ...errorMessage,
+      [name]: validationMessage,
+    });
+  }
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setInputData({
+      ...inputData,
+      [name]: value,
+    });
+  }
+  /*
+  function handleSubmit(e) {
+    e.preventDefault();
+    handleLogin(inputData.email, inputData.password);
+  }
+   */
+
+  // -- управление компонентами -- />
+
   return (
     <div className="body__container">
       <main className="register">
@@ -12,32 +62,96 @@ function Register() {
             <label className="register__row">
               <span className="register__key">Имя</span>
               <input
-                className="register__value"
+                className={
+                  isInputValid.username
+                    ? 'register__value'
+                    : inputData.username
+                    ? 'register__value register__value_error'
+                    : 'register__value'
+                }
+                onChange={handleChange}
+                value={inputData.username || ''}
+                onInput={handleInput}
+                required
+                minLength="2"
+                maxLength="30"
                 type="text"
                 name="username"
                 id="username"
               />
-              <span className="register__error">Что-то пошло не так ...</span>
+              <span
+                className={
+                  isInputValid.username
+                    ? 'register__error'
+                    : inputData.username
+                    ? 'register__error register__error_visible'
+                    : 'register__error'
+                }
+              >
+                {errorMessage.username}
+              </span>
             </label>
             <label className="register__row">
               <span className="register__key">E-mail</span>
               <input
-                className="register__value"
+                className={
+                  isInputValid.email
+                    ? 'register__value'
+                    : inputData.email
+                    ? 'register__value register__value_error'
+                    : 'register__value'
+                }
+                onChange={handleChange}
+                value={inputData.email || ''}
+                onInput={handleInput}
+                required
                 type="email"
-                name="useremail"
-                id="useremail"
+                name="email"
+                id="email"
               />
-              <span className="register__error">Что-то пошло не так ...</span>
+              <span
+                className={
+                  isInputValid.email
+                    ? 'register__error'
+                    : inputData.email
+                    ? 'register__error register__error_visible'
+                    : 'register__error'
+                }
+              >
+                {errorMessage.email}
+              </span>
             </label>
             <label className="register__row">
               <span className="register__key">Пароль</span>
               <input
-                className="register__value"
+                className={
+                  isInputValid.password
+                    ? 'register__value'
+                    : inputData.password
+                    ? 'register__value register__value_error'
+                    : 'register__value'
+                }
+                onChange={handleChange}
+                value={inputData.password || ''}
+                onInput={handleInput}
+                required
+                minLength="6"
+                maxLength="30"
                 type="password"
-                name="userpassword"
-                id="userpassword"
+                name="password"
+                id="password"
               />
-              <span className="register__error">Что-то пошло не так ...</span>
+              <span
+                className={
+                  isInputValid.password
+                    ? 'register__error'
+                    : inputData.password
+                    ? 'register__error register__error_visible'
+                    : 'register__error'
+                }
+              >
+                {errorMessage.password}
+              </span>
             </label>
             <button className="register__button" type="submit">
               Зарегистрироваться
