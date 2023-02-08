@@ -10,8 +10,6 @@ function SavedMovies() {
           <MoviesCard />
           <MoviesCard />
           <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
         </ul>
       </section>
     </main>
