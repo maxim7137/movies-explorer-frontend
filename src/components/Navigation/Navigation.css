@@ -69,6 +69,7 @@
     flex-basis: 100%;
     transition: right 0.3s ease 0s;
     overflow: auto;
+    z-index: 1;
   }
 
   .navigation_active {

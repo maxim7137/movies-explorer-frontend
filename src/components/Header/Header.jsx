@@ -1,11 +1,11 @@
 import Navigation from '../Navigation/Navigation';
 import Logo from './Logo';
 
-function Header({ loggedIn, logIn, logOut }) {
+function Header({ loggedIn}) {
   return (
     <header className="header">
       <Logo />
-      <Navigation loggedIn={loggedIn} logIn={logIn} logOut={logOut} />
+      <Navigation loggedIn={loggedIn}/>
     </header>
   );
 }

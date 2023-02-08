@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Navigation({ loggedIn, logIn, logOut }) {
   const [burger, setBurger] = useState(false); // меню бургер да нет
@@ -47,28 +48,27 @@ function Navigation({ loggedIn, logIn, logOut }) {
               onClick={closeSideMenu}
             >
               <li>
-                <a className="navigation__item" href="#">
+                <Link to="/" className="navigation__item">
                   Главная
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="navigation__item" href="#">
+                <Link to="/movies" className="navigation__item">
                   Фильмы
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="navigation__item" href="#">
+                <Link to="saved-movies" className="navigation__item">
                   Сохраненные фильмы
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
+                  to="/profile"
                   className="navigation__item navigation__item_acount"
-                  href="#"
-                  onClick={logOut}
                 >
                   Аккаунт
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -80,21 +80,17 @@ function Navigation({ loggedIn, logIn, logOut }) {
           <nav className="navigation">
             <ul className="navigation__list">
               <li>
-                <a
+                <Link
+                  to="/signup"
                   className="navigation__item navigation__item_signup"
-                  href="#"
                 >
                   Регистрация
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  className="navigation__item navigation__item_signin"
-                  href="#"
-                  onClick={logIn}
-                >
+                <Link to="/signin" className="navigation__item navigation__item_signin">
                   Войти
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>

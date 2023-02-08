@@ -110,11 +110,11 @@
 
 /* 320 */
 @media (max-width: 575px) {
-  html, .body {
-    height: 100%;
+  .body__container_profile {
+    height: calc(100vh - 74px);
   }
   .profile {
-    min-height: calc(100% - 74px);
+    min-height: 100%;
   }
   .profile__header {
     margin: 80px 0 70px;
@@ -130,5 +130,4 @@
     flex: 1 1 auto;
     justify-content: flex-end;
   }
-
 }

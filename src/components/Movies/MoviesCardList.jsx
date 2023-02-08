@@ -1,9 +1,15 @@
 import MoviesCard from './MoviesCard';
 
-function MoviesCardList({ cardClass }) {
+function MoviesCardList() {
   return (
     <section className="cards">
       <ul className="cards__list">
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
         <MoviesCard />
         <MoviesCard />
         <MoviesCard />

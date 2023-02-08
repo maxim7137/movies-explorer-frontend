@@ -1,4 +1,4 @@
-import FilterCheckbox from './FilterCheckbox'
+import FilterCheckbox from './FilterCheckbox';
 
 function SearchForm() {
   return (
@@ -11,7 +11,7 @@ function SearchForm() {
               type="text"
               placeholder="Фильм"
               name="search"
-              autocomplete="off"
+              autoComplete="off"
             />
             <button className="search__find" type="submit"></button>
             <div className="search__separator"></div>

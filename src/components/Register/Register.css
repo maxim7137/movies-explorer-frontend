@@ -1,6 +1,5 @@
-html,
-.body {
-  height: 100%;
+.body__container {
+  height: 100vh;
 }
 
 .register {
@@ -111,7 +110,7 @@ html,
   text-decoration: none;
   color: #4285f4;
   transition: color 0.2s;
-  padding-left: 6px;
+  padding: 16px;
 }
 
 .register__link:hover {
@@ -120,7 +119,7 @@ html,
 
 /* 768 */
 @media (min-width: 575.01px) and (max-width: 768px) {
-  .body {
+  .body__container {
     display: flex;
     justify-content: center;
     align-items: center;

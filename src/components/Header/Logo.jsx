@@ -1,10 +1,12 @@
+import { Link } from 'react-router-dom';
+
 function Logo() {
   return (
-    <div className="logo">
+    <Link to="/" className="logo">
       <div className="logo__circle">
         <div className="logo__arc"></div>
       </div>
-    </div>
+    </Link>
   );
 }
 
