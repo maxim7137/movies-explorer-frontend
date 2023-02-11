@@ -1,0 +1,138 @@
+.about__container {
+  padding: 112px 70px;
+}
+
+.section-title {
+  margin: 0;
+  padding-bottom: 23px;
+  font-weight: 400;
+  font-size: 22px;
+  border-bottom: 1px solid #dadada;
+  letter-spacing: -0.04em;
+}
+
+.about__discription-container {
+  display: flex;
+  margin: 70px 0 110px;
+  gap: calc((100vw - 768px) / (1280 - 768) * (52 - 30) + 30px);
+}
+
+.about__subtitle {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 0 0 26px;
+  letter-spacing: -0.04em;
+}
+
+.about__text {
+  margin: 0;
+  line-height: 20px;
+}
+
+.about__chart {
+  text-align: center;
+  font-size: 14px;
+}
+
+.about__time {
+  display: flex;
+}
+
+.about__week,
+.about__caption {
+  margin: 0;
+}
+
+.about__week {
+  padding: 10px 0;
+  font-weight: 400;
+}
+
+.about__caption {
+  padding: 15px 0 0;
+  font-weight: 500;
+  color: #8b8b8b;
+}
+
+.about__week:first-child,
+.about__caption:first-child {
+  flex-grow: 1;
+}
+
+.about__week:last-child,
+.about__caption:last-child {
+  flex-grow: 4;
+}
+
+.about__week:first-child {
+  background-color: #3ddc84;
+  color: #000;
+}
+
+.about__week:last-child {
+  background-color: #303030;
+}
+
+@media (max-width: 768px) {
+  .about__container {
+    padding: 92px 50px;
+  }
+
+  .about__discription-container {
+    margin-bottom: 92px;
+    gap: calc((100vw - 425px) / (768 - 425) * (38 - 10) + 10px);
+  }
+
+  .about__subtitle {
+    margin-bottom: 22px;
+  }
+
+  .about__text {
+    margin: 0;
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media (max-width: 425px) {
+  .about__container {
+    padding: 71px 18px;
+  }
+
+  .section-title {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 27px;
+  }
+
+  .about__discription-container {
+    margin: 61px 0 60px;
+    flex-direction: column;
+    gap: 57px;
+  }
+
+  .about__subtitle {
+    margin-bottom: 15px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about__chart {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about__week {
+    padding: 11px 0;
+  }
+
+  .about__caption {
+    padding: 10px 0 0;
+  }
+}

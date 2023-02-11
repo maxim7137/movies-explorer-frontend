@@ -1,0 +1,252 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  font-size: 12px;
+}
+
+.navigation_login {
+  margin-left: 44px;
+  flex-basis: 100%;
+  font-size: 13px;
+}
+
+.navigation__list {
+  display: flex;
+  flex-basis: 100%;
+  list-style: none;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+}
+
+.navigation__list_login {
+  gap: 16px;
+}
+
+.navigation__list_login li:first-child {
+  display: none;
+}
+
+.navigation__list li:last-child {
+  margin-left: auto;
+}
+
+.navigation__item {
+  text-decoration: none;
+  font-weight: 500;
+  color: #fff;
+}
+
+.navigation__item_signup {
+  padding-bottom: 0px;
+  border-bottom: none;
+}
+
+.navigation__item_signin {
+  border: none;
+  padding: 8px 20px;
+  background-color: #3ddc84;
+  border-radius: 3px;
+  font-family: "Inter", sans-serif;
+  color: #000;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.navigation__item_account {
+  padding: 8px 22px;
+  background-color: #313131;
+  border-radius: 20px;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.burger {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .navigation_login {
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 68%;
+    height: 100vh;
+    background-color: #202020;
+    font-size: 18px;
+    align-items: flex-start;
+    flex-basis: 100%;
+    transition: right 0.3s ease 0s;
+    overflow: auto;
+    z-index: 1;
+  }
+
+  .navigation_active {
+    right: 0;
+  }
+
+  .navigation__list_login {
+    flex-direction: column;
+    align-items: center;
+    gap: 29px;
+    flex-basis: 100%;
+    height: calc(100% - 160px);
+    margin-top: 160px;
+  }
+
+  .navigation__list_login li:first-child {
+    display: block;
+  }
+
+  .navigation__list_login li:last-child {
+    margin-left: 0;
+    margin-top: auto;
+    margin-right: 0;
+    font-size: 14px;
+    margin-bottom: 98px;
+  }
+
+  .navigation__item_side {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+  }
+
+  .navigation__item_selected {
+    border-bottom-color: #fff;
+  }
+
+  .burger {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 38px;
+    height: 38px;
+    margin-left: auto;
+    z-index: 3;
+    border: none;
+    background: none;
+    transition: all 0.1s ease 0s;
+    padding: 1px 9px 1px 2px;
+  }
+
+  .burger_active {
+    transform: translate(9px, 0);
+  }
+
+  .burger__line,
+  .burger:before,
+  .burger:after {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: #fff;
+    position: relative;
+    opacity: 1;
+    transition: all 0.1s ease 0s;
+  }
+
+  .burger:before,
+  .burger:after {
+    content: "";
+  }
+
+  .burger:before {
+    bottom: 7px;
+  }
+
+  .burger:after {
+    top: 7px;
+  }
+
+  .burger_active:before {
+    transform: rotate(45deg) translate(0, 14px);
+  }
+
+  .burger_active:after {
+    transform: rotate(-45deg) translate(0, -14px);
+  }
+
+  .burger__line_active {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 425px) {
+  .navigation {
+    font-size: 10px;
+  }
+
+  .navigation_login {
+    width: 100%;
+  }
+
+  .navigation__item_signin {
+    padding: 7px 12px;
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .navigation__list {
+    line-height: 1;
+    gap: 24px 14px;
+  }
+
+  .navigation__list_login {
+    margin-top: 145px;
+  }
+
+  .burger {
+    padding: 1px 2px 0 0;
+  }
+
+  .burger__line,
+  .burger:before,
+  .burger:after {
+    width: 22px;
+    height: 2px;
+  }
+
+  .burger:before {
+    bottom: 8px;
+  }
+
+  .burger:after {
+    top: 8px;
+  }
+
+  .burger_active {
+    transform: translate(15px, -9px);
+  }
+
+  .navigation__item_selected {
+    border-bottom-color: #fff;
+  }
+
+  .navigation__item_account {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    border: none;
+  }
+
+  .navigation__list_login li:last-child {
+    margin-bottom: 39px;
+  }
+
+  .navigation__item_side {
+    padding-bottom: 6px;
+  }
+}
