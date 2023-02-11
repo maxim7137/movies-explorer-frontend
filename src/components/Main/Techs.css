@@ -63,8 +63,12 @@
     max-width: 460px;
   }
 
+  .techs__title {
+    padding-bottom: 22px;
+  }
+
   .techs__subtitle {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
   }
 
   .techs__list {
@@ -94,6 +98,10 @@
 
   .techs__description {
     margin: 60px auto 50px;
+  }
+
+  .techs__title {
+    padding-bottom: 26px;
   }
 
   .techs__subtitle {

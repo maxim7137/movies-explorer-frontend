@@ -5,7 +5,7 @@ function Footer() {
         Учебный проект Яндекс.Практикум х BeatFilm.
       </p>
       <div className="footer__copy">
-        <p className="footer__date">&copy; {new Date().getFullYear()}</p>
+        <p className="footer__date">&copy;{new Date().getFullYear()}</p>
         <ul className="footer__list">
           <li>
             <a

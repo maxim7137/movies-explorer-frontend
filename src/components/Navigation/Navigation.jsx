@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 function Navigation({ loggedIn, logIn, logOut }) {
   const [burger, setBurger] = useState(false); // меню бургер да нет
@@ -48,27 +48,40 @@ function Navigation({ loggedIn, logIn, logOut }) {
               onClick={closeSideMenu}
             >
               <li>
-                <Link to="/" className="navigation__item">
+                <NavLink
+                  exact
+                  to="/"
+                  activeClassName="navigation__item_selected"
+                  className="navigation__item navigation__item_side"
+                >
                   Главная
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/movies" className="navigation__item">
+                <NavLink
+                  to="/movies"
+                  activeClassName="navigation__item_selected"
+                  className="navigation__item navigation__item_side"
+                >
                   Фильмы
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="saved-movies" className="navigation__item">
-                  Сохраненные фильмы
-                </Link>
+                <NavLink
+                  to="saved-movies"
+                  activeClassName="navigation__item_selected"
+                  className="navigation__item navigation__item_side"
+                >
+                  Сохранённые фильмы
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/profile"
-                  className="navigation__item navigation__item_acount"
+                  className="navigation__item navigation__item_account"
                 >
                   Аккаунт
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </nav>
@@ -88,7 +101,10 @@ function Navigation({ loggedIn, logIn, logOut }) {
                 </Link>
               </li>
               <li>
-                <Link to="/signin" className="navigation__item navigation__item_signin">
+                <Link
+                  to="/signin"
+                  className="navigation__item navigation__item_signin"
+                >
                   Войти
                 </Link>
               </li>

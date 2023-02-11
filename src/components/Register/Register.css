@@ -126,7 +126,7 @@
   text-decoration: none;
   color: #4285f4;
   transition: color 0.2s;
-  padding: 16px;
+  padding: 16px 0 0 8px;
 }
 
 .register__link:hover {
@@ -163,5 +163,21 @@
 
   .register__head {
     text-align: center;
+    margin: 50px 0 79px;
+  }
+
+  .register__button {
+    font-size: 12px;
+    line-height: 15px;
+    margin-bottom: 14px;
+  }
+
+  .register__footer {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .register__link {
+    padding: 14px 0 0 7px;
   }
 }

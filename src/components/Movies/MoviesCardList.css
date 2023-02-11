@@ -57,7 +57,7 @@
 /* 320 */
 @media (max-width: 575px) {
   .cards {
-    padding: 50px 10px 40px;
+    padding: 50px 10px 42px;
   }
 
   .cards__list {

@@ -18,6 +18,7 @@
   gap: 30px;
   padding: 0;
   margin: 0;
+  align-items: center;
 }
 
 .navigation__list_login {
@@ -38,14 +39,24 @@
   color: #fff;
 }
 
-.navigation__item_signin {
-  color: #000;
-  padding: 7px 20px;
-  background-color: #3ddc84;
-  border-radius: 3px;
+.navigation__item_signup {
+  padding-bottom: 0px;
+  border-bottom: none;
 }
 
-.navigation__item_acount {
+.navigation__item_signin {
+  border: none;
+  padding: 8px 20px;
+  background-color: #3ddc84;
+  border-radius: 3px;
+  font-family: "Inter", sans-serif;
+  color: #000;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.navigation__item_account {
   padding: 8px 22px;
   background-color: #313131;
   border-radius: 20px;
@@ -83,7 +94,7 @@
   .navigation__list_login {
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 29px;
     flex-basis: 100%;
     height: calc(100% - 160px);
     margin-top: 160px;
@@ -98,7 +109,19 @@
     margin-top: auto;
     margin-right: 0;
     font-size: 14px;
-    margin-bottom: 94px;
+    margin-bottom: 98px;
+  }
+
+  .navigation__item_side {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+  }
+
+  .navigation__item_selected {
+    border-bottom-color: #fff;
   }
 
   .burger {
@@ -116,6 +139,7 @@
     border: none;
     background: none;
     transition: all 0.1s ease 0s;
+    padding: 1px 9px 1px 2px;
   }
 
   .burger_active {
@@ -171,10 +195,58 @@
 
   .navigation__item_signin {
     padding: 7px 12px;
+    font-size: 10px;
+    line-height: 16px;
   }
 
   .navigation__list {
     line-height: 1;
-    gap: 14px;
+    gap: 24px 14px;
+  }
+
+  .navigation__list_login {
+    margin-top: 145px;
+  }
+
+  .burger {
+    padding: 1px 2px 0 0;
+  }
+
+  .burger__line,
+  .burger:before,
+  .burger:after {
+    width: 22px;
+    height: 2px;
+  }
+
+  .burger:before {
+    bottom: 8px;
+  }
+
+  .burger:after {
+    top: 8px;
+  }
+
+  .burger_active {
+    transform: translate(15px, -9px);
+  }
+
+  .navigation__item_selected {
+    border-bottom-color: #fff;
+  }
+
+  .navigation__item_account {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    border: none;
+  }
+
+  .navigation__list_login li:last-child {
+    margin-bottom: 39px;
+  }
+
+  .navigation__item_side {
+    padding-bottom: 6px;
   }
 }

@@ -122,11 +122,11 @@
 /* 768 */
 @media (max-width: 1279px) {
   .profile__header {
-    margin: 236px 0 96px;
+    margin: 236px 0 81px;
   }
 
   .profile__buttons {
-    margin-top: 210px;
+    margin-top: 192px;
   }
 }
 
@@ -139,7 +139,7 @@
     min-height: 100%;
   }
   .profile__header {
-    margin: 80px 0 70px;
+    margin: 70px 0 65px;
   }
 
   .profile__form {
@@ -151,6 +151,11 @@
     margin-bottom: 40px;
     flex: 1 1 auto;
     justify-content: flex-end;
+  }
+
+  .profile__button {
+    font-size: 12px;
+    line-height: 15px;
   }
 
   .profile__error_name {

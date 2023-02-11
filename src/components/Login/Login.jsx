@@ -122,7 +122,7 @@ function Login({ logIn }) {
           </form>
         </div>
         <div className="register__footer">
-          <span className="register__question">Ещё зарегистрированы?</span>
+          <span className="register__question">Ещё не зарегистрированы?</span>
           <Link to="/signup" className="register__link">
             Регистрация
           </Link>

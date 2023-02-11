@@ -7,7 +7,7 @@
 }
 
 .footer__text {
-  margin: 20px auto ;
+  margin: 20px auto;
 }
 
 .footer__copy {
@@ -51,7 +51,7 @@
   }
 
   .footer__text {
-    margin: 21px auto ;
+    margin: 21px auto;
   }
 
   .footer__copy {
@@ -62,7 +62,7 @@
   .footer__list {
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     margin: 31px 0;
   }
 

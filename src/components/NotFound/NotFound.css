@@ -53,7 +53,7 @@
 /* 320 */
 @media (max-width: 575px) {
   .notfound__block {
-    margin-top: calc(50vh - (97px / 2));
+    margin-top: calc(50vh - (123px / 2));
   }
 
   .notfound__number {
@@ -69,5 +69,7 @@
 
   .notfound__back {
     margin-bottom: 30px;
+    font-size: 12px;
+    line-height: 15px;
   }
 }
