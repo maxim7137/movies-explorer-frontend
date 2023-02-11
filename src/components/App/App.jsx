@@ -1,11 +1,14 @@
-import { useState, useEffect, useCallback, memo, useRef } from 'react';
-import { Switch, Route, Redirect, useLocation, Link } from 'react-router-dom';
+// import { useState, useEffect, useCallback, memo, useRef } from 'react';
+// import { Switch, Route, Redirect, useLocation, Link } from 'react-router-dom';
+
+import { useState } from 'react';
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
 import Profile from '../Profile/Profile';
-import Preloader from '../Preloader/Preloader';
+// import Preloader from '../Preloader/Preloader';
 
 import Header from '../Header/Header';
 
