@@ -107,7 +107,7 @@
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 575px) {
   .me__discription-container {
     flex-wrap: wrap-reverse;
   }

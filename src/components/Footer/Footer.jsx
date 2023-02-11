@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer content">
       <p className="footer__text">
         Учебный проект Яндекс.Практикум х BeatFilm.
       </p>

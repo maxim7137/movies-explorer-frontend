@@ -22,6 +22,7 @@ function SearchForm() {
               placeholder="Фильм"
               name="search"
               autoComplete="off"
+              required
             />
             <button className="search__find" type="submit"></button>
             <div className="search__separator"></div>

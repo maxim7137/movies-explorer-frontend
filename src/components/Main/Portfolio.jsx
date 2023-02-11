@@ -2,7 +2,7 @@ import arrow from '../../images/arrow.svg'
 
 function Portfolio() {
   return (
-    <section className="portfolio">
+    <section className="portfolio content">
       <div className="portfolio__container">
         <p className="portfolio__title">Портфолио</p>
         <ul className="portfolio__list">
