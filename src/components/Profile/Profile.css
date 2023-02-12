@@ -110,6 +110,15 @@
   color: #3ddc84;
 }
 
+.profile__button_disabled {
+  color: #7b7b7b;
+}
+
+.profile__button_disabled:hover {
+  color: #7b7b7b;
+  cursor: default;
+}
+
 .profile__button_exit {
   color: #ee3465;
   font-weight: 500;

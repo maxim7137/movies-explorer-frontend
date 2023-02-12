@@ -1,41 +1,160 @@
-// import { useState, useEffect, useCallback, memo, useRef } from 'react';
-// import { Switch, Route, Redirect, useLocation, Link } from 'react-router-dom';
+import { useState, useEffect, useCallback, memo, useRef } from 'react'; // реакт
+import { Switch, Route, Redirect, useLocation, Link } from 'react-router-dom'; // реакт роутер
 
-import { useState } from 'react';
-import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import { Signin, Signup, getToken } from '../../utils/Auth'; // утилиты
+import MainApi from '../../utils/MainApi'; // мое апи
 
+import CurrentUserContext from '../../contexts/CurrentUserContext'; // контекст текущего пользователя
+
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'; // защищенный роут
+
+// <-- jsx компоненты
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
 import Profile from '../Profile/Profile';
-// import Preloader from '../Preloader/Preloader';
-
+import Preloader from '../Preloader/Preloader';
 import Header from '../Header/Header';
-
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
-
 import Footer from '../Footer/Footer';
+// -- jsx компоненты --/>
 
 function App() {
   let location = useLocation(); // переменная для useLocation
 
   const [loggedIn, setLoggedIn] = useState(false); // вошел не вошел
+  const [loading, setLoading] = useState(true); // загружается не загружается
 
-  // войти
-  function logIn(event) {
-    event.preventDefault();
+  const [userAuthData, setUserAuthData] = useState({
+    password: '',
+    email: '',
+  });
+
+  const [currentUser, setCurrentUser] = useState({}); // Контекст текущего пользователя
+
+  // <-- Пользователь
+  useEffect(() => {
+    if (loggedIn) {
+      const jwt = 'Bearer ' + localStorage.getItem('jwt');
+      MainApi.getInitialUser(jwt)
+        .then((result) => {
+          setCurrentUser(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [loggedIn]);
+  // Пользователь -- />
+
+  // <-- Обработчик аутентификации
+  const authentication = useCallback((data) => {
+    localStorage.setItem('jwt', data.token);
     setLoggedIn(true);
-  }
+    setUserAuthData(data.user);
+  }, []);
+  // Обработчик аутентификации -->
 
-  // выйти
-  function logOut(event) {
-    event.preventDefault();
+  // <-- Обработчики входа и выхода
+  const handleLogin = useCallback(
+    async (email, password) => {
+      try {
+        setLoading(true);
+        const data = await Signin(email, password);
+        if (data.token) {
+          authentication(data);
+        }
+        setUserAuthData({
+          password,
+          email,
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [authentication]
+  );
+
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem('jwt');
     setLoggedIn(false);
-  }
+    setUserAuthData({
+      password: '',
+      email: '',
+    });
+  }, []);
+  // Обработчики входа и выхода -->
 
-  // проверка useLocation
+  // <-- Обработчик регистрации
+  const handleRegister = useCallback(
+    async (name, email, password) => {
+      try {
+        setLoading(true);
+        const data = await Signup(name, email, password);
+        if (data.token) {
+          authentication(data);
+        }
+        handleLogin(email, password);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [authentication, handleLogin]
+  );
+  // Обработчик регистрации -->
+
+  // <-- Обработчик обновления профиля
+  function handleUpdateUser(data) {
+    const jwt = 'Bearer ' + localStorage.getItem('jwt');
+    MainApi.setUser(data, jwt)
+      .then((result) => {
+        setCurrentUser(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  // Обработчик обновления профиля -- />
+
+  // Проверка токена
+  const tokenCheck = useCallback(async () => {
+    // если у пользователя есть токен в localStorage,
+    // эта функция проверит валидность токена
+    try {
+      setLoading(true);
+      const jwt = localStorage.getItem('jwt');
+      if (!jwt) {
+        throw new Error('no token');
+      }
+      if (jwt) {
+        const user = await getToken(jwt);
+        if (!user) {
+          throw new Error('no user');
+        }
+        if (user) {
+          setUserAuthData(user);
+          setLoggedIn(true);
+        }
+      }
+    } catch (error) {
+      console.log('tokenCheck', error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    // настало время проверить токен
+    tokenCheck();
+  }, [tokenCheck]);
+
+  // <-- проверка useLocation
   function isHeaderLocation() {
     return (
       location.pathname === '/' ||
@@ -44,7 +163,6 @@ function App() {
       location.pathname === '/profile'
     );
   }
-
   function isFooterLocation() {
     return (
       location.pathname === '/' ||
@@ -52,38 +170,55 @@ function App() {
       location.pathname === '/saved-movies'
     );
   }
+  // -- проверка useLocation -- />
 
   return (
-    <>
-      {isHeaderLocation() && <Header loggedIn={loggedIn} />}
-      <Switch>
-        <Route exact path="/">
-          <Main />
-        </Route>
-        <Route path="/movies">
-          <Movies />
-        </Route>
-        <Route path="/saved-movies">
-          <SavedMovies />
-        </Route>
-        <Route path="/profile">
-          <Profile logOut={logOut} />
-        </Route>
-        <Route path="/signin">
-          <Login logIn={logIn} />
-        </Route>
-        <Route path="/signup">
-          <Register />
-        </Route>
-        <Route path="/404">
-          <NotFound />
-        </Route>
-        <Route path="*">
-          {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
-        </Route>
-      </Switch>
-      {isFooterLocation() && <Footer />}
-    </>
+    <CurrentUserContext.Provider value={currentUser}>
+      {loading ? (
+        <Preloader />
+      ) : (
+        <>
+          {isHeaderLocation() && <Header loggedIn={loggedIn} />}
+          <Switch>
+            <Route exact path="/">
+              <Main />
+            </Route>
+
+            <ProtectedRoute
+              path="/movies"
+              component={Movies}
+              loggedIn={loggedIn}
+            />
+            <ProtectedRoute
+              path="/saved-movies"
+              component={SavedMovies}
+              loggedIn={loggedIn}
+            />
+            <ProtectedRoute
+              path="/profile"
+              component={Profile}
+              loggedIn={loggedIn}
+              handleLogout={handleLogout}
+              handleUpdateUser={handleUpdateUser}
+            />
+
+            <Route path="/signin">
+              <Login handleLogin={handleLogin} loggedIn={loggedIn} />
+            </Route>
+            <Route path="/signup">
+              <Register handleRegister={handleRegister} loggedIn={loggedIn} />
+            </Route>
+            <Route path="/404">
+              <NotFound />
+            </Route>
+            <Route path="*">
+              {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
+            </Route>
+          </Switch>
+          {isFooterLocation() && <Footer />}
+        </>
+      )}
+    </CurrentUserContext.Provider>
   );
 }
 
