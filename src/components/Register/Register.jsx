@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { Link, Route, Redirect } from 'react-router-dom';
 import Logo from '../Header/Logo';
 
-function Register({ handleRegister, loggedIn }) {
+function Register({
+  handleRegister,
+  loggedIn,
+  serverErrorMessage,
+  setServerErrorMessage,
+}) {
   // <-- управление компонентами --
   const [inputData, setInputData] = useState({
     name: '',
@@ -24,10 +29,17 @@ function Register({ handleRegister, loggedIn }) {
   });
 
   let isFormValid =
-    isInputValid.name && isInputValid.email && isInputValid.password;
+    isInputValid.name &&
+    isInputValid.email &&
+    isInputValid.password &&
+    !serverErrorMessage;
 
   // Обработчик изменения инпута для валидации
   function handleInput(e) {
+    setTimeout(() => {
+      setServerErrorMessage(false);
+    }, 7000);
+
     const { name, validity, validationMessage } = e.target;
 
     setIsInputValid({
@@ -68,7 +80,11 @@ function Register({ handleRegister, loggedIn }) {
             <Logo />
             <div className="register__main">
               <h1 className="register__head">Добро пожаловать!</h1>
-              <form className="register__form" onSubmit={handleSubmit}>
+              <form
+                className="register__form"
+                autoComplete="off"
+                onSubmit={handleSubmit}
+              >
                 <label className="register__row">
                   <span className="register__key">Имя</span>
                   <input
@@ -107,7 +123,7 @@ function Register({ handleRegister, loggedIn }) {
                   <span className="register__key">E-mail</span>
                   <input
                     className={
-                      isInputValid.email
+                      isInputValid.email && !serverErrorMessage
                         ? 'register__value'
                         : inputData.email
                         ? 'register__value register__value_error'
@@ -124,14 +140,14 @@ function Register({ handleRegister, loggedIn }) {
                   />
                   <span
                     className={
-                      isInputValid.email
+                      isInputValid.email && !serverErrorMessage
                         ? 'register__error'
                         : inputData.email
                         ? 'register__error register__error_visible'
                         : 'register__error'
                     }
                   >
-                    {errorMessage.email}
+                    {serverErrorMessage || errorMessage.email}
                   </span>
                 </label>
                 <label className="register__row">

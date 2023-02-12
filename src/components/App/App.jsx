@@ -26,6 +26,7 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false); // вошел не вошел
   const [loading, setLoading] = useState(true); // загружается не загружается
+  const [serverErrorMessage, setServerErrorMessage] = useState(false); // загружается не загружается
 
   const [userAuthData, setUserAuthData] = useState({
     password: '',
@@ -100,7 +101,9 @@ function App() {
         }
         handleLogin(email, password);
       } catch (error) {
-        console.log(error);
+        const { message } = await error;
+        console.log(message);
+        setServerErrorMessage(message);
       } finally {
         setLoading(false);
       }
@@ -143,7 +146,7 @@ function App() {
         }
       }
     } catch (error) {
-      console.log('tokenCheck', error);
+      // console.log('tokenCheck', error);
     } finally {
       setLoading(false);
     }
@@ -206,7 +209,12 @@ function App() {
               <Login handleLogin={handleLogin} loggedIn={loggedIn} />
             </Route>
             <Route path="/signup">
-              <Register handleRegister={handleRegister} loggedIn={loggedIn} />
+              <Register
+                handleRegister={handleRegister}
+                loggedIn={loggedIn}
+                serverErrorMessage={serverErrorMessage}
+                setServerErrorMessage={setServerErrorMessage}
+              />
             </Route>
             <Route path="/404">
               <NotFound />
