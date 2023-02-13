@@ -1,7 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext'; // контекст текущего пользователя
 
-function Profile({ handleLogout, handleUpdateUser }) {
+function Profile({
+  handleLogout,
+  handleUpdateUser,
+  serverErrorMessage,
+  setServerErrorMessage,
+}) {
   const user = useContext(CurrentUserContext);
 
   // <-- управление компонентами --
@@ -21,12 +26,19 @@ function Profile({ handleLogout, handleUpdateUser }) {
     email: '',
   });
 
+  let isFormValid =
+    isInputValid.name && isInputValid.email && !serverErrorMessage;
+
   useEffect(() => {
     setInputData(user);
   }, [user]);
 
   // Обработчик изменения инпута для валидации
   function handleInput(e) {
+    // setTimeout(() => {
+    setServerErrorMessage(false);
+    // }, 0);
+
     const { name, validity, validationMessage } = e.target;
     setIsInputValid({
       ...isInputValid,
@@ -47,8 +59,6 @@ function Profile({ handleLogout, handleUpdateUser }) {
       [name]: value,
     });
   }
-
-  let isFormValid = isInputValid.name && isInputValid.email;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -105,7 +115,7 @@ function Profile({ handleLogout, handleUpdateUser }) {
             <span className="profile__key">E-mail</span>
             <input
               className={
-                isInputValid.email
+                isInputValid.email && !serverErrorMessage
                   ? 'profile__value'
                   : inputData.email
                   ? 'profile__value profile__value_error'
@@ -119,17 +129,18 @@ function Profile({ handleLogout, handleUpdateUser }) {
               name="email"
               id="email"
               placeholder="E-mail"
+              autoComplete="off"
             />
             <span
               className={
-                isInputValid.email
+                isInputValid.email && !serverErrorMessage
                   ? 'profile__error'
                   : inputData.email
                   ? 'profile__error profile__error_visible'
                   : 'profile__error'
               }
             >
-              {errorMessage.email}
+              {serverErrorMessage || errorMessage.email}
             </span>
           </label>
         </form>

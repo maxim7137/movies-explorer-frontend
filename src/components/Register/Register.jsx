@@ -136,6 +136,7 @@ function Register({
                     type="email"
                     name="email"
                     id="email"
+                    placeholder="E-mail"
                     autoComplete="off"
                   />
                   <span

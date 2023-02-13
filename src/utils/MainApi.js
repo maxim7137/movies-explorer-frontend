@@ -6,7 +6,7 @@ class Api {
       return res.json();
     }
     // если ошибка, отклоняем промис
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return Promise.reject(res.json());
   }
 
   constructor(baseUrl) {

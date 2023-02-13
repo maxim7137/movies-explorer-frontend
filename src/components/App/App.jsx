@@ -102,7 +102,6 @@ function App() {
         handleLogin(email, password);
       } catch (error) {
         const { message } = await error;
-        console.log(message);
         setServerErrorMessage(message);
       } finally {
         setLoading(false);
@@ -119,8 +118,19 @@ function App() {
       .then((result) => {
         setCurrentUser(result);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        return error;
+      })
+      .then((error) => {
+        if (error) {
+          const { message } = error;
+          setServerErrorMessage(message);
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          console.log(error);
+        }
       });
   }
   // Обработчик обновления профиля -- />
@@ -203,6 +213,8 @@ function App() {
               loggedIn={loggedIn}
               handleLogout={handleLogout}
               handleUpdateUser={handleUpdateUser}
+              serverErrorMessage={serverErrorMessage}
+              setServerErrorMessage={setServerErrorMessage}
             />
 
             <Route path="/signin">
