@@ -3,6 +3,7 @@ import { Switch, Route, Redirect, useLocation, Link } from 'react-router-dom'; /
 
 import { Signin, Signup, getToken } from '../../utils/Auth'; // утилиты
 import MainApi from '../../utils/MainApi'; // мое апи
+import MoviesApi from '../../utils/MoviesApi'; // апи к фильмам
 
 import CurrentUserContext from '../../contexts/CurrentUserContext'; // контекст текущего пользователя
 
@@ -19,6 +20,7 @@ import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Footer from '../Footer/Footer';
+
 // -- jsx компоненты --/>
 
 function App() {
@@ -31,7 +33,6 @@ function App() {
   // < -- карточки с фильмами
   const [cardsBeatfilm, setCardsBeatfilm] = useState([]); // все начальные карточки
   const [cardsNormal, setCardsNormal] = useState([]); // все нормализованные для моего апи карточки
-
 
   // -- карточки с фильмами -- />
 
@@ -193,6 +194,21 @@ function App() {
     );
   }
   // -- проверка useLocation -- />
+
+  // <-- всё, что касается переменной cards --
+  // <-- Карточки
+  useEffect(() => {
+    if (loggedIn) {
+      MoviesApi.getInitialCards()
+        .then((result) => {
+          setCardsBeatfilm(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [loggedIn]);
+  // Карточки -->
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

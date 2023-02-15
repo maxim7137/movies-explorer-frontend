@@ -13,7 +13,7 @@ function SearchForm({ handleSearch }) {
   }
 
   // Обработчик фокуса
-  function handleBlur(e) {
+  function handleBlur() {
     setIsInputValid(true);
   }
 

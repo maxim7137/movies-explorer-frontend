@@ -13,10 +13,9 @@ class Api {
     this._baseUrl = baseUrl;
   }
 
-  getInitialCards(token) {
-    return fetch(`${this._baseUrl}/movies`, {
+  getInitialCards() {
+    return fetch(`${this._baseUrl}`, {
       headers: {
-        authorization: token,
         'Content-Type': 'application/json',
       },
     }).then(this._isServerOk);
