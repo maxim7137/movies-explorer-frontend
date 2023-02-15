@@ -4,6 +4,7 @@ import { Switch, Route, Redirect, useLocation, Link } from 'react-router-dom'; /
 import { Signin, Signup, getToken } from '../../utils/Auth'; // утилиты
 import MainApi from '../../utils/MainApi'; // мое апи
 import MoviesApi from '../../utils/MoviesApi'; // апи к фильмам
+import NormCard from '../../utils/NormCard'; // класс для создания карточки для моего апи
 
 import CurrentUserContext from '../../contexts/CurrentUserContext'; // контекст текущего пользователя
 
@@ -32,8 +33,6 @@ function App() {
 
   // < -- карточки с фильмами
   const [cardsBeatfilm, setCardsBeatfilm] = useState([]); // все начальные карточки
-  const [cardsNormal, setCardsNormal] = useState([]); // все нормализованные для моего апи карточки
-
   // -- карточки с фильмами -- />
 
   // < -- данные пользователя для авторизации
@@ -201,7 +200,10 @@ function App() {
     if (loggedIn) {
       MoviesApi.getInitialCards()
         .then((result) => {
-          setCardsBeatfilm(result);
+          return result.map((rowCard) => NormCard(rowCard));
+        })
+        .then((NormCardArray) => {
+          setCardsBeatfilm(NormCardArray);
         })
         .catch((err) => {
           console.log(err);
