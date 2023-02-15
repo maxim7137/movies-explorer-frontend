@@ -22,15 +22,6 @@ class Api {
     }).then(this._isServerOk);
   }
 
-  getInitialCards(token) {
-    return fetch(`${this._baseUrl}/movies`, {
-      headers: {
-        authorization: token,
-        'Content-Type': 'application/json',
-      },
-    }).then(this._isServerOk);
-  }
-
   setUser({ name, email }, token) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',

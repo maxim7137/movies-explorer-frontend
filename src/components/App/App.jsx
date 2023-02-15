@@ -28,10 +28,19 @@ function App() {
   const [loading, setLoading] = useState(true); // загружается не загружается
   const [serverErrorMessage, setServerErrorMessage] = useState(false); // загружается не загружается
 
+  // < -- карточки с фильмами
+  const [cardsBeatfilm, setCardsBeatfilm] = useState([]); // все начальные карточки
+  const [cardsNormal, setCardsNormal] = useState([]); // все нормализованные для моего апи карточки
+
+
+  // -- карточки с фильмами -- />
+
+  // < -- данные пользователя для авторизации
   const [userAuthData, setUserAuthData] = useState({
     password: '',
     email: '',
   });
+  // -- данные пользователя для авторизации -- />
 
   const [currentUser, setCurrentUser] = useState({}); // Контекст текущего пользователя
 

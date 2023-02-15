@@ -5,17 +5,6 @@ function MoviesCardList() {
     <section className="cards">
       <ul className="cards__list">
         <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
       </ul>
       <div className="more">
         <button className="more__btn">Ещё</button>

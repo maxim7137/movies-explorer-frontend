@@ -8,8 +8,6 @@ function SavedMovies() {
       <section className="cards">
         <ul className="cards__list">
           <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
         </ul>
       </section>
     </main>
