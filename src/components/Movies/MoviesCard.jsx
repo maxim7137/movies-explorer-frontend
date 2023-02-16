@@ -1,7 +1,19 @@
-import image from '../../images/card.jpg';
 import { useLocation } from 'react-router-dom';
+import MinToHours from '../../utils/MinToHours';
 
-function MoviesCard() {
+function MoviesCard({
+  country,
+  director,
+  duration,
+  year,
+  description,
+  trailerLink,
+  nameRU,
+  nameEN,
+  movieId,
+  image,
+  thumbnail,
+}) {
   let location = useLocation(); // переменная для useLocation
 
   // проверка useLocation
@@ -13,8 +25,8 @@ function MoviesCard() {
     <li className="card">
       <div className="card__head">
         <div className="card__text">
-          <p className="card__name">33 слова о дизайне</p>
-          <p className="card__duration">1ч 47м</p>
+          <p className="card__name">{nameRU}</p>
+          <p className="card__duration">{MinToHours(duration)}</p>
         </div>
         <div className="card__save">
           <button
@@ -25,7 +37,11 @@ function MoviesCard() {
         </div>
       </div>
       <div className="card__body">
-        <img src={image} alt="Постер фильма" className="card__img" />
+        <img
+          src={image}
+          alt={`Постер фильма: ${nameRU}`}
+          className="card__img"
+        />
       </div>
     </li>
   );

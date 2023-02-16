@@ -35,9 +35,7 @@ function Profile({
 
   // Обработчик изменения инпута для валидации
   function handleInput(e) {
-    // setTimeout(() => {
     setServerErrorMessage(false);
-    // }, 0);
 
     const { name, validity, validationMessage } = e.target;
     setIsInputValid({

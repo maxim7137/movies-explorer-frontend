@@ -3,8 +3,6 @@ import { Switch, Route, Redirect, useLocation, Link } from 'react-router-dom'; /
 
 import { Signin, Signup, getToken } from '../../utils/Auth'; // утилиты
 import MainApi from '../../utils/MainApi'; // мое апи
-import MoviesApi from '../../utils/MoviesApi'; // апи к фильмам
-import NormCard from '../../utils/NormCard'; // класс для создания карточки для моего апи
 
 import CurrentUserContext from '../../contexts/CurrentUserContext'; // контекст текущего пользователя
 
@@ -29,11 +27,7 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false); // вошел не вошел
   const [loading, setLoading] = useState(true); // загружается не загружается
-  const [serverErrorMessage, setServerErrorMessage] = useState(false); // загружается не загружается
-
-  // < -- карточки с фильмами
-  const [cardsBeatfilm, setCardsBeatfilm] = useState([]); // все начальные карточки
-  // -- карточки с фильмами -- />
+  const [serverErrorMessage, setServerErrorMessage] = useState(null); // загружается не загружается
 
   // < -- данные пользователя для авторизации
   const [userAuthData, setUserAuthData] = useState({
@@ -194,24 +188,6 @@ function App() {
   }
   // -- проверка useLocation -- />
 
-  // <-- всё, что касается переменной cards --
-  // <-- Карточки
-  useEffect(() => {
-    if (loggedIn) {
-      MoviesApi.getInitialCards()
-        .then((result) => {
-          return result.map((rowCard) => NormCard(rowCard));
-        })
-        .then((NormCardArray) => {
-          setCardsBeatfilm(NormCardArray);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [loggedIn]);
-  // Карточки -->
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {loading ? (
@@ -245,7 +221,12 @@ function App() {
             />
 
             <Route path="/signin">
-              <Login handleLogin={handleLogin} loggedIn={loggedIn} />
+              <Login
+                handleLogin={handleLogin}
+                loggedIn={loggedIn}
+                serverErrorMessage={serverErrorMessage}
+                setServerErrorMessage={setServerErrorMessage}
+              />
             </Route>
             <Route path="/signup">
               <Register

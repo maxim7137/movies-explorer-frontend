@@ -104,7 +104,7 @@ function Register({
                     type="text"
                     name="name"
                     id="name"
-                    pattern="[a-zA-Zа-яА-Я\s-]+"
+                    pattern="[a-zA-Zа-яА-Яё\s-]+"
                     autoComplete="off"
                   />
                   <span

@@ -3,11 +3,11 @@ import SearchForm from '../Movies/SearchForm';
 
 function SavedMovies() {
   return (
-    <main className='body__main'>
+    <main className='body__main content'>
       <SearchForm />
       <section className="cards">
         <ul className="cards__list">
-          <MoviesCard />
+
         </ul>
       </section>
     </main>

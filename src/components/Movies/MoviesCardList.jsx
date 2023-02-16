@@ -1,10 +1,16 @@
 import MoviesCard from './MoviesCard';
 
-function MoviesCardList() {
+function MoviesCardList({ cardsBeatfilm }) {
   return (
     <section className="cards">
       <ul className="cards__list">
-        <MoviesCard />
+        {cardsBeatfilm.map((card) => (
+          <MoviesCard
+            key={card.movieId}
+            card={card}
+            {...card}
+          />
+        ))}
       </ul>
       <div className="more">
         <button className="more__btn">Ещё</button>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import FilterCheckbox from './FilterCheckbox';
 
-function SearchForm({ handleSearch }) {
+function SearchForm({ loadAllMovies, handleSearch }) {
   const [inputData, setInputData] = useState(''); // Данные в поле
   const [isInputValid, setIsInputValid] = useState(true); // Стейты для валидации
   const errorMessage = 'Нужно ввести ключевое слово'; // Сообщение об ошибке
@@ -26,7 +26,10 @@ function SearchForm({ handleSearch }) {
     e.preventDefault();
     const form = e.currentTarget;
     setIsInputValid(form.checkValidity());
-    // handleSearch(inputData);
+    if (form.checkValidity()) {
+      loadAllMovies();
+      // handleSearch(inputData);
+    }
   };
 
   return (
