@@ -75,7 +75,14 @@ function App() {
           email,
         });
       } catch (error) {
-        console.log(error);
+        const { message } = await error;
+        if (message === 'Validation failed') {
+          const { validation } = await error;
+          const validationMessage = validation.body.message;
+          setServerErrorMessage(validationMessage);
+        } else {
+          setServerErrorMessage(message);
+        }
       } finally {
         setLoading(false);
       }
@@ -105,7 +112,13 @@ function App() {
         handleLogin(email, password);
       } catch (error) {
         const { message } = await error;
-        setServerErrorMessage(message);
+        if (message === 'Validation failed') {
+          const { validation } = await error;
+          const validationMessage = validation.body.message;
+          setServerErrorMessage(validationMessage);
+        } else {
+          setServerErrorMessage(message);
+        }
       } finally {
         setLoading(false);
       }
@@ -127,7 +140,13 @@ function App() {
       .then((error) => {
         if (error) {
           const { message } = error;
-          setServerErrorMessage(message);
+          if (message === 'Validation failed') {
+            const { validation } = error;
+            const validationMessage = validation.body.message;
+            setServerErrorMessage(validationMessage);
+          } else {
+            setServerErrorMessage(message);
+          }
         }
       })
       .catch((error) => {

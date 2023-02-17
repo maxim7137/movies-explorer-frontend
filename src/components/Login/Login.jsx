@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, Route, Redirect } from 'react-router-dom';
 import Logo from '../Header/Logo';
 
@@ -8,8 +8,14 @@ function Login({
   serverErrorMessage,
   setServerErrorMessage,
 }) {
+  // сохранение введенных данных при логине (почта - имя любое, а пароль нельзя)
+  const potentialUserEmail = localStorage.getItem('potentialUserEmail');
+
   // <-- управление компонентами --
-  const [inputData, setInputData] = useState({ password: '', email: '' });
+  const [inputData, setInputData] = useState({
+    password: '',
+    email: potentialUserEmail || '',
+  });
 
   // Стейты для валидации
   const [isInputValid, setIsInputValid] = useState({
@@ -26,7 +32,7 @@ function Login({
   function handleInput(e) {
     setTimeout(() => {
       setServerErrorMessage(false);
-    }, 7000);
+    }, 0);
 
     const { name, validity, validationMessage } = e.target;
     setIsInputValid({
@@ -49,6 +55,7 @@ function Login({
 
   function handleSubmit(e) {
     e.preventDefault();
+    localStorage.setItem('potentialUserEmail', inputData.email);
     handleLogin(inputData.email, inputData.password);
   }
 

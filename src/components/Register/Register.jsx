@@ -8,10 +8,13 @@ function Register({
   serverErrorMessage,
   setServerErrorMessage,
 }) {
+  // сохранение введенных данных при логине (почта - имя любое, а пароль нельзя)
+  const potentialUserEmail = localStorage.getItem('potentialUserEmail');
+
   // <-- управление компонентами --
   const [inputData, setInputData] = useState({
     name: '',
-    email: '',
+    email: potentialUserEmail || '',
     password: '',
   });
 
@@ -38,7 +41,7 @@ function Register({
   function handleInput(e) {
     setTimeout(() => {
       setServerErrorMessage(false);
-    }, 7000);
+    }, 0);
 
     const { name, validity, validationMessage } = e.target;
 
@@ -65,6 +68,7 @@ function Register({
 
   function handleSubmit(e) {
     e.preventDefault();
+    localStorage.setItem('potentialUserEmail', inputData.email);
     handleRegister(inputData.name, inputData.email, inputData.password);
   }
 

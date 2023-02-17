@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import SearchForm from './SearchForm'; // jsx
 import MoviesCardList from './MoviesCardList'; // jsx
@@ -8,6 +8,10 @@ import NormCard from '../../utils/NormCard'; // функция для созда
 
 function Movies() {
   const [cardsBeatfilm, setCardsBeatfilm] = useState([]); // все начальные карточки
+
+  useEffect(() => {
+    localStorage.removeItem('potentialUserEmail');
+  }, []);
 
   // <-- Функция загрузки всех фильмов
   function loadAllMovies() {
