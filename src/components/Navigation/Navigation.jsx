@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-function Navigation({ loggedIn, logIn, logOut }) {
+function Navigation({ loggedIn }) {
   const [burger, setBurger] = useState(false); // меню бургер да нет
   // переключение меню бургер
   function burgerClick() {

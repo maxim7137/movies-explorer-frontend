@@ -29,10 +29,8 @@
 
 .search__error {
   position: absolute;
-  display: block;
-  width: 100%;
-  text-align: center;
-  top: 20%;
+  top: 46px;
+  left: 63px;
   font-size: 18px;
   line-height: 20px;
   font-weight: 400;
@@ -140,6 +138,11 @@
   .search__border {
     padding-bottom: 109px;
   }
+
+  .search__error {
+    top: 50px;
+    left: 30px;
+  }
 }
 
 /* 320 */
@@ -173,6 +176,10 @@
     outline: 2px solid #424242;
   }
 
+  .search__wrap_error:focus-within {
+    outline: 2px solid #ee3465;
+  }
+
   .search__wrap_checkbox {
     justify-content: center;
     align-items: center;
@@ -192,5 +199,12 @@
     font-size: 11px;
     line-height: 18px;
     padding-left: 13px;
+  }
+
+  .search__error {
+    left: 19px;
+    top: 45px;
+    font-size: 14px;
+    line-height: 1.1;
   }
 }

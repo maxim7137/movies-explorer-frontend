@@ -45,7 +45,13 @@ function SearchForm({ loadAllMovies, handleSearch }) {
           onSubmit={handleSubmit}
           onBlur={handleBlur}
         >
-          <div className="search__wrap search__wrap_input">
+          <div
+            className={
+              isInputValid
+                ? 'search__wrap search__wrap_input'
+                : 'search__wrap search__wrap_input search__wrap_error'
+            }
+          >
             <input
               className="search__text"
               onChange={handleChange}
