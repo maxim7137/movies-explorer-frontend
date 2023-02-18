@@ -1,19 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import FilterCheckbox from './FilterCheckbox';
 
-function SearchForm({ handleSearch, foundMovies }) {
-  const [inputData, setInputData] = useState(''); // Данные в поле поиска если искали то из локального хранилища, иначе пустая строка
+function SearchForm({ handleSearch }) {
+  const [inputData, setInputData] = useState(''); // Данные в поле поиска
+  const [shortChecked, setShortChecked] = useState(false); // состояние чек-бокса
   const [isInputValid, setIsInputValid] = useState(true); // Стейты для валидации
-  const errorMessage = 'Нужно ввести ключевое слово'; // Сообщение об ошибке
-  const [shortChecked, setShortChecked] = useState(false); // состояние чек-бокса из локального хранилища, иначе отключен
 
-  useEffect(() => {
-    //   setInputData(localStorage.getItem('moviesState').inputData);
-    //   setShortChecked(localStorage.getItem('moviesState').shortChecked);
-    const test = JSON.parse(localStorage.getItem('moviesState'));
-    console.log(test);
-  }, []);
+  const errorMessage = 'Нужно ввести ключевое слово'; // Сообщение об ошибке
 
   // Обработчик изменения инпута для валидации
   function handleInput() {
@@ -30,18 +24,32 @@ function SearchForm({ handleSearch, foundMovies }) {
     setInputData(e.target.value);
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    setIsInputValid(form.checkValidity());
-    if (form.checkValidity()) {
-      localStorage.setItem(
-        'moviesState',
-        JSON.stringify({ inputData, shortChecked, foundMovies })
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      const form = e.currentTarget;
+      setIsInputValid(form.checkValidity());
+      if (form.checkValidity()) {
+        localStorage.setItem(
+          'moviesSearchState',
+          JSON.stringify({ inputData, shortChecked })
+        );
+        handleSearch(inputData, shortChecked);
+      }
+    },
+    [handleSearch, inputData, shortChecked]
+  );
+
+  useEffect(() => {
+    if (localStorage.getItem('moviesSearchState')) {
+      setInputData(
+        JSON.parse(localStorage.getItem('moviesSearchState')).inputData
       );
-      handleSearch(inputData, shortChecked);
+      setShortChecked(
+        JSON.parse(localStorage.getItem('moviesSearchState')).shortChecked
+      );
     }
-  };
+  }, []);
 
   return (
     <section className="search">

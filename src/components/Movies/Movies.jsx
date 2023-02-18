@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import SearchForm from './SearchForm'; // jsx
 import MoviesCardList from './MoviesCardList'; // jsx
@@ -28,18 +28,33 @@ function Movies() {
 
   useEffect(() => {
     loadAllMovies(); // загрузим все фильмы до сабмита чтоб они были сразу доступны для фильтрации при поиске
-    // setFoundMovies(localStorage.getItem('moviesState').foundMovies);
     localStorage.removeItem('potentialUserEmail'); // удаление имейла вошедшего пользователя из локального хранилища
+    if (localStorage.getItem('moviesListState')) {
+      setFoundMovies(JSON.parse(localStorage.getItem('moviesListState')));
+    }
   }, []);
 
   // <-- Обработчика сабмита поиска
-  function handleSearch(inputData, shortChecked) {
+  const handleSearch = useCallback(
+    (inputData, shortChecked) => {
+      const foundMoviesNow = SearchMovies(
+        inputData,
+        shortChecked,
+        cardsBeatfilm
+      );
+      setFoundMovies(foundMoviesNow);
+      localStorage.setItem('moviesListState', JSON.stringify(foundMoviesNow));
+    },
+    [cardsBeatfilm]
+  );
+
+  /*   function handleSearch(inputData, shortChecked) {
     setFoundMovies(SearchMovies(inputData, shortChecked, cardsBeatfilm));
-  }
+  } */
 
   return (
     <main className="movies content">
-      <SearchForm handleSearch={handleSearch} foundMovies={foundMovies} />
+      <SearchForm handleSearch={handleSearch} />
       <MoviesCardList foundMovies={foundMovies} />
     </main>
   );
