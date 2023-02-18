@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import FilterCheckbox from './FilterCheckbox';
 
-function SearchForm({ loadAllMovies, handleSearch, foundMovies }) {
-  const [inputData, setInputData] = useState(''); // Данные в поле
+function SearchForm({ handleSearch, foundMovies }) {
+  const [inputData, setInputData] = useState(''); // Данные в поле поиска если искали то из локального хранилища, иначе пустая строка
   const [isInputValid, setIsInputValid] = useState(true); // Стейты для валидации
   const errorMessage = 'Нужно ввести ключевое слово'; // Сообщение об ошибке
-  const [shortChecked, setShortChecked] = useState(false); // состояние чек-бокса
+  const [shortChecked, setShortChecked] = useState(false); // состояние чек-бокса из локального хранилища, иначе отключен
+
+  useEffect(() => {
+    //   setInputData(localStorage.getItem('moviesState').inputData);
+    //   setShortChecked(localStorage.getItem('moviesState').shortChecked);
+    const test = JSON.parse(localStorage.getItem('moviesState'));
+    console.log(test);
+  }, []);
 
   // Обработчик изменения инпута для валидации
   function handleInput() {
@@ -28,12 +35,10 @@ function SearchForm({ loadAllMovies, handleSearch, foundMovies }) {
     const form = e.currentTarget;
     setIsInputValid(form.checkValidity());
     if (form.checkValidity()) {
-      loadAllMovies();
-      localStorage.setItem('moviesState', {
-        inputData,
-        shortChecked,
-        foundMovies,
-      });
+      localStorage.setItem(
+        'moviesState',
+        JSON.stringify({ inputData, shortChecked, foundMovies })
+      );
       handleSearch(inputData, shortChecked);
     }
   };

@@ -91,7 +91,9 @@ function App() {
   );
 
   const handleLogout = useCallback(() => {
-    localStorage.removeItem('jwt');
+    // localStorage.removeItem('jwt');
+    // localStorage.removeItem('moviesState');
+    localStorage.clear();
     setLoggedIn(false);
     setUserAuthData({
       password: '',

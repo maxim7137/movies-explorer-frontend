@@ -78,6 +78,7 @@ function Navigation({ loggedIn }) {
               <li>
                 <NavLink
                   to="/profile"
+                  activeClassName="navigation__item_selected"
                   className="navigation__item navigation__item_account"
                 >
                   Аккаунт
