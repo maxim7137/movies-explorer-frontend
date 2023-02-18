@@ -30,25 +30,45 @@ function Movies() {
   }
   // Функция загрузки всех фильмов -- />
 
+  // загрузим все фильмы до сабмита чтоб они были сразу доступны для фильтрации при поиске
+  useEffect(() => {
+    loadAllMovies();
+  }, []);
+
   // <-- Функция поиска
   function handleSearch(inputData, shortChecked) {
     let foundArray;
-    const filterItems = (arr, query) => {
-      return arr.filter(
-        (el) => el.nameRU.toLowerCase().indexOf(query.toLowerCase()) !== -1
-      );
-    };
+
+    function filterItemsObject(el, query) {
+      let result = false;
+
+      for (let key in el) {
+        if (
+          el[key]
+            .toString()
+            .toLowerCase()
+            .indexOf(query.toString().toLowerCase()) !== -1
+        ) {
+          result = true;
+        }
+      }
+      return result;
+    }
+
+    function filterItemsArray(arr, query) {
+      return arr.filter((el) => filterItemsObject(el, query));
+    }
+
     if (shortChecked) {
       foundArray = cardsBeatfilm.filter((e) => e.duration <= 40);
     } else {
       foundArray = cardsBeatfilm;
     }
-
-    const finalArray = filterItems(foundArray, inputData);
+    const finalArray = filterItemsArray(foundArray, inputData);
     setFoundMovies(finalArray);
     // Функция поиска -- />
   }
-  
+
   return (
     <main className="movies content">
       <SearchForm loadAllMovies={loadAllMovies} handleSearch={handleSearch} />

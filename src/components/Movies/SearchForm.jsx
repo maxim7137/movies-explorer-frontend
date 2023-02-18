@@ -29,12 +29,12 @@ function SearchForm({ loadAllMovies, handleSearch, foundMovies }) {
     setIsInputValid(form.checkValidity());
     if (form.checkValidity()) {
       loadAllMovies();
-      handleSearch(inputData, shortChecked);
       localStorage.setItem('moviesState', {
         inputData,
         shortChecked,
         foundMovies,
       });
+      handleSearch(inputData, shortChecked);
     }
   };
 
