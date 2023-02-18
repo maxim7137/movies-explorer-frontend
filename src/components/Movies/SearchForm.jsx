@@ -2,13 +2,14 @@ import { useState } from 'react';
 
 import FilterCheckbox from './FilterCheckbox';
 
-function SearchForm({ loadAllMovies, handleSearch }) {
+function SearchForm({ loadAllMovies, handleSearch, foundMovies }) {
   const [inputData, setInputData] = useState(''); // Данные в поле
   const [isInputValid, setIsInputValid] = useState(true); // Стейты для валидации
   const errorMessage = 'Нужно ввести ключевое слово'; // Сообщение об ошибке
+  const [shortChecked, setShortChecked] = useState(false); // состояние чек-бокса
 
   // Обработчик изменения инпута для валидации
-  function handleInput(e) {
+  function handleInput() {
     setIsInputValid(true);
   }
 
@@ -28,7 +29,12 @@ function SearchForm({ loadAllMovies, handleSearch }) {
     setIsInputValid(form.checkValidity());
     if (form.checkValidity()) {
       loadAllMovies();
-      // handleSearch(inputData);
+      handleSearch(inputData, shortChecked);
+      localStorage.setItem('moviesState', {
+        inputData,
+        shortChecked,
+        foundMovies,
+      });
     }
   };
 
@@ -68,7 +74,10 @@ function SearchForm({ loadAllMovies, handleSearch }) {
             <div className="search__separator"></div>
           </div>
           <div className="search__wrap search__wrap_checkbox">
-            <FilterCheckbox />
+            <FilterCheckbox
+              shortChecked={shortChecked}
+              setShortChecked={setShortChecked}
+            />
             <span className="search__short">Короткометражки</span>
           </div>
         </form>

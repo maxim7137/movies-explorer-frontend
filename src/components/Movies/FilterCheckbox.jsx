@@ -1,8 +1,4 @@
-import { useState } from 'react';
-
-function FilterCheckbox() {
-  const [shortChecked, setShortChecked] = useState(false);
-
+function FilterCheckbox({ shortChecked, setShortChecked }) {
   function handleToggleShort(event) {
     setShortChecked(event.target.checked);
   }
