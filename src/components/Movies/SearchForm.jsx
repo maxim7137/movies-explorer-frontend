@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import FilterCheckbox from './FilterCheckbox';
 
-function SearchForm({ handleSearch }) {
+function SearchForm({ handleSearch, loadAllMovies }) {
   const [inputData, setInputData] = useState(''); // Данные в поле поиска
   const [shortChecked, setShortChecked] = useState(false); // состояние чек-бокса
   const [isInputValid, setIsInputValid] = useState(true); // Стейты для валидации
@@ -30,6 +30,7 @@ function SearchForm({ handleSearch }) {
       const form = e.currentTarget;
       setIsInputValid(form.checkValidity());
       if (form.checkValidity()) {
+        loadAllMovies();
         localStorage.setItem(
           'moviesSearchState',
           JSON.stringify({ inputData, shortChecked })
@@ -37,7 +38,7 @@ function SearchForm({ handleSearch }) {
         handleSearch(inputData, shortChecked);
       }
     },
-    [handleSearch, inputData, shortChecked]
+    [handleSearch, inputData, loadAllMovies, shortChecked]
   );
 
   useEffect(() => {

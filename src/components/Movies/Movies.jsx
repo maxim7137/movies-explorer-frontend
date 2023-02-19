@@ -9,34 +9,44 @@ import SearchMovies from '../../utils/SearchMovies'; // поиск фильмо�
 
 function Movies() {
   const [cardsBeatfilm, setCardsBeatfilm] = useState([]); // все начальные карточки
-  const [foundMovies, setFoundMovies] = useState([]); // найденные карточки из локального хранилища, иначе пустой массив
+  const [foundMovies, setFoundMovies] = useState([]); // найденные карточки из локального хранилища
+  const [searching, setSearching] = useState(false); // загружается не загружается
 
   // <-- Функция загрузки всех фильмов
-  function loadAllMovies() {
-    MoviesApi.getInitialCards()
-      .then((result) => {
-        return result.map((rowCard) => NormCard(rowCard));
-      })
-      .then((NormCardArray) => {
-        setCardsBeatfilm(NormCardArray);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  async function loadAllMovies() {
+    try {
+      setSearching(true);
+      const rowArray = await MoviesApi.getInitialCards();
+      const normArray = rowArray.map((rowCard) => NormCard(rowCard));
+      setCardsBeatfilm(normArray);
+      return normArray;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSearching(false);
+    }
   }
   // Функция загрузки всех фильмов -- />
 
   useEffect(() => {
-    loadAllMovies(); // загрузим все фильмы до сабмита чтоб они были сразу доступны для фильтрации при поиске
-    localStorage.removeItem('potentialUserEmail'); // удаление имейла вошедшего пользователя из локального хранилища
+    if (localStorage.getItem('potentialUserEmail')) {
+      localStorage.removeItem('potentialUserEmail'); // удаление имейла вошедшего пользователя из локального хранилища
+    }
     if (localStorage.getItem('moviesListState')) {
-      setFoundMovies(JSON.parse(localStorage.getItem('moviesListState')));
+      setFoundMovies(JSON.parse(localStorage.getItem('moviesListState'))); // найденные фильмы вставляем из локального хранилища
     }
   }, []);
+
+  useEffect(() => {
+    if (!cardsBeatfilm[0]) {
+      loadAllMovies().then((result) => setCardsBeatfilm(result)); // загрузим все фильмы до сабмита чтоб они были сразу доступны для фильтрации при поиске
+    }
+  }, [cardsBeatfilm, foundMovies]);
 
   // <-- Обработчика сабмита поиска
   const handleSearch = useCallback(
     (inputData, shortChecked) => {
+      loadAllMovies();
       const foundMoviesNow = SearchMovies(
         inputData,
         shortChecked,
@@ -48,14 +58,10 @@ function Movies() {
     [cardsBeatfilm]
   );
 
-  /*   function handleSearch(inputData, shortChecked) {
-    setFoundMovies(SearchMovies(inputData, shortChecked, cardsBeatfilm));
-  } */
-
   return (
     <main className="movies content">
-      <SearchForm handleSearch={handleSearch} />
-      <MoviesCardList foundMovies={foundMovies} />
+      <SearchForm handleSearch={handleSearch} loadAllMovies={loadAllMovies} />
+      <MoviesCardList foundMovies={foundMovies} searching={searching} />
     </main>
   );
 }
