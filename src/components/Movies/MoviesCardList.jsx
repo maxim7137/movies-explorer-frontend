@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import useWindowSize from '../../utils/useWindowSize';
 import Preloader from '../Preloader/Preloader';
 import MoviesCard from './MoviesCard';
 
@@ -8,6 +9,30 @@ function MoviesCardList({ foundMovies, searching, isFound }) {
   const [supplement, setSupplement] = useState(3);
   const [cardHeight, setCardHeight] = useState(320);
 
+  let size = useWindowSize().width;
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (size > 1684) {
+        setCardQuantity(16);
+        setSupplement(4);
+        setCardHeight(320);
+      } else if (size > 1280 && size <= 1684) {
+        setCardQuantity(12);
+        setSupplement(3);
+        setCardHeight(320);
+      } else if (size > 767 && size <= 1279) {
+        setCardQuantity(8);
+        setSupplement(2);
+        setCardHeight(305);
+      } else {
+        setCardQuantity(5);
+        setSupplement(2);
+        setCardHeight(620);
+      }
+    }, 5000);
+  }, [size]);
+
   function moreHandler(e) {
     setCardQuantity(cardQuantity + supplement);
     setTimeout(() => {
@@ -15,7 +40,7 @@ function MoviesCardList({ foundMovies, searching, isFound }) {
         top: cardHeight,
         behavior: 'smooth',
       });
-    }, 1);
+    }, 100);
   }
 
   useEffect(() => {
@@ -34,7 +59,7 @@ function MoviesCardList({ foundMovies, searching, isFound }) {
             ))}
           </ul>
           <div className="more">
-            {foundMovies.length > 3 ? (
+            {foundMovies.length > displayedArray.length ? (
               <button className="more__btn" onClick={moreHandler}>
                 Ещё
               </button>
