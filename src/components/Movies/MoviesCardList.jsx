@@ -9,31 +9,33 @@ function MoviesCardList({ foundMovies, searching, isFound }) {
   const [supplement, setSupplement] = useState(3);
   const [cardHeight, setCardHeight] = useState(320);
 
-  let size = useWindowSize().width;
+  const size = useWindowSize().width;
 
   useEffect(() => {
-    setTimeout(() => {
-      if (size > 1684) {
-        setCardQuantity(16);
-        setSupplement(4);
-        setCardHeight(320);
-      } else if (size > 1280 && size <= 1684) {
-        setCardQuantity(12);
-        setSupplement(3);
-        setCardHeight(320);
-      } else if (size > 767 && size <= 1279) {
-        setCardQuantity(8);
-        setSupplement(2);
-        setCardHeight(305);
-      } else {
-        setCardQuantity(5);
-        setSupplement(2);
-        setCardHeight(620);
-      }
-    }, 5000);
+    if (size > 1584) {
+      setCardQuantity(16);
+      setSupplement(4);
+      setCardHeight(320);
+    } else if (size > 1024 && size <= 1584) {
+      setCardQuantity(12);
+      setSupplement(3);
+      setCardHeight(320);
+    } else if (size > 480 && size <= 1024) {
+      setCardQuantity(8);
+      setSupplement(2);
+      setCardHeight(305);
+    } else if (size <= 480) {
+      setCardQuantity(5);
+      setSupplement(2);
+      setCardHeight(620);
+    }
   }, [size]);
 
-  function moreHandler(e) {
+  useEffect(() => {
+    setDisplayedArray(foundMovies.slice(0, cardQuantity));
+  }, [cardQuantity, foundMovies]);
+
+  function moreHandler() {
     setCardQuantity(cardQuantity + supplement);
     setTimeout(() => {
       window.scrollBy({
@@ -42,10 +44,6 @@ function MoviesCardList({ foundMovies, searching, isFound }) {
       });
     }, 100);
   }
-
-  useEffect(() => {
-    setDisplayedArray(foundMovies.slice(0, cardQuantity));
-  }, [cardQuantity, foundMovies]);
 
   return (
     <section className="cards">

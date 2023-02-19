@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
-import MoviesCard from '../Movies/MoviesCard';
+
 import SearchForm from '../Movies/SearchForm';
+// import MoviesCardList from '../Movies/MoviesCardList';
+import MoviesCard from '../Movies/MoviesCard';
 
 function SavedMovies() {
   useEffect(() => {
@@ -10,9 +12,7 @@ function SavedMovies() {
   return (
     <main className="body__main content">
       <SearchForm />
-      <section className="cards">
-        <ul className="cards__list"></ul>
-      </section>
+      {/* <MoviesCardList /> */}
     </main>
   );
 }
