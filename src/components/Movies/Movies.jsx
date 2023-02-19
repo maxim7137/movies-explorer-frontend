@@ -6,6 +6,7 @@ import MoviesCardList from './MoviesCardList'; // jsx
 import MoviesApi from '../../utils/MoviesApi'; // апи к фильмам
 import NormCard from '../../utils/NormCard'; // функция для создания карточки для моего апи
 import SearchMovies from '../../utils/SearchMovies'; // поиск фильмов
+import { FOUND_SEARCH_ERROR } from '../../constants/constants';
 
 function Movies() {
   const [cardsBeatfilm, setCardsBeatfilm] = useState([]); // все начальные карточки
@@ -22,6 +23,7 @@ function Movies() {
       setCardsBeatfilm(normArray);
       return normArray;
     } catch (error) {
+      setIsFound(FOUND_SEARCH_ERROR);
       console.log(error);
     } finally {
       setSearching(false);
@@ -41,7 +43,12 @@ function Movies() {
   // загрузим все фильмы до сабмита чтоб они были сразу доступны для фильтрации при поиске
   useEffect(() => {
     if (!cardsBeatfilm[0]) {
-      loadAllMovies().then((result) => setCardsBeatfilm(result));
+      loadAllMovies()
+        .then((result) => setCardsBeatfilm(result))
+        .catch((error) => {
+          setIsFound(FOUND_SEARCH_ERROR);
+          console.log(error);
+        });
     }
   }, [cardsBeatfilm, foundMovies]);
 
