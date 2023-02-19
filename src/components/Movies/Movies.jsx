@@ -11,6 +11,7 @@ function Movies() {
   const [cardsBeatfilm, setCardsBeatfilm] = useState([]); // все начальные карточки
   const [foundMovies, setFoundMovies] = useState([]); // найденные карточки из локального хранилища
   const [searching, setSearching] = useState(false); // загружается не загружается
+  const [isFound, setIsFound] = useState(false); // загружается не загружается
 
   // <-- Функция загрузки всех фильмов
   async function loadAllMovies() {
@@ -37,9 +38,10 @@ function Movies() {
     }
   }, []);
 
+  // загрузим все фильмы до сабмита чтоб они были сразу доступны для фильтрации при поиске
   useEffect(() => {
     if (!cardsBeatfilm[0]) {
-      loadAllMovies().then((result) => setCardsBeatfilm(result)); // загрузим все фильмы до сабмита чтоб они были сразу доступны для фильтрации при поиске
+      loadAllMovies().then((result) => setCardsBeatfilm(result));
     }
   }, [cardsBeatfilm, foundMovies]);
 
@@ -54,14 +56,19 @@ function Movies() {
       );
       setFoundMovies(foundMoviesNow);
       localStorage.setItem('moviesListState', JSON.stringify(foundMoviesNow));
+      setIsFound(!foundMoviesNow[0] ? 'Ничего не найдено' : false);
     },
     [cardsBeatfilm]
   );
 
   return (
-    <main className="movies content">
-      <SearchForm handleSearch={handleSearch} loadAllMovies={loadAllMovies} />
-      <MoviesCardList foundMovies={foundMovies} searching={searching} />
+    <main className="movies content body__main">
+      <SearchForm handleSearch={handleSearch} />
+      <MoviesCardList
+        foundMovies={foundMovies}
+        searching={searching}
+        isFound={isFound}
+      />
     </main>
   );
 }

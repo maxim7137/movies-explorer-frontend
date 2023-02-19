@@ -1,7 +1,7 @@
 import Preloader from '../Preloader/Preloader';
 import MoviesCard from './MoviesCard';
 
-function MoviesCardList({ foundMovies, searching }) {
+function MoviesCardList({ foundMovies, searching, isFound }) {
   return (
     <section className="cards">
       {searching ? (
@@ -14,7 +14,11 @@ function MoviesCardList({ foundMovies, searching }) {
             ))}
           </ul>
           <div className="more">
-            <button className="more__btn">Ещё</button>
+            {foundMovies[0] ? (
+              <button className="more__btn">Ещё</button>
+            ) : (
+              isFound || false
+            )}
           </div>
         </>
       )}
