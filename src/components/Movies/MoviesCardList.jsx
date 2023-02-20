@@ -3,7 +3,7 @@ import useWindowSize from '../../utils/useWindowSize';
 import Preloader from '../Preloader/Preloader';
 import MoviesCard from './MoviesCard';
 
-function MoviesCardList({ foundMovies, searching, isFound }) {
+function MoviesCardList({ foundMovies, searching, isFound, addCard }) {
   const [displayedArray, setDisplayedArray] = useState(foundMovies);
   const [cardQuantity, setCardQuantity] = useState(12);
   const [supplement, setSupplement] = useState(3);
@@ -53,7 +53,7 @@ function MoviesCardList({ foundMovies, searching, isFound }) {
         <>
           <ul className="cards__list">
             {displayedArray.map((card) => (
-              <MoviesCard key={card.movieId} card={card} {...card} />
+              <MoviesCard key={card.movieId} card={card} {...card} addCard={addCard}/>
             ))}
           </ul>
           <div className="more">

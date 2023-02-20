@@ -3,9 +3,7 @@ import { Switch, Route, Redirect, useLocation, Link } from 'react-router-dom'; /
 
 import { Signin, Signup, getToken } from '../../utils/Auth'; // утилиты
 import MainApi from '../../utils/MainApi'; // мое апи
-
 import CurrentUserContext from '../../contexts/CurrentUserContext'; // контекст текущего пользователя
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'; // защищенный роут
 
 // <-- jsx компоненты
@@ -19,7 +17,6 @@ import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Footer from '../Footer/Footer';
-
 // -- jsx компоненты --/>
 
 function App() {
@@ -91,8 +88,6 @@ function App() {
   );
 
   const handleLogout = useCallback(() => {
-    // localStorage.removeItem('jwt');
-    // localStorage.removeItem('moviesState');
     localStorage.clear();
     setLoggedIn(false);
     setUserAuthData({
@@ -209,6 +204,24 @@ function App() {
   }
   // -- проверка useLocation -- />
 
+  // < -- КАРТОЧКИ --
+  // Сохранение карточки
+  function addCard(data) {
+    const jwt = 'Bearer ' + localStorage.getItem('jwt');
+
+    MainApi.setCard(data, jwt)
+      .then((newCard) => {
+        return newCard;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  // <-- Удаление карточки
+
+  //  -- КАРТОЧКИ -- />
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {loading ? (
@@ -224,6 +237,7 @@ function App() {
             <ProtectedRoute
               path="/movies"
               component={Movies}
+              addCard={addCard}
               loggedIn={loggedIn}
             />
             <ProtectedRoute

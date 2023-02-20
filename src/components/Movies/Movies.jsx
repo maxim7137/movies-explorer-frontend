@@ -8,7 +8,7 @@ import NormCard from '../../utils/NormCard'; // функция для созда
 import SearchMovies from '../../utils/SearchMovies'; // поиск фильмов
 import { FOUND_SEARCH_ERROR } from '../../constants/constants';
 
-function Movies() {
+function Movies({addCard}) {
   const [cardsBeatfilm, setCardsBeatfilm] = useState([]); // все начальные карточки
   const [foundMovies, setFoundMovies] = useState([]); // найденные карточки из локального хранилища
   const [searching, setSearching] = useState(false); // загружается не загружается
@@ -68,6 +68,8 @@ function Movies() {
     [cardsBeatfilm]
   );
 
+
+
   return (
     <main className="movies content body__main">
       <SearchForm handleSearch={handleSearch} />
@@ -75,6 +77,7 @@ function Movies() {
         foundMovies={foundMovies}
         searching={searching}
         isFound={isFound}
+        addCard={addCard}
       />
     </main>
   );
