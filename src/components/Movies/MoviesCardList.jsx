@@ -9,7 +9,14 @@ import {
   MOVIES_CARD_CLASS_IN_SAVED,
 } from '../../constants/constants';
 
-function MoviesCardList({ foundMovies, searching, isFound, savedMovies }) {
+function MoviesCardList({
+  foundMovies,
+  searching,
+  isFound,
+  savedMovies,
+  addCard,
+  delCard,
+}) {
   let location = useLocation().pathname;
   const [displayedArray, setDisplayedArray] = useState(foundMovies);
   const [cardQuantity, setCardQuantity] = useState(12);
@@ -69,6 +76,8 @@ function MoviesCardList({ foundMovies, searching, isFound, savedMovies }) {
                     cardClass={MOVIES_CARD_CLASS}
                     card={card}
                     {...card}
+                    addCard={addCard}
+                    delCard={delCard}
                   />
                 ))}
               </ul>
@@ -90,6 +99,7 @@ function MoviesCardList({ foundMovies, searching, isFound, savedMovies }) {
                   cardClass={MOVIES_CARD_CLASS_IN_SAVED}
                   card={card}
                   {...card}
+                  delCard={delCard}
                 />
               ))}
             </ul>

@@ -18,6 +18,8 @@ function Movies({
   setIsFound,
   handleSearch,
   searching,
+  addCard,
+  delCard,
 }) {
   useEffect(() => {
     if (localStorage.getItem('potentialUserEmail')) {
@@ -54,6 +56,8 @@ function Movies({
         savedMovies={savedMovies}
         searching={searching}
         isFound={isFound}
+        addCard={addCard}
+        delCard={delCard}
       />
     </main>
   );

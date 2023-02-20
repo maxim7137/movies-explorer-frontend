@@ -8,6 +8,7 @@ function SavedMovies({
   foundMovies,
   searching,
   loadSavedMovies,
+  delCard,
 }) {
   useEffect(() => {
     localStorage.removeItem('potentialUserEmail');
@@ -21,6 +22,7 @@ function SavedMovies({
         foundMovies={foundMovies}
         searching={searching}
         isFound={false}
+        delCard={delCard}
       />
     </main>
   );

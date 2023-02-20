@@ -250,6 +250,30 @@ function App() {
   }, []);
   // -- Функция загрузки сохраненных фильмов -- />
 
+  // <-- Функция сохранения карточки --
+  const addCard = useCallback(async (data) => {
+    try {
+      const jwt = 'Bearer ' + localStorage.getItem('jwt');
+      const addedCard = await MainApi.setCard(data, jwt);
+      return addedCard;
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+  // -- Функция сохранения карточки -- />
+
+  // <-- Функция удаления карточки --
+  const delCard = useCallback(async (_id) => {
+    try {
+      const jwt = 'Bearer ' + localStorage.getItem('jwt');
+      const deletedCard = await MainApi.delCard(_id, jwt);
+      return deletedCard;
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+  // -- Функция удаления карточки -- />
+
   // <-- Обработчика сабмита поиска --
   const handleSearch = useCallback(
     (inputData, shortChecked) => {
@@ -267,22 +291,6 @@ function App() {
   );
   // -- Обработчика сабмита поиска -- />
 
-  // Сохранение карточки
-  function addCard(data) {
-    const jwt = 'Bearer ' + localStorage.getItem('jwt');
-    MainApi.setCard(data, jwt)
-      .then((newCard) => {
-        return newCard;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  // <-- Удаление карточки --
-
-  //  -- КАРТОЧКИ -- />
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {loading ? (
@@ -299,6 +307,7 @@ function App() {
               path="/movies"
               component={Movies}
               addCard={addCard}
+              delCard={delCard}
               loggedIn={loggedIn}
               foundMovies={foundMovies}
               setFoundMovies={setFoundMovies}
@@ -319,6 +328,7 @@ function App() {
               loggedIn={loggedIn}
               foundMovies={savedMovies}
               loadSavedMovies={loadSavedMovies}
+              delCard={delCard}
             />
             <ProtectedRoute
               path="/profile"

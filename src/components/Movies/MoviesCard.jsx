@@ -16,8 +16,11 @@ function MoviesCard({
   movieId,
   image,
   thumbnail,
+  _id,
   cardClass,
   savedMovies,
+  addCard,
+  delCard,
 }) {
   let location = useLocation().pathname; // переменная для useLocation
 
@@ -30,10 +33,41 @@ function MoviesCard({
     }
   }, [location, movieId, savedMovies]);
 
-  function handleClick() {}
+  function handleRemove(e) {
+    if (
+      location === '/saved-movies' &&
+      e.target.classList.contains('card__btn')
+    ) {
+      e.currentTarget.remove();
+    }
+  }
+
+  function handleClick() {
+    if (location === '/movies') {
+      if (itIsSaved) {
+      } else {
+        setItIsSaved(true);
+        addCard({
+          country,
+          director,
+          duration,
+          year,
+          description,
+          trailerLink,
+          nameRU,
+          nameEN,
+          movieId,
+          image,
+          thumbnail,
+        });
+      }
+    } else {
+      delCard(_id);
+    }
+  }
 
   return (
-    <li className="card">
+    <li className="card" onClick={handleRemove}>
       <div className="card__head">
         <div className="card__text">
           <p className="card__name">{nameRU}</p>
@@ -41,7 +75,11 @@ function MoviesCard({
         </div>
         <div className="card__save">
           <button
-            className={itIsSaved && location === '/movies' ? `${cardClass} card__btn_saved` : cardClass}
+            className={
+              itIsSaved && location === '/movies'
+                ? `${cardClass} card__btn_saved`
+                : cardClass
+            }
             onClick={handleClick}
           ></button>
         </div>

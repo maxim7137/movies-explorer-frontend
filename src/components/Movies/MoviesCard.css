@@ -69,6 +69,11 @@
   background-image: url("../../images/saved.svg");
 }
 
+.card__btn_saved:hover {
+  background-color: #4285f4;
+  background-image: url("../../images/saved.svg");
+}
+
 .card__btn_inSaved {
   background-image: url("../../images/insaved.svg");
 }
