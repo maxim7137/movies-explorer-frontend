@@ -1,9 +1,5 @@
-function isSavedCard(savedMovies, movieId) {
-  let movieIdArray = [];
-  savedMovies.forEach((element) => {
-    movieIdArray.push(element.movieId);
-  });
-  return movieIdArray.includes(movieId);
+function get_idByMovieId(movieId, savedMovies) {
+  return savedMovies.filter((card) => card.movieId === movieId)[0]._id;
 }
 
-export default isSavedCard;
+export default get_idByMovieId;

@@ -255,11 +255,12 @@ function App() {
     try {
       const jwt = 'Bearer ' + localStorage.getItem('jwt');
       const addedCard = await MainApi.setCard(data, jwt);
+      setSavedMovies(savedMovies.concat(addedCard));
       return addedCard;
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [savedMovies]);
   // -- Функция сохранения карточки -- />
 
   // <-- Функция удаления карточки --

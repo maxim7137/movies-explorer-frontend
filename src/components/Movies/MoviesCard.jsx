@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import MinToHours from '../../utils/MinToHours';
 import isSavedCard from '../../utils/isSavedCard';
 import { useState } from 'react';
+import get_idByMovieId from '../../utils/get_idByMovieId';
 
 function MoviesCard({
   country,
@@ -21,7 +22,6 @@ function MoviesCard({
   addCard,
   delCard,
   savedMovies,
-  setSavedMovies,
 }) {
   let location = useLocation().pathname; // переменная для useLocation
 
@@ -46,6 +46,10 @@ function MoviesCard({
   function handleClick() {
     if (location === '/movies') {
       if (itIsSaved) {
+        const _id = get_idByMovieId(movieId, savedMovies);
+        if (_id) {
+          delCard(_id, movieId);
+        }
       } else {
         setItIsSaved(true);
         addCard({
