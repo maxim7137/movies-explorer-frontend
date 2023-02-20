@@ -14,6 +14,7 @@ function MoviesCardList({
   searching,
   isFound,
   savedMovies,
+  setSavedMovies,
   addCard,
   delCard,
 }) {
@@ -72,12 +73,13 @@ function MoviesCardList({
                 {displayedArray.map((card) => (
                   <MoviesCard
                     key={card.movieId}
-                    savedMovies={savedMovies}
                     cardClass={MOVIES_CARD_CLASS}
                     card={card}
                     {...card}
                     addCard={addCard}
                     delCard={delCard}
+                    savedMovies={savedMovies}
+                    setSavedMovies={setSavedMovies}
                   />
                 ))}
               </ul>
@@ -100,6 +102,8 @@ function MoviesCardList({
                   card={card}
                   {...card}
                   delCard={delCard}
+                  savedMovies={savedMovies}
+                  setSavedMovies={setSavedMovies}
                 />
               ))}
             </ul>

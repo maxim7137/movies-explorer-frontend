@@ -263,10 +263,13 @@ function App() {
   // -- Функция сохранения карточки -- />
 
   // <-- Функция удаления карточки --
-  const delCard = useCallback(async (_id) => {
+  const delCard = useCallback(async (_id, movieId) => {
     try {
       const jwt = 'Bearer ' + localStorage.getItem('jwt');
       const deletedCard = await MainApi.delCard(_id, jwt);
+      setSavedMovies((state) =>
+        state.filter((stateCard) => stateCard.movieId !== movieId)
+      );
       return deletedCard;
     } catch (error) {
       console.log(error);
@@ -329,6 +332,8 @@ function App() {
               foundMovies={savedMovies}
               loadSavedMovies={loadSavedMovies}
               delCard={delCard}
+              savedMovies={savedMovies}
+              setSavedMovies={setSavedMovies}
             />
             <ProtectedRoute
               path="/profile"

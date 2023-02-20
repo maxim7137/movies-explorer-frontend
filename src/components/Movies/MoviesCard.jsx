@@ -18,9 +18,10 @@ function MoviesCard({
   thumbnail,
   _id,
   cardClass,
-  savedMovies,
   addCard,
   delCard,
+  savedMovies,
+  setSavedMovies,
 }) {
   let location = useLocation().pathname; // переменная для useLocation
 
@@ -38,7 +39,7 @@ function MoviesCard({
       location === '/saved-movies' &&
       e.target.classList.contains('card__btn')
     ) {
-      e.currentTarget.remove();
+      // e.currentTarget.remove();
     }
   }
 
@@ -62,7 +63,7 @@ function MoviesCard({
         });
       }
     } else {
-      delCard(_id);
+      delCard(_id, movieId);
     }
   }
 
