@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom'; // реакт роутер
 import useWindowSize from '../../utils/useWindowSize';
 import Preloader from '../Preloader/Preloader';
 import MoviesCard from './MoviesCard';
 
-function MoviesCardList({ foundMovies, searching, isFound, addCard }) {
+function MoviesCardList({ foundMovies, searching, isFound, savedMovies }) {
+  let location = useLocation().pathname;
   const [displayedArray, setDisplayedArray] = useState(foundMovies);
   const [cardQuantity, setCardQuantity] = useState(12);
   const [supplement, setSupplement] = useState(3);
@@ -44,27 +46,38 @@ function MoviesCardList({ foundMovies, searching, isFound, addCard }) {
       });
     }, 100);
   }
-
+  // загружается ? прелоадер : карточки
+  // фильмы ? фильмы из стороннего апи (найдено больше чем нарисовано ? покажи кнопку : убери кнопку) : фильмы из нашего апи
   return (
     <section className="cards">
       {searching ? (
         <Preloader />
       ) : (
         <>
-          <ul className="cards__list">
-            {displayedArray.map((card) => (
-              <MoviesCard key={card.movieId} card={card} {...card} addCard={addCard}/>
-            ))}
-          </ul>
-          <div className="more">
-            {foundMovies.length > displayedArray.length ? (
-              <button className="more__btn" onClick={moreHandler}>
-                Ещё
-              </button>
-            ) : (
-              isFound || false
-            )}
-          </div>
+          {location === '/movies' ? (
+            <>
+              <ul className="cards__list">
+                {displayedArray.map((card) => (
+                  <MoviesCard key={card.movieId} card={card} {...card} />
+                ))}
+              </ul>
+              <div className="more">
+                {foundMovies.length > displayedArray.length ? (
+                  <button className="more__btn" onClick={moreHandler}>
+                    Ещё
+                  </button>
+                ) : (
+                  isFound || false
+                )}
+              </div>
+            </>
+          ) : (
+            <ul className="cards__list">
+              {foundMovies.map((card) => (
+                <MoviesCard key={card.movieId} card={card} {...card} />
+              ))}
+            </ul>
+          )}
         </>
       )}
     </section>

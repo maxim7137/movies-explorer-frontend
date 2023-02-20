@@ -39,6 +39,7 @@ function App() {
   // < -- Стейты для movies ------------------------------------------------------
   const [cardsBeatfilm, setCardsBeatfilm] = useState([]); // все начальные карточки
   const [foundMovies, setFoundMovies] = useState([]); // найденные карточки из локального хранилища
+  const [savedMovies, setSavedMovies] = useState([]); // найденные карточки из моего апи
   const [searching, setSearching] = useState(false); // загружается не загружается
   const [isFound, setIsFound] = useState(false); // загружается не загружается
   //  -- Стейты для movies ----------------------------------------------------- />
@@ -95,12 +96,15 @@ function App() {
     [authentication]
   );
   const handleLogout = useCallback(() => {
+    setCardsBeatfilm([]);
+    setFoundMovies([]);
+    setSavedMovies([]);
     localStorage.clear();
-    setLoggedIn(false);
     setUserAuthData({
       password: '',
       email: '',
     });
+    setLoggedIn(false);
   }, []);
   // Обработчики входа и выхода -->
 
@@ -229,6 +233,23 @@ function App() {
   }
   // -- Функция загрузки всех фильмов -- />
 
+  // <-- Функция загрузки сохраненных фильмов --
+  const loadSavedMovies = useCallback(async () => {
+    try {
+      setSearching(true);
+      const jwt = 'Bearer ' + localStorage.getItem('jwt');
+      const savedArray = await MainApi.getCards(jwt);
+      setSavedMovies(savedArray);
+      return savedArray;
+    } catch (error) {
+      setIsFound(FOUND_SEARCH_ERROR);
+      console.log(error);
+    } finally {
+      setSearching(false);
+    }
+  }, []);
+  // -- Функция загрузки сохраненных фильмов -- />
+
   // <-- Обработчика сабмита поиска --
   const handleSearch = useCallback(
     (inputData, shortChecked) => {
@@ -284,15 +305,20 @@ function App() {
               cardsBeatfilm={cardsBeatfilm}
               setCardsBeatfilm={setCardsBeatfilm}
               loadAllMovies={loadAllMovies}
+              loadSavedMovies={loadSavedMovies}
               isFound={isFound}
               setIsFound={setIsFound}
               handleSearch={handleSearch}
               searching={searching}
+              savedMovies={savedMovies}
+              setSavedMovies={setSavedMovies}
             />
             <ProtectedRoute
               path="/saved-movies"
               component={SavedMovies}
               loggedIn={loggedIn}
+              foundMovies={savedMovies}
+              loadSavedMovies={loadSavedMovies}
             />
             <ProtectedRoute
               path="/profile"

@@ -17,9 +17,15 @@ function MoviesCard({
   let location = useLocation(); // переменная для useLocation
 
   // проверка useLocation
-  function isSavedLocation() {
-    return location.pathname === '/saved-movies';
+  function isInSavedLocationCLass() {
+    if (location.pathname === '/saved-movies') {
+      return 'card__btn card__btn_inSaved';
+    } else {
+      return 'card__btn';
+    }
   }
+
+  function handleClick(params) {}
 
   return (
     <li className="card">
@@ -30,9 +36,8 @@ function MoviesCard({
         </div>
         <div className="card__save">
           <button
-            className={
-              isSavedLocation() ? 'card__btn card__btn_inSaved' : 'card__btn'
-            }
+            className={isInSavedLocationCLass()}
+            onClick={handleClick}
           ></button>
         </div>
       </div>

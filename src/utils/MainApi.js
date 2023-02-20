@@ -36,6 +36,15 @@ class Api {
     }).then(this._isServerOk);
   }
 
+  getCards(token) {
+    return fetch(`${this._baseUrl}/movies`, {
+      headers: {
+        authorization: token,
+        'Content-Type': 'application/json',
+      },
+    }).then(this._isServerOk);
+  }
+
   setCard(data, token) {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'POST',

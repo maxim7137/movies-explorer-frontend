@@ -11,6 +11,9 @@ function Movies({
   cardsBeatfilm,
   setCardsBeatfilm,
   loadAllMovies,
+  loadSavedMovies,
+  savedMovies,
+  setSavedMovies,
   isFound,
   setIsFound,
   handleSearch,
@@ -23,25 +26,32 @@ function Movies({
     if (localStorage.getItem('moviesListState')) {
       setFoundMovies(JSON.parse(localStorage.getItem('moviesListState'))); // найденные фильмы вставляем из локального хранилища
     }
-  }, []);
+  }, [setFoundMovies]);
 
   // загрузим все фильмы до сабмита чтоб они были сразу доступны для фильтрации при поиске
   useEffect(() => {
-    if (!cardsBeatfilm[0]) {
+    if (cardsBeatfilm.length < 1) {
       loadAllMovies()
         .then((result) => setCardsBeatfilm(result))
         .catch((error) => {
           setIsFound(FOUND_SEARCH_ERROR);
           console.log(error);
         });
+
+      loadSavedMovies()
+        .then((result) => setSavedMovies(result))
+        .catch((error) => {
+          console.log(error);
+        });
     }
-  }, [cardsBeatfilm, foundMovies, loadAllMovies, setCardsBeatfilm, setIsFound]);
+  }, [cardsBeatfilm]);
 
   return (
     <main className="movies content body__main">
       <SearchForm handleSearch={handleSearch} />
       <MoviesCardList
         foundMovies={foundMovies}
+        savedMovies={savedMovies}
         searching={searching}
         isFound={isFound}
       />

@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom'; // реакт роутер
 
 import FilterCheckbox from './FilterCheckbox';
 
 function SearchForm({ handleSearch }) {
+  let location = useLocation().pathname;
   const [inputData, setInputData] = useState(''); // Данные в поле поиска
   const [shortChecked, setShortChecked] = useState(false); // состояние чек-бокса
   const [isInputValid, setIsInputValid] = useState(true); // Стейты для валидации
@@ -30,26 +32,30 @@ function SearchForm({ handleSearch }) {
       const form = e.currentTarget;
       setIsInputValid(form.checkValidity());
       if (form.checkValidity()) {
-        localStorage.setItem(
-          'moviesSearchState',
-          JSON.stringify({ inputData, shortChecked })
-        );
+        if (location === '/movies') {
+          localStorage.setItem(
+            'moviesSearchState',
+            JSON.stringify({ inputData, shortChecked })
+          );
+        }
         handleSearch(inputData, shortChecked);
       }
     },
-    [handleSearch, inputData, shortChecked]
+    [handleSearch, inputData, location, shortChecked]
   );
 
   useEffect(() => {
-    if (localStorage.getItem('moviesSearchState')) {
-      setInputData(
-        JSON.parse(localStorage.getItem('moviesSearchState')).inputData
-      );
-      setShortChecked(
-        JSON.parse(localStorage.getItem('moviesSearchState')).shortChecked
-      );
+    if (location === '/movies') {
+      if (localStorage.getItem('moviesSearchState')) {
+        setInputData(
+          JSON.parse(localStorage.getItem('moviesSearchState')).inputData
+        );
+        setShortChecked(
+          JSON.parse(localStorage.getItem('moviesSearchState')).shortChecked
+        );
+      }
     }
-  }, []);
+  }, [location]);
 
   return (
     <section className="search">
