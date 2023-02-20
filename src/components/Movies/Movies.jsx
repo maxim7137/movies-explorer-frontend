@@ -3,34 +3,19 @@ import { useCallback, useEffect, useState } from 'react';
 import SearchForm from './SearchForm'; // jsx
 import MoviesCardList from './MoviesCardList'; // jsx
 
-import MoviesApi from '../../utils/MoviesApi'; // апи к фильмам
-import NormCard from '../../utils/NormCard'; // функция для создания карточки для моего апи
-import SearchMovies from '../../utils/SearchMovies'; // поиск фильмов
-import { FOUND_SEARCH_ERROR } from '../../constants/constants';
+import { FOUND_SEARCH_ERROR } from '../../constants/constants'; // константы
 
-function Movies({addCard}) {
-  const [cardsBeatfilm, setCardsBeatfilm] = useState([]); // все начальные карточки
-  const [foundMovies, setFoundMovies] = useState([]); // найденные карточки из локального хранилища
-  const [searching, setSearching] = useState(false); // загружается не загружается
-  const [isFound, setIsFound] = useState(false); // загружается не загружается
-
-  // <-- Функция загрузки всех фильмов
-  async function loadAllMovies() {
-    try {
-      setSearching(true);
-      const rowArray = await MoviesApi.getInitialCards();
-      const normArray = rowArray.map((rowCard) => NormCard(rowCard));
-      setCardsBeatfilm(normArray);
-      return normArray;
-    } catch (error) {
-      setIsFound(FOUND_SEARCH_ERROR);
-      console.log(error);
-    } finally {
-      setSearching(false);
-    }
-  }
-  // Функция загрузки всех фильмов -- />
-
+function Movies({
+  foundMovies,
+  setFoundMovies,
+  cardsBeatfilm,
+  setCardsBeatfilm,
+  loadAllMovies,
+  isFound,
+  setIsFound,
+  handleSearch,
+  searching,
+}) {
   useEffect(() => {
     if (localStorage.getItem('potentialUserEmail')) {
       localStorage.removeItem('potentialUserEmail'); // удаление имейла вошедшего пользователя из локального хранилища
@@ -50,25 +35,7 @@ function Movies({addCard}) {
           console.log(error);
         });
     }
-  }, [cardsBeatfilm, foundMovies]);
-
-  // <-- Обработчика сабмита поиска
-  const handleSearch = useCallback(
-    (inputData, shortChecked) => {
-      loadAllMovies();
-      const foundMoviesNow = SearchMovies(
-        inputData,
-        shortChecked,
-        cardsBeatfilm
-      );
-      setFoundMovies(foundMoviesNow);
-      localStorage.setItem('moviesListState', JSON.stringify(foundMoviesNow));
-      setIsFound(!foundMoviesNow[0] ? 'Ничего не найдено' : false);
-    },
-    [cardsBeatfilm]
-  );
-
-
+  }, [cardsBeatfilm, foundMovies, loadAllMovies, setCardsBeatfilm, setIsFound]);
 
   return (
     <main className="movies content body__main">
@@ -77,7 +44,6 @@ function Movies({addCard}) {
         foundMovies={foundMovies}
         searching={searching}
         isFound={isFound}
-        addCard={addCard}
       />
     </main>
   );

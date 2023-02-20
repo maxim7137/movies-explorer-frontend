@@ -1,11 +1,6 @@
 import { useState, useEffect, useCallback, memo, useRef } from 'react'; // реакт
 import { Switch, Route, Redirect, useLocation, Link } from 'react-router-dom'; // реакт роутер
 
-import { Signin, Signup, getToken } from '../../utils/Auth'; // утилиты
-import MainApi from '../../utils/MainApi'; // мое апи
-import CurrentUserContext from '../../contexts/CurrentUserContext'; // контекст текущего пользователя
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'; // защищенный роут
-
 // <-- jsx компоненты
 import Register from '../Register/Register';
 import Login from '../Login/Login';
@@ -19,13 +14,21 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Footer from '../Footer/Footer';
 // -- jsx компоненты --/>
 
+import { FOUND_SEARCH_ERROR } from '../../constants/constants'; // константы
+import MoviesApi from '../../utils/MoviesApi'; // апи к публичному апи фильмам
+import MainApi from '../../utils/MainApi'; // мое апи
+import { Signin, Signup, getToken } from '../../utils/Auth'; // утилиты авторизации
+import SearchMovies from '../../utils/SearchMovies'; // поиск фильмов
+import NormCard from '../../utils/NormCard'; // функция для создания карточки для моего апи
+import CurrentUserContext from '../../contexts/CurrentUserContext'; // контекст текущего пользователя
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'; // защищенный роут
+
 function App() {
   let location = useLocation(); // переменная для useLocation
-
+  const [currentUser, setCurrentUser] = useState({}); // Контекст текущего пользователя
   const [loggedIn, setLoggedIn] = useState(false); // вошел не вошел
   const [loading, setLoading] = useState(true); // загружается не загружается
-  const [serverErrorMessage, setServerErrorMessage] = useState(null); // загружается не загружается
-
+  const [serverErrorMessage, setServerErrorMessage] = useState(null); // сообщение об ошибке с сервера
   // < -- данные пользователя для авторизации
   const [userAuthData, setUserAuthData] = useState({
     password: '',
@@ -33,7 +36,12 @@ function App() {
   });
   // -- данные пользователя для авторизации -- />
 
-  const [currentUser, setCurrentUser] = useState({}); // Контекст текущего пользователя
+  // < -- Стейты для movies ------------------------------------------------------
+  const [cardsBeatfilm, setCardsBeatfilm] = useState([]); // все начальные карточки
+  const [foundMovies, setFoundMovies] = useState([]); // найденные карточки из локального хранилища
+  const [searching, setSearching] = useState(false); // загружается не загружается
+  const [isFound, setIsFound] = useState(false); // загружается не загружается
+  //  -- Стейты для movies ----------------------------------------------------- />
 
   // <-- Пользователь
   useEffect(() => {
@@ -86,7 +94,6 @@ function App() {
     },
     [authentication]
   );
-
   const handleLogout = useCallback(() => {
     localStorage.clear();
     setLoggedIn(false);
@@ -154,7 +161,7 @@ function App() {
   }
   // Обработчик обновления профиля -- />
 
-  // Проверка токена
+  // < -- Проверка токена ----------------------
   const tokenCheck = useCallback(async () => {
     // если у пользователя есть токен в localStorage,
     // эта функция проверит валидность токена
@@ -180,11 +187,11 @@ function App() {
       setLoading(false);
     }
   }, []);
-
   useEffect(() => {
     // настало время проверить токен
     tokenCheck();
   }, [tokenCheck]);
+  // -- Проверка токена --------------- />
 
   // <-- проверка useLocation
   function isHeaderLocation() {
@@ -205,10 +212,43 @@ function App() {
   // -- проверка useLocation -- />
 
   // < -- КАРТОЧКИ --
+  // <-- Функция загрузки всех фильмов --
+  async function loadAllMovies() {
+    try {
+      setSearching(true);
+      const rowArray = await MoviesApi.getInitialCards();
+      const normArray = rowArray.map((rowCard) => NormCard(rowCard));
+      setCardsBeatfilm(normArray);
+      return normArray;
+    } catch (error) {
+      setIsFound(FOUND_SEARCH_ERROR);
+      console.log(error);
+    } finally {
+      setSearching(false);
+    }
+  }
+  // -- Функция загрузки всех фильмов -- />
+
+  // <-- Обработчика сабмита поиска --
+  const handleSearch = useCallback(
+    (inputData, shortChecked) => {
+      loadAllMovies();
+      const foundMoviesNow = SearchMovies(
+        inputData,
+        shortChecked,
+        cardsBeatfilm
+      );
+      setFoundMovies(foundMoviesNow);
+      localStorage.setItem('moviesListState', JSON.stringify(foundMoviesNow));
+      setIsFound(!foundMoviesNow[0] ? 'Ничего не найдено' : false);
+    },
+    [cardsBeatfilm]
+  );
+  // -- Обработчика сабмита поиска -- />
+
   // Сохранение карточки
   function addCard(data) {
     const jwt = 'Bearer ' + localStorage.getItem('jwt');
-
     MainApi.setCard(data, jwt)
       .then((newCard) => {
         return newCard;
@@ -218,7 +258,7 @@ function App() {
       });
   }
 
-  // <-- Удаление карточки
+  // <-- Удаление карточки --
 
   //  -- КАРТОЧКИ -- />
 
@@ -239,6 +279,15 @@ function App() {
               component={Movies}
               addCard={addCard}
               loggedIn={loggedIn}
+              foundMovies={foundMovies}
+              setFoundMovies={setFoundMovies}
+              cardsBeatfilm={cardsBeatfilm}
+              setCardsBeatfilm={setCardsBeatfilm}
+              loadAllMovies={loadAllMovies}
+              isFound={isFound}
+              setIsFound={setIsFound}
+              handleSearch={handleSearch}
+              searching={searching}
             />
             <ProtectedRoute
               path="/saved-movies"
