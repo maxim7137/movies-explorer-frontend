@@ -4,6 +4,11 @@ import useWindowSize from '../../utils/useWindowSize';
 import Preloader from '../Preloader/Preloader';
 import MoviesCard from './MoviesCard';
 
+import {
+  MOVIES_CARD_CLASS,
+  MOVIES_CARD_CLASS_IN_SAVED,
+} from '../../constants/constants';
+
 function MoviesCardList({ foundMovies, searching, isFound, savedMovies }) {
   let location = useLocation().pathname;
   const [displayedArray, setDisplayedArray] = useState(foundMovies);
@@ -58,7 +63,13 @@ function MoviesCardList({ foundMovies, searching, isFound, savedMovies }) {
             <>
               <ul className="cards__list">
                 {displayedArray.map((card) => (
-                  <MoviesCard key={card.movieId} card={card} {...card} />
+                  <MoviesCard
+                    key={card.movieId}
+                    savedMovies={savedMovies}
+                    cardClass={MOVIES_CARD_CLASS}
+                    card={card}
+                    {...card}
+                  />
                 ))}
               </ul>
               <div className="more">
@@ -74,7 +85,12 @@ function MoviesCardList({ foundMovies, searching, isFound, savedMovies }) {
           ) : (
             <ul className="cards__list">
               {foundMovies.map((card) => (
-                <MoviesCard key={card.movieId} card={card} {...card} />
+                <MoviesCard
+                  key={card.movieId}
+                  cardClass={MOVIES_CARD_CLASS_IN_SAVED}
+                  card={card}
+                  {...card}
+                />
               ))}
             </ul>
           )}

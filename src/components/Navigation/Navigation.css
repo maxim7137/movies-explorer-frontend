@@ -41,7 +41,9 @@
   transition: opacity 0.2s;
 }
 
-.navigation__item_selected {
+.navigation__item_selected,
+.navigation__item_signup,
+.navigation__item_signin {
   opacity: 1;
 }
 

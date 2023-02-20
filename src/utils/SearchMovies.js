@@ -4,10 +4,7 @@ function SearchMovies(inputData, shortChecked, cardsBeatfilm) {
     let result = false;
     for (let key in el) {
       if (
-        el[key]
-          .toString()
-          .toLowerCase()
-          .indexOf(query.toString().toLowerCase()) !== -1
+        el[key].toString().toLowerCase().indexOf(query.toString().toLowerCase()) !== -1
       ) {
         result = true;
       }

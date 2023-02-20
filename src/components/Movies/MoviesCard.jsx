@@ -1,5 +1,8 @@
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import MinToHours from '../../utils/MinToHours';
+import isSavedCard from '../../utils/isSavedCard';
+import { useState } from 'react';
 
 function MoviesCard({
   country,
@@ -13,19 +16,21 @@ function MoviesCard({
   movieId,
   image,
   thumbnail,
+  cardClass,
+  savedMovies,
 }) {
-  let location = useLocation(); // переменная для useLocation
+  let location = useLocation().pathname; // переменная для useLocation
 
-  // проверка useLocation
-  function isInSavedLocationCLass() {
-    if (location.pathname === '/saved-movies') {
-      return 'card__btn card__btn_inSaved';
-    } else {
-      return 'card__btn';
+  const [itIsSaved, setItIsSaved] = useState(false);
+
+  // проверка сохранена ли карточка
+  useEffect(() => {
+    if (location === '/movies') {
+      setItIsSaved(isSavedCard(savedMovies, movieId));
     }
-  }
+  }, [location, movieId, savedMovies]);
 
-  function handleClick(params) {}
+  function handleClick() {}
 
   return (
     <li className="card">
@@ -36,7 +41,7 @@ function MoviesCard({
         </div>
         <div className="card__save">
           <button
-            className={isInSavedLocationCLass()}
+            className={itIsSaved && location === '/movies' ? `${cardClass} card__btn_saved` : cardClass}
             onClick={handleClick}
           ></button>
         </div>
