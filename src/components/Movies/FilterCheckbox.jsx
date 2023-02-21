@@ -1,7 +1,12 @@
+import { useLocation } from 'react-router-dom';
+
 function FilterCheckbox({ shortChecked, setShortChecked, handleSavedChange }) {
+  let location = useLocation().pathname;
   function handleToggleShort(event) {
     setShortChecked(event.target.checked);
-    handleSavedChange();
+    if (location === '/saved-movies') {
+      handleSavedChange();
+    }
   }
 
   return (
