@@ -303,7 +303,7 @@ function App() {
   const handleSavedSearch = useCallback(
     (inputData, shortChecked) => {
       const foundMoviesNow = SearchMovies(inputData, shortChecked, savedMovies);
-      inputData === '' || inputData === ' '
+      inputData === '' && shortChecked === false
         ? setFilteredMovies(savedMovies)
         : setFilteredMovies(foundMoviesNow);
     },

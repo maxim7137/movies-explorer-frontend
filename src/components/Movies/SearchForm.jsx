@@ -116,6 +116,7 @@ function SearchForm({ handleSearch }) {
             <FilterCheckbox
               shortChecked={shortChecked}
               setShortChecked={setShortChecked}
+              handleSavedChange={handleSavedChange}
             />
             <span className="search__short">Короткометражки</span>
           </div>

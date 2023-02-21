@@ -1,6 +1,7 @@
-function FilterCheckbox({ shortChecked, setShortChecked }) {
+function FilterCheckbox({ shortChecked, setShortChecked, handleSavedChange }) {
   function handleToggleShort(event) {
     setShortChecked(event.target.checked);
+    handleSavedChange();
   }
 
   return (
