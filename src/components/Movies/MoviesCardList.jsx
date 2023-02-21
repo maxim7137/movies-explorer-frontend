@@ -80,7 +80,6 @@ function MoviesCardList({
                     addCard={addCard}
                     delCard={delCard}
                     savedMovies={savedMovies}
-                    setSavedMovies={setSavedMovies}
                   />
                 ))}
               </ul>
@@ -104,7 +103,6 @@ function MoviesCardList({
                   {...card}
                   delCard={delCard}
                   savedMovies={savedMovies}
-                  setSavedMovies={setSavedMovies}
                 />
               ))}
             </ul>

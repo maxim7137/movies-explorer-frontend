@@ -311,6 +311,11 @@ function App() {
   );
   // -- Обработчика сабмита поиска сохраненных фильмов -- />
 
+  // изменяем фильтрованный массив вслед за сохраненным
+  useEffect(() => {
+    setFilteredMovies(savedMovies);
+  }, [savedMovies]);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {loading ? (
