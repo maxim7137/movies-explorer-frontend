@@ -299,7 +299,7 @@ function App() {
   );
   // -- Обработчика сабмита поиска -- />
 
-  // <-- Обработчика сабмита поиска сохраненных фильмов --
+  // <-- Обработчика фильтра сохраненных фильмов --
   const handleSavedSearch = useCallback(
     (inputData, shortChecked) => {
       const foundMoviesNow = SearchMovies(inputData, shortChecked, savedMovies);
@@ -309,7 +309,7 @@ function App() {
     },
     [savedMovies]
   );
-  // -- Обработчика сабмита поиска сохраненных фильмов -- />
+  // -- Обработчика фильтра сохраненных фильмов -- />
 
   // изменяем фильтрованный массив вслед за сохраненным
   useEffect(() => {
@@ -346,6 +346,7 @@ function App() {
               searching={searching}
               savedMovies={savedMovies}
               setSavedMovies={setSavedMovies}
+              setFilteredMovies={setFilteredMovies}
             />
             <ProtectedRoute
               path="/saved-movies"

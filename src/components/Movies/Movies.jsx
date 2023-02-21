@@ -20,6 +20,7 @@ function Movies({
   searching,
   addCard,
   delCard,
+  setFilteredMovies,
 }) {
   useEffect(() => {
     if (localStorage.getItem('potentialUserEmail')) {
@@ -47,6 +48,11 @@ function Movies({
         });
     }
   }, [cardsBeatfilm]);
+
+  // изменяем фильтрованный массив вслед за сохраненным
+  useEffect(() => {
+    setFilteredMovies(savedMovies);
+  }, [savedMovies]);
 
   return (
     <main className="movies content body__main">
