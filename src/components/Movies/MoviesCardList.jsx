@@ -94,7 +94,7 @@ function MoviesCardList({
             </>
           ) : (
             <ul className="cards__list">
-              {savedMovies.map((card) => (
+              {filteredMovies.map((card) => (
                 <MoviesCard
                   key={card.movieId}
                   cardClass={MOVIES_CARD_CLASS_IN_SAVED}
