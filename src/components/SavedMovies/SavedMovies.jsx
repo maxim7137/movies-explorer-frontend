@@ -10,7 +10,6 @@ function SavedMovies({
   loadSavedMovies,
   delCard,
   savedMovies,
-  setSavedMovies,
   filteredMovies,
 }) {
   useEffect(() => {
@@ -27,7 +26,6 @@ function SavedMovies({
         isFound={false}
         delCard={delCard}
         savedMovies={savedMovies}
-        setSavedMovies={setSavedMovies}
         filteredMovies={filteredMovies}
       />
     </main>

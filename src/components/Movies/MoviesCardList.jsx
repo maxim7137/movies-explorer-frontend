@@ -14,7 +14,6 @@ function MoviesCardList({
   searching,
   isFound,
   savedMovies,
-  setSavedMovies,
   addCard,
   delCard,
   filteredMovies,

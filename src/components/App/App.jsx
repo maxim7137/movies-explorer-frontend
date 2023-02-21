@@ -355,7 +355,6 @@ function App() {
               loadSavedMovies={loadSavedMovies}
               delCard={delCard}
               savedMovies={savedMovies}
-              setSavedMovies={setSavedMovies}
               handleSavedSearch={handleSavedSearch}
               filteredMovies={filteredMovies}
             />
