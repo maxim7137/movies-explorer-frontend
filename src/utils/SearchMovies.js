@@ -1,4 +1,4 @@
-function SearchMovies(inputData, shortChecked, cardsBeatfilm) {
+function SearchMovies(inputData, shortChecked, cardsArray) {
   // поиск в объекте (если хоть в одном ключе есть искомое значение значит этот объект нам подходит)
   function filterItemsObject(el, query) {
     let result = false;
@@ -19,9 +19,9 @@ function SearchMovies(inputData, shortChecked, cardsBeatfilm) {
   let foundArray;
 
   if (shortChecked) {
-    foundArray = cardsBeatfilm.filter((e) => e.duration <= 40);
+    foundArray = cardsArray.filter((e) => e.duration <= 40);
   } else {
-    foundArray = cardsBeatfilm;
+    foundArray = cardsArray;
   }
 
   const finalArray = filterItemsArray(foundArray, inputData);

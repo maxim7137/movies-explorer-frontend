@@ -40,6 +40,7 @@ function App() {
   const [cardsBeatfilm, setCardsBeatfilm] = useState([]); // все начальные карточки
   const [foundMovies, setFoundMovies] = useState([]); // найденные карточки из локального хранилища
   const [savedMovies, setSavedMovies] = useState([]); // найденные карточки из моего апи
+  const [filteredMovies, setFilteredMovies] = useState(savedMovies); // фильтрованные карточки из моего апи
   const [searching, setSearching] = useState(false); // загружается не загружается
   const [isFound, setIsFound] = useState(false); // загружается не загружается
   //  -- Стейты для movies ----------------------------------------------------- />
@@ -251,16 +252,19 @@ function App() {
   // -- Функция загрузки сохраненных фильмов -- />
 
   // <-- Функция сохранения карточки --
-  const addCard = useCallback(async (data) => {
-    try {
-      const jwt = 'Bearer ' + localStorage.getItem('jwt');
-      const addedCard = await MainApi.setCard(data, jwt);
-      setSavedMovies(savedMovies.concat(addedCard));
-      return addedCard;
-    } catch (error) {
-      console.log(error);
-    }
-  }, [savedMovies]);
+  const addCard = useCallback(
+    async (data) => {
+      try {
+        const jwt = 'Bearer ' + localStorage.getItem('jwt');
+        const addedCard = await MainApi.setCard(data, jwt);
+        setSavedMovies(savedMovies.concat(addedCard));
+        return addedCard;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [savedMovies]
+  );
   // -- Функция сохранения карточки -- />
 
   // <-- Функция удаления карточки --
@@ -294,6 +298,18 @@ function App() {
     [cardsBeatfilm]
   );
   // -- Обработчика сабмита поиска -- />
+
+  // <-- Обработчика сабмита поиска сохраненных фильмов --
+  const handleSavedSearch = useCallback(
+    (inputData, shortChecked) => {
+      const foundMoviesNow = SearchMovies(inputData, shortChecked, savedMovies);
+      inputData === '' || inputData === ' '
+        ? setFilteredMovies(savedMovies)
+        : setFilteredMovies(foundMoviesNow);
+    },
+    [savedMovies]
+  );
+  // -- Обработчика сабмита поиска сохраненных фильмов -- />
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -330,11 +346,13 @@ function App() {
               path="/saved-movies"
               component={SavedMovies}
               loggedIn={loggedIn}
-              foundMovies={savedMovies}
+              foundMovies={foundMovies}
               loadSavedMovies={loadSavedMovies}
               delCard={delCard}
               savedMovies={savedMovies}
               setSavedMovies={setSavedMovies}
+              handleSavedSearch={handleSavedSearch}
+              filteredMovies={filteredMovies}
             />
             <ProtectedRoute
               path="/profile"

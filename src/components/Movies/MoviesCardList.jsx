@@ -17,6 +17,7 @@ function MoviesCardList({
   setSavedMovies,
   addCard,
   delCard,
+  filteredMovies,
 }) {
   let location = useLocation().pathname;
   const [displayedArray, setDisplayedArray] = useState(foundMovies);
@@ -95,7 +96,7 @@ function MoviesCardList({
             </>
           ) : (
             <ul className="cards__list">
-              {foundMovies.map((card) => (
+              {savedMovies.map((card) => (
                 <MoviesCard
                   key={card.movieId}
                   cardClass={MOVIES_CARD_CLASS_IN_SAVED}

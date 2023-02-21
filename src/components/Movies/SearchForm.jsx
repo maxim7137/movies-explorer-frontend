@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom'; // реакт роутер
+import { INPUT_EMPTY } from '../../constants/constants'; // переменные
 
-import FilterCheckbox from './FilterCheckbox';
+import FilterCheckbox from './FilterCheckbox'; // jsx
 
 function SearchForm({ handleSearch }) {
   let location = useLocation().pathname;
@@ -9,21 +10,32 @@ function SearchForm({ handleSearch }) {
   const [shortChecked, setShortChecked] = useState(false); // состояние чек-бокса
   const [isInputValid, setIsInputValid] = useState(true); // Стейты для валидации
 
-  const errorMessage = 'Нужно ввести ключевое слово'; // Сообщение об ошибке
+  const handleSavedChange = useCallback(() => {
+    handleSearch(inputData, shortChecked);
+  }, [handleSearch, inputData, shortChecked]);
 
   // Обработчик изменения инпута для валидации
   function handleInput() {
     setIsInputValid(true);
+    if (location === 'saved-movies') {
+      handleSavedChange();
+    }
   }
 
   // Обработчик фокуса
   function handleBlur() {
     setIsInputValid(true);
+    if (location === 'saved-movies') {
+      handleSavedChange();
+    }
   }
 
   // управление данными
   function handleChange(e) {
     setInputData(e.target.value);
+    if (location === 'saved-movies') {
+      handleSavedChange();
+    }
   }
 
   const handleSubmit = useCallback(
@@ -44,6 +56,7 @@ function SearchForm({ handleSearch }) {
     [handleSearch, inputData, location, shortChecked]
   );
 
+  // вставляем данные из локального хранилища
   useEffect(() => {
     if (location === '/movies') {
       if (localStorage.getItem('moviesSearchState')) {
@@ -56,6 +69,13 @@ function SearchForm({ handleSearch }) {
       }
     }
   }, [location]);
+
+  // сортировка сохраненных фильмов
+  useEffect(() => {
+    if (location === '/saved-movies') {
+      handleSavedChange();
+    }
+  }, [location, inputData, shortChecked]);
 
   return (
     <section className="search">
@@ -107,7 +127,7 @@ function SearchForm({ handleSearch }) {
               : 'search__error search__error_visible'
           }
         >
-          {errorMessage}
+          {INPUT_EMPTY}
         </span>
       </div>
     </section>

@@ -8,6 +8,10 @@
   border-radius: 8px;
 }
 
+.logo_selected {
+  opacity: 1;
+}
+
 .logo__circle {
   display: flex;
   justify-content: center;

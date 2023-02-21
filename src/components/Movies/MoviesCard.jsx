@@ -34,15 +34,6 @@ function MoviesCard({
     }
   }, [location, movieId, savedMovies]);
 
-  function handleRemove(e) {
-    if (
-      location === '/saved-movies' &&
-      e.target.classList.contains('card__btn')
-    ) {
-      // e.currentTarget.remove();
-    }
-  }
-
   function handleClick() {
     if (location === '/movies') {
       if (itIsSaved) {
@@ -72,7 +63,7 @@ function MoviesCard({
   }
 
   return (
-    <li className="card" onClick={handleRemove}>
+    <li className="card">
       <div className="card__head">
         <div className="card__text">
           <p className="card__name">{nameRU}</p>
