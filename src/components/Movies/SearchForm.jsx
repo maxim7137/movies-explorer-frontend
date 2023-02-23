@@ -17,7 +17,7 @@ function SearchForm({ handleSearch }) {
   // Обработчик изменения инпута для валидации
   function handleInput() {
     setIsInputValid(true);
-    if (location === 'saved-movies') {
+    if (location === '/saved-movies') {
       handleSavedChange();
     }
   }
@@ -25,7 +25,7 @@ function SearchForm({ handleSearch }) {
   // Обработчик фокуса
   function handleBlur() {
     setIsInputValid(true);
-    if (location === 'saved-movies') {
+    if (location === '/saved-movies') {
       handleSavedChange();
     }
   }
@@ -33,7 +33,7 @@ function SearchForm({ handleSearch }) {
   // управление данными
   function handleChange(e) {
     setInputData(e.target.value);
-    if (location === 'saved-movies') {
+    if (location === '/saved-movies') {
       handleSavedChange();
     }
   }
@@ -56,6 +56,25 @@ function SearchForm({ handleSearch }) {
     [handleSearch, inputData, location, shortChecked]
   );
 
+  // для сортировки всех фильмов при переключении короткометражек
+  const handleShortChecked = useCallback(
+    (shortNowChecked) => {
+      const inputStorageData = JSON.parse(
+        localStorage.getItem('moviesSearchState')
+      ).inputData;
+      if (inputStorageData) {
+        if (location === '/movies') {
+          localStorage.setItem(
+            'moviesSearchState',
+            JSON.stringify({ inputData: inputStorageData, shortNowChecked })
+          );
+        }
+        handleSearch(inputStorageData, shortNowChecked);
+      }
+    },
+    [handleSearch, location]
+  );
+
   // вставляем данные из локального хранилища
   useEffect(() => {
     if (location === '/movies') {
@@ -75,7 +94,7 @@ function SearchForm({ handleSearch }) {
     if (location === '/saved-movies') {
       handleSavedChange();
     }
-  }, [location, inputData, shortChecked]);
+  }, [location, inputData, shortChecked, handleSavedChange]);
 
   return (
     <section className="search">
@@ -117,6 +136,7 @@ function SearchForm({ handleSearch }) {
               shortChecked={shortChecked}
               setShortChecked={setShortChecked}
               handleSavedChange={handleSavedChange}
+              handleShortChecked={handleShortChecked}
             />
             <span className="search__short">Короткометражки</span>
           </div>
