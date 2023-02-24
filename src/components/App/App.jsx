@@ -383,6 +383,7 @@ function App() {
                 setServerErrorMessage={setServerErrorMessage}
               />
             </Route>
+
             <Route path="/signup">
               <Register
                 handleRegister={handleRegister}
@@ -391,13 +392,16 @@ function App() {
                 setServerErrorMessage={setServerErrorMessage}
               />
             </Route>
+
             <Route path="/404">
               <NotFound />
             </Route>
+
             <Route path="*">
               {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
             </Route>
           </Switch>
+
           {isFooterLocation() && <Footer />}
         </>
       )}
