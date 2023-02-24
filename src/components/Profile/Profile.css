@@ -76,10 +76,9 @@
   line-height: 12px;
   color: #3ddc84;
   margin: 0 0 5px;
-  visibility: hidden;
-  transition: all 0.2s;
   width: 100%;
   text-align: center;
+  visibility: hidden;
 }
 
 .profile__error_visible {

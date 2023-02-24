@@ -28,6 +28,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({}); // Контекст текущего пользователя
   const [loggedIn, setLoggedIn] = useState(false); // вошел не вошел
   const [loading, setLoading] = useState(true); // загружается не загружается
+  const [isUpdateUserSuccessful, setIsUpdateUserSuccessful] = useState(false); // для показа сообщения об изменении профиля
   const [serverErrorMessage, setServerErrorMessage] = useState(null); // сообщение об ошибке с сервера
   // < -- данные пользователя для авторизации
   const [userAuthData, setUserAuthData] = useState({
@@ -142,6 +143,10 @@ function App() {
     MainApi.setUser(data, jwt)
       .then((result) => {
         setCurrentUser(result);
+        setIsUpdateUserSuccessful(true);
+        setTimeout(() => {
+          setIsUpdateUserSuccessful(false);
+        }, 5000);
       })
       .catch((error) => {
         return error;
@@ -367,6 +372,7 @@ function App() {
               handleUpdateUser={handleUpdateUser}
               serverErrorMessage={serverErrorMessage}
               setServerErrorMessage={setServerErrorMessage}
+              isUpdateUserSuccessful={isUpdateUserSuccessful}
             />
 
             <Route path="/signin">

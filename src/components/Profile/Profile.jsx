@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import ProfileDialog from '../Dialogs/ProfileDialog'; // jsx
 import CurrentUserContext from '../../contexts/CurrentUserContext'; // контекст текущего пользователя
 
 function Profile({
@@ -6,6 +7,7 @@ function Profile({
   handleUpdateUser,
   serverErrorMessage,
   setServerErrorMessage,
+  isUpdateUserSuccessful
 }) {
   const user = useContext(CurrentUserContext);
 
@@ -164,6 +166,7 @@ function Profile({
           </button>
         </div>
       </main>
+      <ProfileDialog isUpdateUserSuccessful={isUpdateUserSuccessful} />
     </div>
   );
 }
