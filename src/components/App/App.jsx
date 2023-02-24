@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback, memo, useRef } from 'react'; // реакт
-import { Switch, Route, Redirect, useLocation, Link } from 'react-router-dom'; // реакт роутер
+import { useState, useEffect, useCallback } from 'react'; // реакт
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom'; // реакт роутер
 
 // <-- jsx компоненты
 import Register from '../Register/Register';
@@ -30,12 +30,7 @@ function App() {
   const [loading, setLoading] = useState(true); // загружается не загружается
   const [isUpdateUserSuccessful, setIsUpdateUserSuccessful] = useState(false); // для показа сообщения об изменении профиля
   const [serverErrorMessage, setServerErrorMessage] = useState(null); // сообщение об ошибке с сервера
-  // < -- данные пользователя для авторизации
-  const [userAuthData, setUserAuthData] = useState({
-    password: '',
-    email: '',
-  });
-  // -- данные пользователя для авторизации -- />
+  const [isDeletedCard, setIsDeletedCard] = useState(false); // сообщение при удалении чужой карточки
 
   // < -- Стейты для movies ------------------------------------------------------
   const [cardsBeatfilm, setCardsBeatfilm] = useState([]); // все начальные карточки
@@ -65,7 +60,6 @@ function App() {
   const authentication = useCallback((data) => {
     localStorage.setItem('jwt', data.token);
     setLoggedIn(true);
-    setUserAuthData(data.user);
   }, []);
   // Обработчик аутентификации -->
 
@@ -78,10 +72,6 @@ function App() {
         if (data.token) {
           authentication(data);
         }
-        setUserAuthData({
-          password,
-          email,
-        });
       } catch (error) {
         const { message } = await error;
         if (message === 'Validation failed') {
@@ -102,10 +92,6 @@ function App() {
     setFoundMovies([]);
     setSavedMovies([]);
     localStorage.clear();
-    setUserAuthData({
-      password: '',
-      email: '',
-    });
     setLoggedIn(false);
   }, []);
   // Обработчики входа и выхода -->
@@ -187,7 +173,6 @@ function App() {
           throw new Error('no user');
         }
         if (user) {
-          setUserAuthData(user);
           setLoggedIn(true);
         }
       }
@@ -282,7 +267,9 @@ function App() {
       );
       return deletedCard;
     } catch (error) {
-      console.log(error);
+      const { message } = await error;
+      console.log(message);
+      setIsDeletedCard(message);
     }
   }, []);
   // -- Функция удаления карточки -- />
