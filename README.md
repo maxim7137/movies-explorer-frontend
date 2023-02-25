@@ -29,7 +29,7 @@
 
 ## ссылка на пул реквест
 
-[пул реквест](https://max.nomoredomainsclub.ru)
+[пул реквест](https://github.com/maxim7137/movies-explorer-frontend/pull/2)
 
 <!-- 
 ## Заметки
