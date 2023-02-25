@@ -6,6 +6,11 @@
   height: 38px;
   background-color: #3ddc84;
   border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.logo:hover {
+  background-color: #4285f4;
 }
 
 .logo_selected {
@@ -29,4 +34,9 @@
   border-radius: 50%;
   border: 2px solid #3ddc84;
   clip-path: inset(50% 0 0 0);
+  transition: background-color 0.2s;
+}
+
+.logo__arc:hover {
+  border: 2px solid #4285f4;
 }

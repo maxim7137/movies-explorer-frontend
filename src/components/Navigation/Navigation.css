@@ -62,6 +62,11 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
+  transition: background-color 0.2s;
+}
+
+.navigation__item_signin:hover {
+  background-color: #4285f4;
 }
 
 .navigation__item_account {
