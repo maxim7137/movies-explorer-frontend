@@ -14,15 +14,22 @@ function SavedMovies({
   filteredMovies,
   isDeletedCard,
   setIsDeletedCard,
+  shortChecked,
+  setShortChecked,
 }) {
   useEffect(() => {
     localStorage.removeItem('potentialUserEmail');
+    setShortChecked(false);
     loadSavedMovies();
-  }, [loadSavedMovies]);
+  }, [loadSavedMovies, setShortChecked]);
 
   return (
     <main className="body__main content">
-      <SearchForm handleSearch={handleSavedSearch} />
+      <SearchForm
+        handleSearch={handleSavedSearch}
+        shortChecked={shortChecked}
+        setShortChecked={setShortChecked}
+      />
       <MoviesCardList
         foundMovies={foundMovies}
         searching={searching}

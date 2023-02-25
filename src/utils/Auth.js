@@ -1,4 +1,4 @@
-import { MY_API_URL } from "../constants/constants";
+import { MY_API_URL } from '../constants/constants';
 
 const checkAuthResponse = (res) =>
   res.ok ? res.json() : Promise.reject(res.json());
@@ -10,7 +10,7 @@ export const Signup = (name, email, password) => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({name, email, password }),
+    body: JSON.stringify({ name, email, password }),
   }).then(checkAuthResponse);
 };
 

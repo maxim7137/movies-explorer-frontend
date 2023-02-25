@@ -20,11 +20,13 @@ import MainApi from '../../utils/MainApi'; // мое апи
 import { Signin, Signup, getToken } from '../../utils/Auth'; // утилиты авторизации
 import SearchMovies from '../../utils/SearchMovies'; // поиск фильмов
 import NormCard from '../../utils/NormCard'; // функция для создания карточки для моего апи
+import getOurMovies from '../../utils/getOurMovies'; // функция фильтрации фильмов для текущего пользователя
 import CurrentUserContext from '../../contexts/CurrentUserContext'; // контекст текущего пользователя
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'; // защищенный роут
 
 function App() {
   let location = useLocation(); // переменная для useLocation
+
   const [currentUser, setCurrentUser] = useState({}); // Контекст текущего пользователя
   const [loggedIn, setLoggedIn] = useState(false); // вошел не вошел
   const [loading, setLoading] = useState(true); // загружается не загружается
@@ -39,6 +41,8 @@ function App() {
   const [filteredMovies, setFilteredMovies] = useState(savedMovies); // фильтрованные карточки из моего апи
   const [searching, setSearching] = useState(false); // загружается не загружается
   const [isFound, setIsFound] = useState(false); // загружается не загружается
+  const [shortChecked, setShortChecked] = useState(false); // состояние чек-бокса фильмов
+  const [shortCheckedSaved, setShortCheckedSaved] = useState(false); // состояние чек-бокса сохраненных фильмов
   //  -- Стейты для movies ----------------------------------------------------- />
 
   // <-- Пользователь
@@ -94,12 +98,14 @@ function App() {
     },
     [authentication]
   );
+
   const handleLogout = useCallback(() => {
     setCardsBeatfilm([]);
     setFoundMovies([]);
     setSavedMovies([]);
     localStorage.clear();
     setLoggedIn(false);
+    setShortChecked(false);
   }, []);
   // Обработчики входа и выхода -->
 
@@ -205,8 +211,9 @@ function App() {
       setLoading(false);
     }
   }, []);
+
+  // настало время проверить токен
   useEffect(() => {
-    // настало время проверить токен
     tokenCheck();
   }, [tokenCheck]);
   // -- Проверка токена --------------- />
@@ -253,17 +260,25 @@ function App() {
   const loadSavedMovies = useCallback(async () => {
     try {
       setSearching(true);
+      let _id;
       const jwt = 'Bearer ' + localStorage.getItem('jwt');
       const savedArray = await MainApi.getCards(jwt);
-      setSavedMovies(savedArray);
-      return savedArray;
+      if (currentUser._id) {
+        _id = currentUser._id;
+      } else {
+        const user = await MainApi.getInitialUser(jwt);
+        _id = user._id;
+      }
+      const ourArray = getOurMovies(_id, savedArray);
+      setSavedMovies(ourArray);
+      return ourArray;
     } catch (error) {
       setIsFound(FOUND_SEARCH_ERROR);
       console.log(error);
     } finally {
       setSearching(false);
     }
-  }, []);
+  }, [currentUser._id]);
   // -- Функция загрузки сохраненных фильмов -- />
 
   // <-- Функция сохранения карточки --
@@ -344,6 +359,7 @@ function App() {
       ) : (
         <>
           {isHeaderLocation() && <Header loggedIn={loggedIn} />}
+
           <Switch>
             <Route exact path="/">
               <Main />
@@ -371,7 +387,10 @@ function App() {
               setFilteredMovies={setFilteredMovies}
               isDeletedCard={isDeletedCard}
               setIsDeletedCard={setIsDeletedCard}
+              shortChecked={shortChecked}
+              setShortChecked={setShortChecked}
             />
+
             <ProtectedRoute
               exact
               path="/saved-movies"
@@ -385,7 +404,10 @@ function App() {
               filteredMovies={filteredMovies}
               isDeletedCard={isDeletedCard}
               setIsDeletedCard={setIsDeletedCard}
+              shortChecked={shortCheckedSaved}
+              setShortChecked={setShortCheckedSaved}
             />
+
             <ProtectedRoute
               exact
               path="/profile"

@@ -11,7 +11,7 @@
   letter-spacing: -0.04em;
 }
 
-.about__discription-container {
+.about__description-container {
   display: flex;
   margin: 70px 0 110px;
   gap: calc((100vw - 768px) / (1280 - 768) * (52 - 30) + 30px);
@@ -79,7 +79,7 @@
     padding: 92px 50px;
   }
 
-  .about__discription-container {
+  .about__description-container {
     margin-bottom: 92px;
     gap: calc((100vw - 425px) / (768 - 425) * (38 - 10) + 10px);
   }
@@ -106,7 +106,7 @@
     padding-bottom: 27px;
   }
 
-  .about__discription-container {
+  .about__description-container {
     margin: 61px 0 60px;
     flex-direction: column;
     gap: 57px;

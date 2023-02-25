@@ -11,7 +11,6 @@ function Login({
   // сохранение введенных данных при логине (почта - имя любое, а пароль нельзя)
   const potentialUserEmail = localStorage.getItem('potentialUserEmail');
 
-  // <-- управление компонентами --
   const [inputData, setInputData] = useState({
     password: '',
     email: potentialUserEmail || '',
@@ -58,8 +57,6 @@ function Login({
     localStorage.setItem('potentialUserEmail', inputData.email);
     handleLogin(inputData.email, inputData.password, e);
   }
-
-  // -- управление компонентами -- />
 
   return (
     <Route>

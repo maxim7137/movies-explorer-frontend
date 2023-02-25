@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom'; // реакт роутер
+import { useLocation } from 'react-router-dom';
 import useWindowSize from '../../utils/useWindowSize';
 import Preloader from '../Preloader/Preloader';
 import MoviesCard from './MoviesCard';

@@ -4,10 +4,9 @@ import { INPUT_EMPTY } from '../../constants/constants'; // переменные
 
 import FilterCheckbox from './FilterCheckbox'; // jsx
 
-function SearchForm({ handleSearch }) {
+function SearchForm({ handleSearch, shortChecked, setShortChecked }) {
   let location = useLocation().pathname;
   const [inputData, setInputData] = useState(''); // Данные в поле поиска
-  const [shortChecked, setShortChecked] = useState(false); // состояние чек-бокса
   const [isInputValid, setIsInputValid] = useState(true); // Стейты для валидации
 
   const handleSavedChange = useCallback(() => {
@@ -59,14 +58,17 @@ function SearchForm({ handleSearch }) {
   // для сортировки всех фильмов при переключении короткометражек
   const handleShortChecked = useCallback(
     (shortNowChecked) => {
-      const inputStorageData = JSON.parse(
-        localStorage.getItem('moviesSearchState')
-      ).inputData;
-      if (inputStorageData) {
+      if (JSON.parse(localStorage.getItem('moviesSearchState'))) {
+        const inputStorageData = JSON.parse(
+          localStorage.getItem('moviesSearchState')
+        ).inputData;
         if (location === '/movies') {
           localStorage.setItem(
             'moviesSearchState',
-            JSON.stringify({ inputData: inputStorageData, shortNowChecked })
+            JSON.stringify({
+              inputData: inputStorageData,
+              shortChecked: shortNowChecked,
+            })
           );
         }
         handleSearch(inputStorageData, shortNowChecked);
@@ -87,7 +89,7 @@ function SearchForm({ handleSearch }) {
         );
       }
     }
-  }, [location]);
+  }, [location, setShortChecked]);
 
   // сортировка сохраненных фильмов
   useEffect(() => {

@@ -1,4 +1,4 @@
-import arrow from '../../images/arrow.svg'
+import arrow from '../../images/arrow.svg';
 
 function Portfolio() {
   return (
@@ -15,11 +15,7 @@ function Portfolio() {
             >
               <span className="portfolio__text">Статичный сайт</span>
               <span className="portfolio__arrow">
-                <img
-                  className="portfolio__img"
-                  src={arrow}
-                  alt="стрелка"
-                />
+                <img className="portfolio__img" src={arrow} alt="стрелка" />
               </span>
             </a>
           </li>
@@ -32,11 +28,7 @@ function Portfolio() {
             >
               <span className="portfolio__text">Адаптивный сайт</span>
               <span className="portfolio__arrow">
-                <img
-                  className="portfolio__img"
-                  src={arrow}
-                  alt="стрелка"
-                />
+                <img className="portfolio__img" src={arrow} alt="стрелка" />
               </span>
             </a>
           </li>
@@ -49,11 +41,7 @@ function Portfolio() {
             >
               <span className="portfolio__text">Одностраничное приложение</span>
               <span className="portfolio__arrow">
-                <img
-                  className="portfolio__img"
-                  src={arrow}
-                  alt="стрелка"
-                />
+                <img className="portfolio__img" src={arrow} alt="стрелка" />
               </span>
             </a>
           </li>

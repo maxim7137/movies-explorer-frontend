@@ -3,7 +3,7 @@ function AboutProject() {
     <section className="about content" id="about">
       <div className="about__container">
         <h2 className="about__title section-title">О проекте</h2>
-        <div className="about__discription-container">
+        <div className="about__description-container">
           <div className="about__description">
             <p className="about__subtitle">Дипломный проект включал 5 этапов</p>
             <p className="about__text">
@@ -12,7 +12,9 @@ function AboutProject() {
             </p>
           </div>
           <div className="about__description">
-            <p className="about__subtitle">На выполнение диплома ушло 5 недель</p>
+            <p className="about__subtitle">
+              На выполнение диплома ушло 5 недель
+            </p>
             <p className="about__text">
               У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было
               соблюдать, чтобы успешно защититься.

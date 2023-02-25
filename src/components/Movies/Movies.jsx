@@ -25,6 +25,8 @@ function Movies({
   setFilteredMovies,
   isDeletedCard,
   setIsDeletedCard,
+  shortChecked,
+  setShortChecked,
 }) {
   useEffect(() => {
     if (localStorage.getItem('potentialUserEmail')) {
@@ -60,7 +62,11 @@ function Movies({
 
   return (
     <main className="movies content body__main">
-      <SearchForm handleSearch={handleSearch} />
+      <SearchForm
+        handleSearch={handleSearch}
+        shortChecked={shortChecked}
+        setShortChecked={setShortChecked}
+      />
       <MoviesCardList
         foundMovies={foundMovies}
         savedMovies={savedMovies}
