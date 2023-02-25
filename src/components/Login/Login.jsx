@@ -64,7 +64,7 @@ function Login({
   return (
     <Route>
       {loggedIn ? (
-        <Redirect to="./saved-movies" />
+        <Redirect to="./movies" />
       ) : (
         <div className="body__container">
           <main className="register">

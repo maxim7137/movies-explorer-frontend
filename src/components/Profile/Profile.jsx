@@ -8,7 +8,7 @@ function Profile({
   serverErrorMessage,
   setServerErrorMessage,
   isUpdateUserSuccessful,
-  setIsUpdateUserSuccessful
+  setIsUpdateUserSuccessful,
 }) {
   const user = useContext(CurrentUserContext);
 
@@ -31,6 +31,8 @@ function Profile({
 
   let isFormValid =
     isInputValid.name && isInputValid.email && !serverErrorMessage;
+  let isCurrentUserData =
+    user.name === inputData.name && user.email === inputData.email;
 
   useEffect(() => {
     setInputData(user);
@@ -150,11 +152,11 @@ function Profile({
             form="profile__form"
             type="submit"
             className={
-              isFormValid
+              isFormValid && !isCurrentUserData
                 ? 'profile__button profile__button_edit'
                 : 'profile__button profile__button_edit profile__button_disabled'
             }
-            disabled={!isFormValid}
+            disabled={!isFormValid || isCurrentUserData}
           >
             Редактировать
           </button>
@@ -167,7 +169,10 @@ function Profile({
           </button>
         </div>
       </main>
-      <ProfileDialog isUpdateUserSuccessful={isUpdateUserSuccessful} setIsUpdateUserSuccessful={setIsUpdateUserSuccessful} />
+      <ProfileDialog
+        isUpdateUserSuccessful={isUpdateUserSuccessful}
+        setIsUpdateUserSuccessful={setIsUpdateUserSuccessful}
+      />
     </div>
   );
 }
