@@ -29,7 +29,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false); // вошел не вошел
   const [loading, setLoading] = useState(true); // загружается не загружается
   const [isUpdateUserSuccessful, setIsUpdateUserSuccessful] = useState(false); // для показа сообщения об изменении профиля
-  const [serverErrorMessage, setServerErrorMessage] = useState(null); // сообщение об ошибке с сервера
+  const [serverErrorMessage, setServerErrorMessage] = useState(''); // сообщение об ошибке с сервера
   const [isDeletedCard, setIsDeletedCard] = useState(false); // сообщение при удалении чужой карточки
 
   // < -- Стейты для movies ------------------------------------------------------
@@ -65,12 +65,16 @@ function App() {
 
   // <-- Обработчики входа и выхода
   const handleLogin = useCallback(
-    async (email, password) => {
+    async (email, password, e) => {
+      const { elements } = e.target;
       try {
         setLoading(true);
         const data = await Signin(email, password);
         if (data.token) {
           authentication(data);
+        }
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].setAttribute('disabled', 'disabled');
         }
       } catch (error) {
         const { message } = await error;
@@ -82,6 +86,9 @@ function App() {
           setServerErrorMessage(message);
         }
       } finally {
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].removeAttribute('disabled');
+        }
         setLoading(false);
       }
     },
@@ -98,7 +105,8 @@ function App() {
 
   // <-- Обработчик регистрации
   const handleRegister = useCallback(
-    async (name, email, password) => {
+    async (name, email, password, e) => {
+      const { elements } = e.target;
       try {
         setLoading(true);
         const data = await Signup(name, email, password);
@@ -106,6 +114,9 @@ function App() {
           authentication(data);
         }
         handleLogin(email, password);
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].setAttribute('disabled', 'disabled');
+        }
       } catch (error) {
         const { message } = await error;
         if (message === 'Validation failed') {
@@ -116,6 +127,9 @@ function App() {
           setServerErrorMessage(message);
         }
       } finally {
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].removeAttribute('disabled');
+        }
         setLoading(false);
       }
     },
@@ -124,7 +138,8 @@ function App() {
   // Обработчик регистрации -->
 
   // <-- Обработчик обновления профиля
-  function handleUpdateUser(data) {
+  function handleUpdateUser(data, e) {
+    const { elements } = e.target;
     const jwt = 'Bearer ' + localStorage.getItem('jwt');
     MainApi.setUser(data, jwt)
       .then((result) => {
@@ -133,6 +148,9 @@ function App() {
         setTimeout(() => {
           setIsUpdateUserSuccessful(false);
         }, 5000);
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].setAttribute('disabled', 'disabled');
+        }
       })
       .catch((error) => {
         return error;
@@ -152,6 +170,11 @@ function App() {
       .catch((error) => {
         if (error) {
           console.log(error);
+        }
+      })
+      .finally(() => {
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].removeAttribute('disabled');
         }
       });
   }
@@ -292,6 +315,7 @@ function App() {
       localStorage.setItem('moviesListState', JSON.stringify(foundMoviesNow));
       setIsFound(!foundMoviesNow[0] ? 'Ничего не найдено' : false);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [cardsBeatfilm]
   );
   // -- Обработчика сабмита поиска -- />

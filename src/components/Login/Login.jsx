@@ -56,7 +56,7 @@ function Login({
   function handleSubmit(e) {
     e.preventDefault();
     localStorage.setItem('potentialUserEmail', inputData.email);
-    handleLogin(inputData.email, inputData.password);
+    handleLogin(inputData.email, inputData.password, e);
   }
 
   // -- управление компонентами -- />

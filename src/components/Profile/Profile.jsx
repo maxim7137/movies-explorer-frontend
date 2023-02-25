@@ -65,7 +65,7 @@ function Profile({
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleUpdateUser(inputData);
+    handleUpdateUser(inputData, e);
   }
 
   // -- управление компонентами -- />

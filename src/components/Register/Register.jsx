@@ -69,7 +69,7 @@ function Register({
   function handleSubmit(e) {
     e.preventDefault();
     localStorage.setItem('potentialUserEmail', inputData.email);
-    handleRegister(inputData.name, inputData.email, inputData.password);
+    handleRegister(inputData.name, inputData.email, inputData.password, e);
   }
 
   // -- управление компонентами -- />
