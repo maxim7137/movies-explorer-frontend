@@ -7,7 +7,8 @@ function Profile({
   handleUpdateUser,
   serverErrorMessage,
   setServerErrorMessage,
-  isUpdateUserSuccessful
+  isUpdateUserSuccessful,
+  setIsUpdateUserSuccessful
 }) {
   const user = useContext(CurrentUserContext);
 
@@ -166,7 +167,7 @@ function Profile({
           </button>
         </div>
       </main>
-      <ProfileDialog isUpdateUserSuccessful={isUpdateUserSuccessful} />
+      <ProfileDialog isUpdateUserSuccessful={isUpdateUserSuccessful} setIsUpdateUserSuccessful={setIsUpdateUserSuccessful} />
     </div>
   );
 }

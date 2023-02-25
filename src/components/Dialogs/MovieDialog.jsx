@@ -1,24 +1,25 @@
-function MovieDialog({ isUpdateUserSuccessful }) {
+function MovieDialog({ isDeletedCard, setIsDeletedCard }) {
   function closeOnBackDropClick({ currentTarget, target }) {
-    console.log(currentTarget);
-    console.log(target);
     const dialogElement = currentTarget;
-    const isClickedOnBackDrop = target === dialogElement;
+    const isClickedOnBackDrop = target === currentTarget;
     if (isClickedOnBackDrop) {
       dialogElement.close();
+      setIsDeletedCard(false);
     }
   }
 
   return (
     <dialog
-      open={isUpdateUserSuccessful}
+      open={isDeletedCard ? true : false}
       className="dialog dialog_movie"
       onClick={closeOnBackDropClick}
     >
       <div className="dialog__wrapper dialog__wrapper_movie">
-        <p className="dialog__text dialog__text_movie">Профиль успешно изменен.</p>
+        <p className="dialog__text">{isDeletedCard}</p>
         <form className="dialog__form dialog__form_movie" method="dialog">
-          <button className="dialog__button dialog__button_movie">Прекрасно!</button>
+          <button className="dialog__button dialog__button_movie">
+            Понятно.
+          </button>
         </form>
       </div>
     </dialog>

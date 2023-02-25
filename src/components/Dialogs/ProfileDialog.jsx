@@ -1,11 +1,10 @@
-function ProfileDialog({ isUpdateUserSuccessful }) {
+function ProfileDialog({ isUpdateUserSuccessful, setIsUpdateUserSuccessful }) {
   function closeOnBackDropClick({ currentTarget, target }) {
-    console.log(currentTarget);
-    console.log(target);
     const dialogElement = currentTarget;
     const isClickedOnBackDrop = target === dialogElement;
     if (isClickedOnBackDrop) {
       dialogElement.close();
+      setIsUpdateUserSuccessful(false);
     }
   }
 

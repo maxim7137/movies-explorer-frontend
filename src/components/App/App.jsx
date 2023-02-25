@@ -270,6 +270,9 @@ function App() {
       const { message } = await error;
       console.log(message);
       setIsDeletedCard(message);
+      setTimeout(() => {
+        setIsDeletedCard(false);
+      }, 4000);
     }
   }, []);
   // -- Функция удаления карточки -- />
@@ -339,6 +342,8 @@ function App() {
               savedMovies={savedMovies}
               setSavedMovies={setSavedMovies}
               setFilteredMovies={setFilteredMovies}
+              isDeletedCard={isDeletedCard}
+              setIsDeletedCard={setIsDeletedCard}
             />
             <ProtectedRoute
               path="/saved-movies"
@@ -350,6 +355,8 @@ function App() {
               savedMovies={savedMovies}
               handleSavedSearch={handleSavedSearch}
               filteredMovies={filteredMovies}
+              isDeletedCard={isDeletedCard}
+              setIsDeletedCard={setIsDeletedCard}
             />
             <ProtectedRoute
               path="/profile"
@@ -360,6 +367,7 @@ function App() {
               serverErrorMessage={serverErrorMessage}
               setServerErrorMessage={setServerErrorMessage}
               isUpdateUserSuccessful={isUpdateUserSuccessful}
+              setIsUpdateUserSuccessful={setIsUpdateUserSuccessful}
             />
 
             <Route path="/signin">

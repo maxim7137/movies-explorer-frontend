@@ -4,6 +4,7 @@
 @import url(./components/App/App.css);
 
 @import url(./components/Dialogs/ProfileDialog.css);
+@import url(./components/Dialogs/MovieDialog.css);
 
 @import url(./components/Header/Header.css);
 @import url(./components/Header/Logo.css);

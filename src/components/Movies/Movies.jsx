@@ -1,7 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react';
 
 import SearchForm from './SearchForm'; // jsx
 import MoviesCardList from './MoviesCardList'; // jsx
+import MovieDialog from '../Dialogs/MovieDialog'; // jsx
 
 import { FOUND_SEARCH_ERROR } from '../../constants/constants'; // константы
 
@@ -21,6 +23,8 @@ function Movies({
   addCard,
   delCard,
   setFilteredMovies,
+  isDeletedCard,
+  setIsDeletedCard,
 }) {
   useEffect(() => {
     if (localStorage.getItem('potentialUserEmail')) {
@@ -64,6 +68,10 @@ function Movies({
         isFound={isFound}
         addCard={addCard}
         delCard={delCard}
+      />
+      <MovieDialog
+        isDeletedCard={isDeletedCard}
+        setIsDeletedCard={setIsDeletedCard}
       />
     </main>
   );

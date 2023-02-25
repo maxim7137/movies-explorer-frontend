@@ -11,6 +11,11 @@
   color: #fff;
 }
 
+.dialog_movie {
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+}
+
 .dialog__wrapper {
   position: fixed;
   right: 20px;
@@ -21,6 +26,18 @@
   width: fit-content;
 }
 
+.dialog__wrapper_movie {
+  box-sizing: border-box;
+  right: calc(50vw - 283px / 2);
+  bottom: calc(50vh - 222px / 2);
+  width: 283px;
+  height: 222px;
+  background-color: #222;
+  border-color: #313131;
+  display: flex;
+  flex-direction: column;
+}
+
 .dialog__text {
   margin-block-start: 0;
   text-align: center;
@@ -28,6 +45,10 @@
 
 .dialog__form {
   text-align: center;
+}
+
+.dialog__form_movie {
+  margin: auto 0;
 }
 
 .dialog__button {
@@ -42,6 +63,10 @@
   transition: color 0.2s, border-color 0.2s;
 }
 
+.dialog__button_movie {
+  background-color: #313131;
+}
+
 .dialog__button:hover {
   color: #3ddc84;
   border-color: #3ddc84;
@@ -51,5 +76,10 @@
   .dialog__wrapper {
     right: calc(50% - 212px / 2);
     bottom: 100px;
+  }
+
+  .dialog__wrapper_movie {
+    right: calc(50vw - 300px / 2);
+    bottom: calc(50vh - 222px / 2);
   }
 }

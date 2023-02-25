@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, Route, Redirect } from 'react-router-dom';
 import Logo from '../Header/Logo';
 
