@@ -37,7 +37,7 @@ function Movies({
 
   // загрузим все фильмы до сабмита чтоб они были сразу доступны для фильтрации при поиске
   useEffect(() => {
-    if (cardsBeatfilm.length < 1) {
+    if (cardsBeatfilm.length < 100) {
       loadAllMovies()
         .then((result) => setCardsBeatfilm(result))
         .catch((error) => {

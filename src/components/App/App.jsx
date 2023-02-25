@@ -209,17 +209,19 @@ function App() {
   // < -- КАРТОЧКИ --
   // <-- Функция загрузки всех фильмов --
   async function loadAllMovies() {
-    try {
-      setSearching(true);
-      const rowArray = await MoviesApi.getInitialCards();
-      const normArray = rowArray.map((rowCard) => NormCard(rowCard));
-      setCardsBeatfilm(normArray);
-      return normArray;
-    } catch (error) {
-      setIsFound(FOUND_SEARCH_ERROR);
-      console.log(error);
-    } finally {
-      setSearching(false);
+    if (cardsBeatfilm.length < 100) {
+      try {
+        setSearching(true);
+        const rowArray = await MoviesApi.getInitialCards();
+        const normArray = rowArray.map((rowCard) => NormCard(rowCard));
+        setCardsBeatfilm(normArray);
+        return normArray;
+      } catch (error) {
+        setIsFound(FOUND_SEARCH_ERROR);
+        console.log(error);
+      } finally {
+        setSearching(false);
+      }
     }
   }
   // -- Функция загрузки всех фильмов -- />
@@ -324,6 +326,7 @@ function App() {
             </Route>
 
             <ProtectedRoute
+              exact
               path="/movies"
               component={Movies}
               addCard={addCard}
@@ -346,6 +349,7 @@ function App() {
               setIsDeletedCard={setIsDeletedCard}
             />
             <ProtectedRoute
+              exact
               path="/saved-movies"
               component={SavedMovies}
               loggedIn={loggedIn}
@@ -359,6 +363,7 @@ function App() {
               setIsDeletedCard={setIsDeletedCard}
             />
             <ProtectedRoute
+              exact
               path="/profile"
               component={Profile}
               loggedIn={loggedIn}
@@ -370,7 +375,7 @@ function App() {
               setIsUpdateUserSuccessful={setIsUpdateUserSuccessful}
             />
 
-            <Route path="/signin">
+            <Route exact path="/signin">
               <Login
                 handleLogin={handleLogin}
                 loggedIn={loggedIn}
@@ -379,7 +384,7 @@ function App() {
               />
             </Route>
 
-            <Route path="/signup">
+            <Route exact path="/signup">
               <Register
                 handleRegister={handleRegister}
                 loggedIn={loggedIn}
@@ -388,12 +393,13 @@ function App() {
               />
             </Route>
 
-            <Route path="/404">
+            <Route exact path="/404">
               <NotFound />
             </Route>
 
             <Route path="*">
-              {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
+              {/* {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />} */}
+              <Redirect to="/404" />
             </Route>
           </Switch>
 
