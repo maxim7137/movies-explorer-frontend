@@ -119,10 +119,10 @@ function App() {
         if (data.token) {
           authentication(data);
         }
-        handleLogin(email, password);
         for (let i = 0; i < elements.length; i++) {
           elements[i].setAttribute('disabled', 'disabled');
         }
+        handleLogin(email, password, e);
       } catch (error) {
         const { message } = await error;
         if (message === 'Validation failed') {
