@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, Route, Redirect } from 'react-router-dom';
+import isEmail from 'validator/lib/isEmail';
 import Logo from '../Header/Logo';
 
 function Register({
@@ -43,18 +44,21 @@ function Register({
       setServerErrorMessage(false);
     }, 0);
 
-    const { name, validity, validationMessage } = e.target;
+    const { name, value, validity, validationMessage } = e.target;
 
     setIsInputValid({
       ...isInputValid,
-      [name]: validity.valid,
+      [name]: name === 'email' ? isEmail(value) : validity.valid,
     });
 
     setErrorMessage({
       ...errorMessage,
-      [name]: validity.patternMismatch
-        ? 'Введите латиницу, кириллицу, пробел или дефис'
-        : validationMessage,
+      [name]:
+        name === 'email'
+          ? validationMessage || 'Введите email например name@mail.com'
+          : validity.patternMismatch
+          ? 'Введите латиницу, кириллицу, пробел или дефис'
+          : validationMessage,
     });
   }
 

@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import isEmail from 'validator/lib/isEmail';
 import ProfileDialog from '../Dialogs/ProfileDialog'; // jsx
 import CurrentUserContext from '../../contexts/CurrentUserContext'; // контекст текущего пользователя
 
@@ -42,16 +43,19 @@ function Profile({
   function handleInput(e) {
     setServerErrorMessage(false);
 
-    const { name, validity, validationMessage } = e.target;
+    const { name, value, validity, validationMessage } = e.target;
     setIsInputValid({
       ...isInputValid,
-      [name]: validity.valid,
+      [name]: name === 'email' ? isEmail(value) : validity.valid,
     });
     setErrorMessage({
       ...errorMessage,
-      [name]: validity.patternMismatch
-        ? 'Введите латиницу, кириллицу, пробел или дефис'
-        : validationMessage,
+      [name]:
+        name === 'email'
+          ? validationMessage || 'Введите email например name@mail.com'
+          : validity.patternMismatch
+          ? 'Введите латиницу, кириллицу, пробел или дефис'
+          : validationMessage,
     });
   }
 

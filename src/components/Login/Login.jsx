@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, Route, Redirect } from 'react-router-dom';
-import Logo from '../Header/Logo';
+import isEmail from 'validator/lib/isEmail';
+import Logo from '../Header/Logo'; // jsx
 
 function Login({
   handleLogin,
@@ -33,14 +34,17 @@ function Login({
       setServerErrorMessage(false);
     }, 0);
 
-    const { name, validity, validationMessage } = e.target;
+    const { name, value, validity, validationMessage } = e.target;
     setIsInputValid({
       ...isInputValid,
-      [name]: validity.valid,
+      [name]: name === 'email' ? isEmail(value) : validity.valid,
     });
     setErrorMessage({
       ...errorMessage,
-      [name]: validationMessage,
+      [name]:
+        name === 'password'
+          ? validationMessage
+          : validationMessage || 'Введите email например name@mail.com',
     });
   }
 
