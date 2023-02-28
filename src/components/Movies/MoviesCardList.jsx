@@ -7,6 +7,19 @@ import MoviesCard from './MoviesCard';
 import {
   MOVIES_CARD_CLASS,
   MOVIES_CARD_CLASS_IN_SAVED,
+  WIDE_SCREEN,
+  MEDIUM_SCREEN,
+  SMALL_SCREEN,
+  WIDE_SCREEN_CARDS,
+  MEDIUM_SCREEN_CARDS,
+  SMALL_SCREEN_CARDS,
+  EX_SMALL_SCREEN_CARDS,
+  WIDE_SCREEN_SUPPLEMENT,
+  MEDIUM_SCREEN_SUPPLEMENT,
+  SMALL_SCREEN_SUPPLEMENT,
+  WIDE_SCREEN_SCROLL,
+  SMALL_SCREEN_SCROLL,
+  EX_SMALL_SCREEN_SCROLL,
 } from '../../constants/constants';
 
 function MoviesCardList({
@@ -27,22 +40,22 @@ function MoviesCardList({
   const size = useWindowSize().width;
 
   useEffect(() => {
-    if (size > 1584) {
-      setCardQuantity(16);
-      setSupplement(4);
-      setCardHeight(320);
-    } else if (size > 1024 && size <= 1584) {
-      setCardQuantity(12);
-      setSupplement(3);
-      setCardHeight(320);
-    } else if (size > 480 && size <= 1024) {
-      setCardQuantity(8);
-      setSupplement(2);
-      setCardHeight(305);
-    } else if (size <= 480) {
-      setCardQuantity(5);
-      setSupplement(2);
-      setCardHeight(620);
+    if (size > WIDE_SCREEN) {
+      setCardQuantity(WIDE_SCREEN_CARDS);
+      setSupplement(WIDE_SCREEN_SUPPLEMENT);
+      setCardHeight(WIDE_SCREEN_SCROLL);
+    } else if (size > MEDIUM_SCREEN && size <= WIDE_SCREEN) {
+      setCardQuantity(MEDIUM_SCREEN_CARDS);
+      setSupplement(MEDIUM_SCREEN_SUPPLEMENT);
+      setCardHeight(WIDE_SCREEN_SCROLL);
+    } else if (size > SMALL_SCREEN && size <= MEDIUM_SCREEN) {
+      setCardQuantity(SMALL_SCREEN_CARDS);
+      setSupplement(SMALL_SCREEN_SUPPLEMENT);
+      setCardHeight(SMALL_SCREEN_SCROLL);
+    } else if (size <= SMALL_SCREEN) {
+      setCardQuantity(EX_SMALL_SCREEN_CARDS);
+      setSupplement(SMALL_SCREEN_SUPPLEMENT);
+      setCardHeight(EX_SMALL_SCREEN_SCROLL);
     }
   }, [size]);
 
