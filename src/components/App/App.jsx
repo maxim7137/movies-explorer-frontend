@@ -297,29 +297,42 @@ function App() {
         setTimeout(() => {
           setIsDeletedCard(false);
         }, 8000);
+        if (message === 'Необходима авторизация') {
+          setTimeout(() => {
+            handleLogout();
+          }, 8001);
+        }
       }
     },
-    [savedMovies]
+    [handleLogout, savedMovies]
   );
   // -- Функция сохранения карточки -- />
 
   // <-- Функция удаления карточки --
-  const delCard = useCallback(async (_id, movieId) => {
-    try {
-      const jwt = 'Bearer ' + localStorage.getItem('jwt');
-      const deletedCard = await MainApi.delCard(_id, jwt);
-      setSavedMovies((state) =>
-        state.filter((stateCard) => stateCard.movieId !== movieId)
-      );
-      return deletedCard;
-    } catch (error) {
-      const { message } = await error;
-      setIsDeletedCard(message);
-      setTimeout(() => {
-        setIsDeletedCard(false);
-      }, 4000);
-    }
-  }, []);
+  const delCard = useCallback(
+    async (_id, movieId) => {
+      try {
+        const jwt = 'Bearer ' + localStorage.getItem('jwt');
+        const deletedCard = await MainApi.delCard(_id, jwt);
+        setSavedMovies((state) =>
+          state.filter((stateCard) => stateCard.movieId !== movieId)
+        );
+        return deletedCard;
+      } catch (error) {
+        const { message } = await error;
+        setIsDeletedCard(message);
+        setTimeout(() => {
+          setIsDeletedCard(false);
+        }, 8000);
+        if (message === 'Необходима авторизация') {
+          setTimeout(() => {
+            handleLogout();
+          }, 8001);
+        }
+      }
+    },
+    [handleLogout]
+  );
   // -- Функция удаления карточки -- />
 
   // <-- Обработчика сабмита поиска --

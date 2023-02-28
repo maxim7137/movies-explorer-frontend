@@ -38,6 +38,11 @@
   flex-direction: column;
 }
 
+.dialog__head {
+  color: #ee3465;
+  text-align: center;
+}
+
 .dialog__text {
   margin-block-start: 0;
   text-align: center;
