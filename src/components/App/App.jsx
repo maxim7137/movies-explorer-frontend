@@ -287,10 +287,16 @@ function App() {
       try {
         const jwt = 'Bearer ' + localStorage.getItem('jwt');
         const addedCard = await MainApi.setCard(data, jwt);
-        setSavedMovies(savedMovies.concat(addedCard));
+        if (addedCard) {
+          setSavedMovies(savedMovies.concat(addedCard));
+        }
         return addedCard;
       } catch (error) {
-        console.log(error);
+        const { message } = await error;
+        setIsDeletedCard(message);
+        setTimeout(() => {
+          setIsDeletedCard(false);
+        }, 8000);
       }
     },
     [savedMovies]
@@ -308,7 +314,6 @@ function App() {
       return deletedCard;
     } catch (error) {
       const { message } = await error;
-      console.log(message);
       setIsDeletedCard(message);
       setTimeout(() => {
         setIsDeletedCard(false);

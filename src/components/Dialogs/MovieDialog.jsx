@@ -8,6 +8,10 @@ function MovieDialog({ isDeletedCard, setIsDeletedCard }) {
     }
   }
 
+  function closeOnButton() {
+    setIsDeletedCard(false);
+  }
+
   return (
     <dialog
       open={isDeletedCard ? true : false}
@@ -15,9 +19,13 @@ function MovieDialog({ isDeletedCard, setIsDeletedCard }) {
       onClick={closeOnBackDropClick}
     >
       <div className="dialog__wrapper dialog__wrapper_movie">
-        <p className="dialog__text">{isDeletedCard}</p>
+        <p className="dialog__text">{`Ошибка на сервере ${isDeletedCard}.`}</p>
+        <p className="dialog__text">{`Проверьте интернет соединение или попробуйте позже.`}</p>
         <form className="dialog__form dialog__form_movie" method="dialog">
-          <button className="dialog__button dialog__button_movie">
+          <button
+            onClick={closeOnButton}
+            className="dialog__button dialog__button_movie"
+          >
             Понятно.
           </button>
         </form>

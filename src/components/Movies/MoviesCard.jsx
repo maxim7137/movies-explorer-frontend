@@ -42,7 +42,6 @@ function MoviesCard({
           delCard(_id, movieId);
         }
       } else {
-        setItIsSaved(true);
         addCard({
           country,
           director,
