@@ -25,7 +25,7 @@ import CurrentUserContext from '../../contexts/CurrentUserContext'; // конт�
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'; // защищенный роут
 
 function App() {
-  let location = useLocation(); // переменная для useLocation
+  let location = useLocation().pathname; // переменная для useLocation
 
   const [currentUser, setCurrentUser] = useState({}); // Контекст текущего пользователя
   const [loggedIn, setLoggedIn] = useState(false); // вошел не вошел
@@ -35,7 +35,9 @@ function App() {
   const [isDeletedCard, setIsDeletedCard] = useState(false); // сообщение при удалении чужой карточки
 
   // < -- Стейты для movies ------------------------------------------------------
-  const [cardsBeatfilm, setCardsBeatfilm] = useState([]); // все начальные карточки
+  const [cardsBeatfilm, setCardsBeatfilm] = useState(
+    JSON.parse(localStorage.getItem('cardsBeatfilmStorage')) || []
+  ); // все начальные карточки
   const [foundMovies, setFoundMovies] = useState([]); // найденные карточки из локального хранилища
   const [savedMovies, setSavedMovies] = useState([]); // найденные карточки из моего апи
   const [filteredMovies, setFilteredMovies] = useState(savedMovies); // фильтрованные карточки из моего апи
@@ -221,17 +223,15 @@ function App() {
   // <-- проверка useLocation
   function isHeaderLocation() {
     return (
-      location.pathname === '/' ||
-      location.pathname === '/movies' ||
-      location.pathname === '/saved-movies' ||
-      location.pathname === '/profile'
+      location === '/' ||
+      location === '/movies' ||
+      location === '/saved-movies' ||
+      location === '/profile'
     );
   }
   function isFooterLocation() {
     return (
-      location.pathname === '/' ||
-      location.pathname === '/movies' ||
-      location.pathname === '/saved-movies'
+      location === '/' || location === '/movies' || location === '/saved-movies'
     );
   }
   // -- проверка useLocation -- />
@@ -245,6 +245,7 @@ function App() {
         const rowArray = await MoviesApi.getInitialCards();
         const normArray = rowArray.map((rowCard) => NormCard(rowCard));
         setCardsBeatfilm(normArray);
+        localStorage.setItem('cardsBeatfilmStorage', JSON.stringify(normArray));
         return normArray;
       } catch (error) {
         setIsFound(FOUND_SEARCH_ERROR);
@@ -338,7 +339,9 @@ function App() {
   // <-- Обработчика сабмита поиска --
   const handleSearch = useCallback(
     (inputData, shortChecked) => {
-      loadAllMovies();
+      if (cardsBeatfilm.length < 100) {
+        loadAllMovies();
+      }
       const foundMoviesNow = SearchMovies(
         inputData,
         shortChecked,

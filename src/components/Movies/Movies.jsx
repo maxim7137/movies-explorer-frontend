@@ -39,20 +39,45 @@ function Movies({
 
   // загрузим все фильмы до сабмита чтоб они были сразу доступны для фильтрации при поиске
   useEffect(() => {
-    if (cardsBeatfilm.length < 100) {
-      loadAllMovies()
-        .then((result) => setCardsBeatfilm(result))
-        .catch((error) => {
-          setIsFound(FOUND_SEARCH_ERROR);
-          console.log(error);
-        });
-
-      loadSavedMovies()
-        .then((result) => setSavedMovies(result))
-        .catch((error) => {
-          console.log(error);
-        });
+    if (localStorage.getItem('cardsBeatfilmStorage')) {
+      if (
+        cardsBeatfilm.length < 100 &&
+        JSON.parse(localStorage.getItem('cardsBeatfilmStorage')).length < 100
+      ) {
+        loadAllMovies()
+          .then((result) => {
+            setCardsBeatfilm(result);
+            localStorage.setItem(
+              'cardsBeatfilmStorage',
+              JSON.stringify(result)
+            );
+          })
+          .catch((error) => {
+            setIsFound(FOUND_SEARCH_ERROR);
+            console.log(error);
+          });
+      }
+    } else {
+      if (cardsBeatfilm.length < 100) {
+        loadAllMovies()
+          .then((result) => {
+            setCardsBeatfilm(result);
+            localStorage.setItem(
+              'cardsBeatfilmStorage',
+              JSON.stringify(result)
+            );
+          })
+          .catch((error) => {
+            setIsFound(FOUND_SEARCH_ERROR);
+            console.log(error);
+          });
+      }
     }
+    loadSavedMovies()
+      .then((result) => setSavedMovies(result))
+      .catch((error) => {
+        console.log(error);
+      });
   }, [cardsBeatfilm]);
 
   // изменяем фильтрованный массив вслед за сохраненным
