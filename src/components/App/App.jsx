@@ -80,7 +80,7 @@ function App() {
           authentication(data);
         }
         for (let i = 0; i < elements.length; i++) {
-          elements[i].setAttribute('disabled', 'disabled');
+          elements[i].setAttribute('disabled', '');
         }
       } catch (error) {
         const { message } = await error;
@@ -122,7 +122,7 @@ function App() {
           authentication(data);
         }
         for (let i = 0; i < elements.length; i++) {
-          elements[i].setAttribute('disabled', 'disabled');
+          elements[i].setAttribute('disabled', '');
         }
         handleLogin(email, password, e);
       } catch (error) {
@@ -157,7 +157,7 @@ function App() {
           setIsUpdateUserSuccessful(false);
         }, 5000);
         for (let i = 0; i < elements.length; i++) {
-          elements[i].setAttribute('disabled', 'disabled');
+          elements[i].setAttribute('disabled', '');
         }
       })
       .catch((error) => {
@@ -284,8 +284,9 @@ function App() {
 
   // <-- Функция сохранения карточки --
   const addCard = useCallback(
-    async (data) => {
+    async (data, { target }) => {
       try {
+        target.setAttribute('disabled', '');
         const jwt = 'Bearer ' + localStorage.getItem('jwt');
         const addedCard = await MainApi.setCard(data, jwt);
         if (addedCard) {
@@ -303,6 +304,8 @@ function App() {
             handleLogout();
           }, 8001);
         }
+      } finally {
+        target.removeAttribute('disabled');
       }
     },
     [handleLogout, savedMovies]
@@ -311,8 +314,9 @@ function App() {
 
   // <-- Функция удаления карточки --
   const delCard = useCallback(
-    async (_id, movieId) => {
+    async (_id, movieId, { target }) => {
       try {
+        target.setAttribute('disabled', '');
         const jwt = 'Bearer ' + localStorage.getItem('jwt');
         const deletedCard = await MainApi.delCard(_id, jwt);
         setSavedMovies((state) =>
@@ -330,6 +334,8 @@ function App() {
             handleLogout();
           }, 8001);
         }
+      } finally {
+        target.removeAttribute('disabled');
       }
     },
     [handleLogout]

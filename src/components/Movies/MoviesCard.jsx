@@ -34,12 +34,12 @@ function MoviesCard({
     }
   }, [location, movieId, savedMovies]);
 
-  function handleClick() {
+  function handleClick(e) {
     if (location === '/movies') {
       if (itIsSaved) {
         const _id = get_idByMovieId(movieId, savedMovies);
         if (_id) {
-          delCard(_id, movieId);
+          delCard(_id, movieId, e);
         }
       } else {
         addCard({
@@ -54,10 +54,10 @@ function MoviesCard({
           movieId,
           image,
           thumbnail,
-        });
+        }, e);
       }
     } else {
-      delCard(_id, movieId);
+      delCard(_id, movieId, e);
     }
   }
 
