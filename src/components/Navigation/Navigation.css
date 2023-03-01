@@ -37,6 +37,14 @@
   text-decoration: none;
   font-weight: 500;
   color: #fff;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.navigation__item_selected,
+.navigation__item_signup,
+.navigation__item_signin {
+  opacity: 1;
 }
 
 .navigation__item_signup {
@@ -54,6 +62,11 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
+  transition: background-color 0.2s;
+}
+
+.navigation__item_signin:hover {
+  background-color: #4285f4;
 }
 
 .navigation__item_account {

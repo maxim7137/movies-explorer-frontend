@@ -1,31 +1,97 @@
-import image from '../../images/card.jpg';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import MinToHours from '../../utils/MinToHours';
+import isSavedCard from '../../utils/isSavedCard';
+import { useState } from 'react';
+import get_idByMovieId from '../../utils/get_idByMovieId';
 
-function MoviesCard() {
-  let location = useLocation(); // переменная для useLocation
+function MoviesCard({
+  country,
+  director,
+  duration,
+  year,
+  description,
+  trailerLink,
+  nameRU,
+  nameEN,
+  movieId,
+  image,
+  thumbnail,
+  _id,
+  cardClass,
+  addCard,
+  delCard,
+  savedMovies,
+}) {
+  let location = useLocation().pathname; // переменная для useLocation
 
-  // проверка useLocation
-  function isSavedLocation() {
-    return location.pathname === '/saved-movies';
+  const [itIsSaved, setItIsSaved] = useState(false);
+
+  // проверка сохранена ли карточка
+  useEffect(() => {
+    if (location === '/movies') {
+      setItIsSaved(isSavedCard(savedMovies, movieId));
+    }
+  }, [location, movieId, savedMovies]);
+
+  function handleClick(e) {
+    if (location === '/movies') {
+      if (itIsSaved) {
+        const _id = get_idByMovieId(movieId, savedMovies);
+        if (_id) {
+          delCard(_id, movieId, e);
+        }
+      } else {
+        addCard({
+          country,
+          director,
+          duration,
+          year,
+          description,
+          trailerLink,
+          nameRU,
+          nameEN,
+          movieId,
+          image,
+          thumbnail,
+        }, e);
+      }
+    } else {
+      delCard(_id, movieId, e);
+    }
   }
 
   return (
     <li className="card">
       <div className="card__head">
         <div className="card__text">
-          <p className="card__name">33 слова о дизайне</p>
-          <p className="card__duration">1ч 47м</p>
+          <p className="card__name">{nameRU}</p>
+          <p className="card__duration">{MinToHours(duration)}</p>
         </div>
         <div className="card__save">
           <button
             className={
-              isSavedLocation() ? 'card__btn card__btn_inSaved' : 'card__btn'
+              itIsSaved && location === '/movies'
+                ? `${cardClass} card__btn_saved`
+                : cardClass
             }
+            onClick={handleClick}
           ></button>
         </div>
       </div>
       <div className="card__body">
-        <img src={image} alt="Постер фильма" className="card__img" />
+        <a
+          className="card__link"
+          href={trailerLink}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            src={image}
+            alt={`Постер фильма: ${nameRU}`}
+            className="card__img"
+          />
+        </a>
       </div>
     </li>
   );

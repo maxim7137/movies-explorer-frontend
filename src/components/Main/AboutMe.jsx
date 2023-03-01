@@ -1,12 +1,10 @@
 import ava from '../../images/ava.jpg';
 
-const idValue = 'me';
-
 function AboutMe() {
   return (
     <section className="me content">
       <div className="me__container">
-        <h2 className="me__title section-title" id={idValue.toString()}>
+        <h2 className="me__title section-title" id="me">
           Студент
         </h2>
         <div className="me__discription-container">

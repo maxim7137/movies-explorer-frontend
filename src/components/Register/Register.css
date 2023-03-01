@@ -118,6 +118,15 @@
   background-color: #3ddc84;
 }
 
+.register__button_disabled {
+  background-color: #8b8b8b;
+}
+
+.register__button_disabled:hover {
+  background-color: #8b8b8b;
+  cursor: default;
+}
+
 .register__question {
   color: #8b8b8b;
 }

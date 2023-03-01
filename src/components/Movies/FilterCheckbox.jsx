@@ -1,10 +1,21 @@
-import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-function FilterCheckbox() {
-  const [shortChecked, setShortChecked] = useState(false);
+function FilterCheckbox({
+  shortChecked,
+  setShortChecked,
+  handleSavedChange,
+  handleShortChecked,
+}) {
+  let location = useLocation().pathname;
 
   function handleToggleShort(event) {
     setShortChecked(event.target.checked);
+    if (location === '/saved-movies') {
+      handleSavedChange();
+    }
+    if (location === '/movies') {
+      handleShortChecked(event.target.checked);
+    }
   }
 
   return (
@@ -13,7 +24,7 @@ function FilterCheckbox() {
         className="search__input"
         type="checkbox"
         onChange={handleToggleShort}
-        checked={shortChecked}
+        checked={shortChecked || false}
       />
       <span className="search__slider"></span>
     </label>

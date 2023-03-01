@@ -1,12 +1,12 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Logo() {
   return (
-    <Link to="/" className="logo">
+    <NavLink to="/" className="logo" activeClassName="logo_selected">
       <div className="logo__circle">
         <div className="logo__arc"></div>
       </div>
-    </Link>
+    </NavLink>
   );
 }
 

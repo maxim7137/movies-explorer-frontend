@@ -76,8 +76,9 @@
   line-height: 12px;
   color: #3ddc84;
   margin: 0 0 5px;
+  width: 100%;
+  text-align: center;
   visibility: hidden;
-  transition: all 0.2s;
 }
 
 .profile__error_visible {
@@ -110,6 +111,15 @@
   color: #3ddc84;
 }
 
+.profile__button_disabled {
+  color: #7b7b7b;
+}
+
+.profile__button_disabled:hover {
+  color: #7b7b7b;
+  cursor: default;
+}
+
 .profile__button_exit {
   color: #ee3465;
   font-weight: 500;
@@ -122,11 +132,11 @@
 /* 768 */
 @media (max-width: 1279px) {
   .profile__header {
-    margin: 236px 0 81px;
+    margin: 160px 0 80px;
   }
 
   .profile__buttons {
-    margin-top: 192px;
+    margin-top: 100px;
   }
 }
 
