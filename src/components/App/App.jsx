@@ -3,8 +3,7 @@ import {
   Switch,
   Route,
   Redirect,
-  useLocation,
-  useParams,
+  useLocation
 } from 'react-router-dom'; // реакт роутер
 
 // <-- jsx компоненты
@@ -33,9 +32,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'; // защищен
 
 function App() {
   let location = useLocation().pathname; // переменная для useLocation
-
-  const params = useParams();
-  const { movieId } = params;
 
   const [currentUser, setCurrentUser] = useState({}); // Контекст текущего пользователя
   const [loggedIn, setLoggedIn] = useState(false); // вошел не вошел
@@ -459,7 +455,7 @@ function App() {
             />
 
             <Route exact path="/movie/:movieId">
-              <Movie movieId={movieId} cardsBeatfilm={cardsBeatfilm} />
+              <Movie cardsBeatfilm={cardsBeatfilm} />
             </Route>
 
             <Route exact path="/signin">
