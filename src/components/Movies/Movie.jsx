@@ -2,8 +2,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import getMovieByMovieId from '../../utils/getMovieByMovieId';
 
 function Movie({ cardsBeatfilm }) {
-  const { movieId } = useParams();
-  
+  let { movieId } = useParams();
+
   const {
     country,
     director,
