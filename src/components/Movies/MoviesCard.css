@@ -19,6 +19,12 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.card__text:hover {
+  text-decoration: underline;
 }
 
 .card__name {

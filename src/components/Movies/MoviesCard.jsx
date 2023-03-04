@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import MinToHours from '../../utils/MinToHours';
 import isSavedCard from '../../utils/isSavedCard';
 import { useState } from 'react';
@@ -42,19 +42,22 @@ function MoviesCard({
           delCard(_id, movieId, e);
         }
       } else {
-        addCard({
-          country,
-          director,
-          duration,
-          year,
-          description,
-          trailerLink,
-          nameRU,
-          nameEN,
-          movieId,
-          image,
-          thumbnail,
-        }, e);
+        addCard(
+          {
+            country,
+            director,
+            duration,
+            year,
+            description,
+            trailerLink,
+            nameRU,
+            nameEN,
+            movieId,
+            image,
+            thumbnail,
+          },
+          e
+        );
       }
     } else {
       delCard(_id, movieId, e);
@@ -64,10 +67,15 @@ function MoviesCard({
   return (
     <li className="card">
       <div className="card__head">
-        <div className="card__text">
+        <Link
+          to={`/movie/${movieId}`}
+          target="_blank"
+          rel="noreferrer"
+          className="card__text"
+        >
           <p className="card__name">{nameRU}</p>
           <p className="card__duration">{MinToHours(duration)}</p>
-        </div>
+        </Link>
         <div className="card__save">
           <button
             className={

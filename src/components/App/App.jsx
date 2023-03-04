@@ -1,5 +1,11 @@
 import { useState, useEffect, useCallback } from 'react'; // реакт
-import { Switch, Route, Redirect, useLocation } from 'react-router-dom'; // реакт роутер
+import {
+  Switch,
+  Route,
+  Redirect,
+  useLocation,
+  useParams,
+} from 'react-router-dom'; // реакт роутер
 
 // <-- jsx компоненты
 import Register from '../Register/Register';
@@ -11,6 +17,7 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import Movie from '../Movies/Movie';
 import Footer from '../Footer/Footer';
 // -- jsx компоненты --/>
 
@@ -26,6 +33,9 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'; // защищен
 
 function App() {
   let location = useLocation().pathname; // переменная для useLocation
+
+  const params = useParams();
+  const { movieId } = params;
 
   const [currentUser, setCurrentUser] = useState({}); // Контекст текущего пользователя
   const [loggedIn, setLoggedIn] = useState(false); // вошел не вошел
@@ -448,6 +458,10 @@ function App() {
               setIsUpdateUserSuccessful={setIsUpdateUserSuccessful}
             />
 
+            <Route exact path="/movie/:movieId">
+              <Movie movieId={movieId} cardsBeatfilm={cardsBeatfilm} />
+            </Route>
+
             <Route exact path="/signin">
               <Login
                 handleLogin={handleLogin}
@@ -470,7 +484,7 @@ function App() {
               <NotFound />
             </Route>
 
-            <Route path="*">
+            <Route path="/404">
               {/* {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />} */}
               <Redirect to="/404" />
             </Route>
