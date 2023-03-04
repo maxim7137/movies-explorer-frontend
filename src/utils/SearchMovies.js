@@ -1,12 +1,28 @@
 function SearchMovies(inputData, shortChecked, cardsArray) {
-  // поиск в объекте (только по nameRu)
+  // поиск в объекте (если хоть в одном ключе (кроме описания, ссылок, длительности и id) есть искомое значение значит этот объект нам подходит)
   function filterItemsObject(el, query) {
-    return (
-      el.nameRU
-        .toString()
-        .toLowerCase()
-        .indexOf(query.toString().toLowerCase()) !== -1
-    );
+    let result = false;
+    const {
+      description,
+      duration,
+      image,
+      movieId,
+      thumbnail,
+      trailerLink,
+      ...rest
+    } = el;
+    
+    for (let key in rest) {
+      if (
+        el[key]
+          .toString()
+          .toLowerCase()
+          .indexOf(query.toString().toLowerCase()) !== -1
+      ) {
+        result = true;
+      }
+    }
+    return result;
   }
 
   function filterItemsArray(arr, query) {
@@ -32,19 +48,14 @@ function SearchMovies(inputData, shortChecked, cardsArray) {
 
 export default SearchMovies;
 
-/* после ревью вернуть этот поиск
-  // поиск в объекте (если хоть в одном ключе есть искомое значение значит этот объект нам подходит)
-  function filterItemsObject(el, query) {
-    let result = false;
-    for (let key in el) {
-      if (
-        el[key]
-          .toString()
-          .toLowerCase()
-          .indexOf(query.toString().toLowerCase()) !== -1
-      ) {
-        result = true;
-      }
-    }
-    return result;
-  } */
+/*
+// поиск в объекте (только по nameRu - для ревью)
+function filterItemsObject(el, query) {
+  return (
+    el.nameRU
+      .toString()
+      .toLowerCase()
+      .indexOf(query.toString().toLowerCase()) !== -1
+  );
+}
+ */
