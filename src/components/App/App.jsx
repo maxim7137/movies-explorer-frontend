@@ -1,10 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'; // реакт
-import {
-  Switch,
-  Route,
-  Redirect,
-  useLocation
-} from 'react-router-dom'; // реакт роутер
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom'; // реакт роутер
 
 // <-- jsx компоненты
 import Register from '../Register/Register';
@@ -454,7 +449,7 @@ function App() {
               setIsUpdateUserSuccessful={setIsUpdateUserSuccessful}
             />
 
-            <Route exact path="/movie/:movieId">
+            <Route path="/movie/:movieId">
               <Movie cardsBeatfilm={cardsBeatfilm} />
             </Route>
 

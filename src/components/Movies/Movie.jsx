@@ -3,7 +3,7 @@ import getMovieByMovieId from '../../utils/getMovieByMovieId';
 
 function Movie({ cardsBeatfilm }) {
   const { movieId } = useParams();
-  console.log(movieId);
+  
   const {
     country,
     director,
