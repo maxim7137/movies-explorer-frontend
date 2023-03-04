@@ -484,7 +484,7 @@ function App() {
               <NotFound />
             </Route>
 
-            <Route path="/404">
+            <Route path="*">
               {/* {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />} */}
               <Redirect to="/404" />
             </Route>
