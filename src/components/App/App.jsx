@@ -459,7 +459,7 @@ function App() {
             />
 
             <Route exact path="/movie/:movieId">
-              <Movie />
+              <Movie movieId={movieId} cardsBeatfilm={cardsBeatfilm} />
             </Route>
 
             <Route exact path="/signin">
