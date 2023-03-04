@@ -69,7 +69,6 @@ function MoviesCard({
       <div className="card__head">
         <Link
           to={`/movie/${movieId}`}
-          target="_blank"
           rel="noreferrer"
           className="card__text"
         >

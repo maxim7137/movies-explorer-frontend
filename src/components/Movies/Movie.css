@@ -34,6 +34,21 @@
   opacity: 0.8;
 }
 
+.movie__back {
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  background-color: inherit;
+  text-decoration: none;
+  color: #4285f4;
+  transition: color 0.2s;
+  margin: auto 0 60px;
+}
+
+.movie__back:hover {
+  color: #3ddc84;
+}
+
 @media (max-width: 426px) {
   .movie {
     padding: 10px;

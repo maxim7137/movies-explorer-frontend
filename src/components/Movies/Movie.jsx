@@ -1,8 +1,9 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import getMovieByMovieId from '../../utils/getMovieByMovieId';
 
 function Movie({ cardsBeatfilm }) {
-  const { movieId } = useParams();
+  let { movieId } = useParams();
+
   const {
     country,
     director,
@@ -13,6 +14,12 @@ function Movie({ cardsBeatfilm }) {
     nameEN,
     image,
   } = getMovieByMovieId(movieId, cardsBeatfilm);
+
+  let history = useHistory();
+
+  function handleClick() {
+    history.goBack();
+  }
 
   return (
     <section className="movie content">
@@ -42,9 +49,14 @@ function Movie({ cardsBeatfilm }) {
           </div>
           <div className="movie__row">
             <p className="movie__column movie__key">Описание</p>
-            <p className="movie__column movie__value movie__value_description">{description}</p>
+            <p className="movie__column movie__value movie__value_description">
+              {description}
+            </p>
           </div>
         </div>
+        <button className="movie__back" onClick={handleClick}>
+          ⬅ Назад
+        </button>
       </div>
     </section>
   );
